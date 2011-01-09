@@ -1,0 +1,17 @@
+package/cfg/c6accel_omap3530/main.o64P: main.c /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/std.h /home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/CERuntime.h /home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/trace/gt.h /home/anol/TI/TI_CGT_C6000_7.0.4/include/stdarg.h /home/anol/TI/TI_CGT_C6000_7.0.4/include/stddef.h /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/targets/std.h /home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/Engine.h /home/anol/dvsdk/dvsdk_3_01_00_10/framework_components_2_25_01_05/packages/ti/sdo/utils/trace/gt.h /home/anol/TI/TI_CGT_C6000_7.0.4/include/stdint.h /home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/Server.h /home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/ipc/Comm.h /home/anol/dvsdk/dvsdk_3_01_00_10/xdais_6_26_01_03/packages/ti/xdais/ialg.h /home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/node/node.h /home/anol/TI/TI_CGT_C6000_7.0.4/include/stdio.h /home/anol/TI/TI_CGT_C6000_7.0.4/include/linkage.h 
+main.c:
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/std.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/CERuntime.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/trace/gt.h:
+/home/anol/TI/TI_CGT_C6000_7.0.4/include/stdarg.h:
+/home/anol/TI/TI_CGT_C6000_7.0.4/include/stddef.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/targets/std.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/Engine.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/framework_components_2_25_01_05/packages/ti/sdo/utils/trace/gt.h:
+/home/anol/TI/TI_CGT_C6000_7.0.4/include/stdint.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/Server.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/ipc/Comm.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdais_6_26_01_03/packages/ti/xdais/ialg.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/node/node.h:
+/home/anol/TI/TI_CGT_C6000_7.0.4/include/stdio.h:
+/home/anol/TI/TI_CGT_C6000_7.0.4/include/linkage.h:

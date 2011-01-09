@@ -1,0 +1,15 @@
+codec.cfg
+server.tcf
+package.bld
+server.cfg
+package.xs
+link.cmd
+package.xdc
+main.c
+package/build.cfg
+package/info
+package/package.ext.xml
+package/package.xdc.inc
+package/package.bld.xml
+c6accel_omap3530.x64P
+package/package.rel.dot

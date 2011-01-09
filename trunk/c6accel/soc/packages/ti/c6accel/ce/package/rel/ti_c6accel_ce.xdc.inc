@@ -1,0 +1,10 @@
+C6ACCEL.xdc
+package.bld
+C6ACCEL.xs
+package.xdc
+package/build.cfg
+package/package.cfg.xdc.inc
+package/package.ext.xml
+package/package.xdc.inc
+package/package.bld.xml
+package/package.rel.dot
