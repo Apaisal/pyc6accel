@@ -1,0 +1,25 @@
+package/cfg/c6accel_omap3530_x64Pcfg_c.o64P: package/cfg/c6accel_omap3530_x64Pcfg_c.c package/cfg/c6accel_omap3530_x64Pcfg.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/std.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/prd.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/swi.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/tsk.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/log.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/tistdtypes.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/fxn.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/sts.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/hwi.h /home/anol/TI/TI_CGT_C6000_7.0.4/include/stdarg.h /home/anol/TI/TI_CGT_C6000_7.0.4/include/stddef.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/knl.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/sem.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/sys.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/trg.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/_hook.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/_log.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/trc.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/atm.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/que.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/obj.h /home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/mem.h 
+package/cfg/c6accel_omap3530_x64Pcfg_c.c:
+package/cfg/c6accel_omap3530_x64Pcfg.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/std.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/prd.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/swi.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/tsk.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/log.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/tistdtypes.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/fxn.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/sts.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/hwi.h:
+/home/anol/TI/TI_CGT_C6000_7.0.4/include/stdarg.h:
+/home/anol/TI/TI_CGT_C6000_7.0.4/include/stddef.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/knl.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/sem.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/sys.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/trg.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/_hook.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/_log.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/trc.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/atm.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/que.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/obj.h:
+/home/anol/dvsdk/dvsdk_3_01_00_10/bios_5_41_07_24/packages/ti/bios/include/mem.h:

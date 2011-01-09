@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="c6accel_app_config" version="" producerId="undefined">
+    <units>
+    </units>
+    <sources>
+        <srcFile name="package/cfg/c6accel_app_xv5T.c"/>
+    </sources>
+    <configurations>
+        <srcFile name="/home/anol/dvsdk/dvsdk_3_01_00_10/c6accel_1_01_00_02/soc/app/omap3530/c6accel_app.cfg"/>
+    </configurations>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/cfg/c6accel_app_xv5T.mak" src="package.bld"/>
+        <srcFile name="package/cfg/c6accel_app_xv5T.ov5T.dep" src="package/cfg/c6accel_app_xv5T.c"/>
+        <srcFile name="package/cfg/c6accel_app_xv5T.dep" src="package/cfg/c6accel_app_xv5T.cfg"/>
+        <srcFile name="package/rel/c6accel_app_config.tar.dep" src="package/rel/c6accel_app_config.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="gnu.targets.arm.GCArmv5T"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.4,1"
+            platform="ti.platforms.evm3530"
+            isa="v5T"
+            suffix="v5T"
+            rootDir="/home/anol/CodeSourcery/Sourcery_G++_Lite/"
+            os="Linux"
+            rts="gnu.targets.arm.rtsv5T">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    </libraries>
+    <executables>
+    <executable name="c6accel_app"
+        pname="c6accel_app.xv5T"
+        target="gnu.targets.arm.GCArmv5T"
+        platform="ti.platforms.evm3530"
+        profile="release"
+        xCfgScript="package/cfg/c6accel_app_xv5T.cfg"
+        xCfgPrefix="package/cfg/c6accel_app_xv5T"
+        cfgScript="/home/anol/dvsdk/dvsdk_3_01_00_10/c6accel_1_01_00_02/soc/app/omap3530/c6accel_app.cfg"
+        cfgArgs="null"
+        />
+    </executables>
+    <tests>
+    <test exeName="c6accel_app.xv5T"
+        args=""
+        groupName="c6accel_app.xv5T"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs=""
+        />
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="c6accel_app_config"
+        pname="c6accel_app_config.tar"
+        label="default"
+    >
+        <file name="package/build.cfg"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.rel.dot"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

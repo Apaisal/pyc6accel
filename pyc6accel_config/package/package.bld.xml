@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="pyc6accel_config" version="" producerId="undefined">
+    <units>
+    </units>
+    <sources>
+        <srcFile name="package/cfg/pyc6accel_xv5T.c"/>
+    </sources>
+    <configurations>
+        <srcFile name="/home/anol/workspace/pyc6accel/pyc6accel.cfg"/>
+    </configurations>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/cfg/pyc6accel_xv5T.mak" src="package.bld"/>
+        <srcFile name="package/cfg/pyc6accel_xv5T.ov5T.dep" src="package/cfg/pyc6accel_xv5T.c"/>
+        <srcFile name="package/cfg/pyc6accel_xv5T.dep" src="package/cfg/pyc6accel_xv5T.cfg"/>
+        <srcFile name="package/rel/pyc6accel_config.tar.dep" src="package/rel/pyc6accel_config.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="gnu.targets.arm.GCArmv5T"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.4,1"
+            platform="ti.platforms.evm3530"
+            isa="v5T"
+            suffix="v5T"
+            rootDir="/home/anol/CodeSourcery/Sourcery_G++_Lite/"
+            os="Linux"
+            rts="gnu.targets.arm.rtsv5T">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    </libraries>
+    <executables>
+    <executable name="pyc6accel"
+        pname="pyc6accel.xv5T"
+        target="gnu.targets.arm.GCArmv5T"
+        platform="ti.platforms.evm3530"
+        profile="release"
+        xCfgScript="package/cfg/pyc6accel_xv5T.cfg"
+        xCfgPrefix="package/cfg/pyc6accel_xv5T"
+        cfgScript="/home/anol/workspace/pyc6accel/pyc6accel.cfg"
+        cfgArgs="null"
+        />
+    </executables>
+    <tests>
+    <test exeName="pyc6accel.xv5T"
+        args=""
+        groupName="pyc6accel.xv5T"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs=""
+        />
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="pyc6accel_config"
+        pname="pyc6accel_config.tar"
+        label="default"
+    >
+        <file name="package/build.cfg"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.rel.dot"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

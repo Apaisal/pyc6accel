@@ -1,0 +1,61 @@
+clean::
+	$(RM) package/ti.c6accel_unitservers.omap3530.sch
+	$(RM) package/.vers_g180
+	$(RM) package/.vers_r170
+	$(RM) package/.vers_b150
+	$(RM) package/.vers_c150
+	$(RM) package/.xdc-v49
+	$(RM) package/ti_c6accel_unitservers_omap3530.java
+	$(RM) package/ti_c6accel_unitservers_omap3530.class
+	$(RM) package/package_ti.c6accel_unitservers.omap3530.c
+	$(RM) package/package.defs.h
+	$(RM) package/package.doc.xml
+	$(RM) package/ti.c6accel_unitservers.omap3530.ccs
+
+.interfaces: package/ti.c6accel_unitservers.omap3530.sch package/.vers_g180 package/.vers_r170 package/.vers_b150 package/.vers_c150 package/.xdc-v49 package/ti_c6accel_unitservers_omap3530.java package/ti_c6accel_unitservers_omap3530.class package/package_ti.c6accel_unitservers.omap3530.c package/package.defs.h package/package.doc.xml package/ti.c6accel_unitservers.omap3530.ccs 
+package/package.xdc.inc: package/.vers_g180
+package/.vers_g180:
+package/package.xdc.inc: package/.vers_r170
+package/.vers_r170:
+package/package.xdc.inc: package/.vers_b150
+package/.vers_b150:
+package/package.xdc.inc: package/.vers_c150
+package/.vers_c150:
+
+.interfaces: 
+
+# schema include file dependencies
+package.xs:
+package/package.xdc.inc: package.xs
+
+# schema update dependencies
+package/package.xdc.inc: xdc/IPackage.xdc
+xdc/IPackage.xdc:
+vpath xdc/IPackage.xdc $(XPKGVPATH)
+
+ifneq (clean,$(MAKECMDGOALS))
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/spec/java/package.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/spec/java/package.jar
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/intern/xsr/java/package.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/intern/xsr/java/package.jar
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/antlr.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/antlr.jar
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/jsr173_api.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/jsr173_api.jar
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/intern/gen/java/package.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/intern/gen/java/package.jar
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/global/java/package.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/global/java/package.jar
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/js.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/js.jar
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/tar.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/tar.jar
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/xbean.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/xbean.jar
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/ecj.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/shelf/java/ecj.jar
+/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/intern/cmd/java/package.jar:
+package/package.xdc.inc: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/intern/cmd/java/package.jar
+endif
+# goals for files generated during schema generation but unspecified by schema's pattern rule
+
