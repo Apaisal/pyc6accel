@@ -1,7 +1,7 @@
 ; Code Composer Project File, Version 2.0 (do not modify or remove this line)
 
 [Project Settings]
-ProjectDir="C:\dvsdk_1_11_00_00\dsplib4arm_working\trunks\c6accel\dsp\alg\pjt\"
+ProjectDir="/home/anol/workspace/pyc6accel/c6accel/dsp/alg/pjt"
 ProjectType=Library
 CPUFamily=TMS320C64XX
 Tool="Archiver"

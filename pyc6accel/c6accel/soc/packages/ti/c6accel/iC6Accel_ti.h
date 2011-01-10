@@ -1001,6 +1001,41 @@ typedef struct IMG_sobel_3x3_16_Params {
 	short Row;
 } IMG_sobel_3x3_16_Params;
 
+/* By Anol on Jan 10, 2011
+ * Function call :
+ */
+/*      void IMG_sobel_5x5_16s                                              */
+/*      (                                                                   */
+/*          const short restrict  *in,     // Input image data  //          */
+/*                short restrict *out,     // Output image data //          */
+/*                short          cols,     // image columns     //          */
+/*                short          rows      // Image rows        //          */
+/*      )                                                                   */
+typedef struct IMG_sobel_5x5_16_Params {
+	unsigned int indata_InArrID1;
+	unsigned int outdata_OutArrID1;
+	short Col;
+	short Row;
+} IMG_sobel_5x5_16_Params;
+
+/* By Anol on Jan 10, 2011
+ * Function call :
+ */
+/*      void IMG_sobel_7x7_16s                                              */
+/*      (                                                                   */
+/*          const short restrict  *in,     // Input image data  //          */
+/*                short restrict *out,     // Output image data //          */
+/*                short          cols,     // image columns     //          */
+/*                short          rows      // Image rows        //          */
+/*      )                                                                   */
+typedef struct IMG_sobel_7x7_16_Params {
+	unsigned int indata_InArrID1;
+	unsigned int outdata_OutArrID1;
+	short Col;
+	short Row;
+} IMG_sobel_7x7_16_Params;
+
+
 /* Function call : IMG_histogram_8 (const unsigned char * restrict in_data, int n, short accumulate,
  unsigned short * restrict t_hist, unsigned short * restrict hist)*/
 typedef struct IMG_histogram_8_Params {
