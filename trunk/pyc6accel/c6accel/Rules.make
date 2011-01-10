@@ -46,7 +46,7 @@ endif
 #==============================================================================
 ifndef PLATFORM
 # Define target platform.
-PLATFORM=omapl138
+PLATFORM=omap3530
 
 ifeq ($(PLATFORM),omapl138)
 # Where the DVSDK is installed.
@@ -142,7 +142,8 @@ DSP_ISA = 64P
 
 endif
 
-C6ACCEL_INSTALL_DIR=  $(DVSDK_INSTALL_DIR)/c6accel_1_01_00_02
+C6ACCEL_INSTALL_DIR=  ./c6accel
+#C6ACCEL_INSTALL_DIR=  $(DVSDK_INSTALL_DIR)/c6accel_1_01_00_02
 
 # The prefix to be added before the GNU compiler tools (optionally including
 # path), i.e. "arm_v5t_le-" or "/opt/bin/arm_v5t_le-".

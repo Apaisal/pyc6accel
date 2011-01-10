@@ -40,7 +40,16 @@
 								<option id="org.eclipse.cdt.build.core.settings.holder.libpaths.1674835881" name="Library Paths" superClass="org.eclipse.cdt.build.core.settings.holder.libpaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pyc6accel/c6accel/dsp/libs}&quot;"/>
 								</option>
-								<option id="org.eclipse.cdt.build.core.settings.holder.libfiles.1581775190" name="Library Files" superClass="org.eclipse.cdt.build.core.settings.holder.libfiles"/>
+								<option id="org.eclipse.cdt.build.core.settings.holder.libfiles.1581775190" name="Library Files" superClass="org.eclipse.cdt.build.core.settings.holder.libfiles" valueType="libFiles">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pyc6accel/c6accel/dsp/libs/C64P_LIBPLUS.lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pyc6accel/c6accel/dsp/libs/dsplib64plus.lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pyc6accel/c6accel/dsp/libs/fastrts64x.lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pyc6accel/c6accel/dsp/libs/IQmath_c64x+.lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pyc6accel/c6accel/dsp/libs/IQmath_RAM_c64x+.lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pyc6accel/c6accel/dsp/libs/dsplib674x.lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pyc6accel/c6accel/dsp/libs/fastrts67x.lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pyc6accel/c6accel/dsp/libs/imglib2.lib}&quot;"/>
+								</option>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.773278023" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.914142423" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
@@ -66,6 +75,7 @@
 									<listOptionValue builtIn="false" value="/home/anol/dvsdk/dvsdk_3_01_00_10/framework_components_2_25_01_05/packages"/>
 									<listOptionValue builtIn="false" value="/home/anol/dvsdk/dvsdk_3_01_00_10/biosutils_1_02_02/packages"/>
 									<listOptionValue builtIn="false" value="/home/anol/dvsdk/dvsdk_3_01_00_10/linuxutils_2_25_05_11/packages"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/pyc6accel/c6accel/dsp/libs/include}&quot;"/>
 								</option>
 								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.1681402174" name="Undefined Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths"/>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.2014537909" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>

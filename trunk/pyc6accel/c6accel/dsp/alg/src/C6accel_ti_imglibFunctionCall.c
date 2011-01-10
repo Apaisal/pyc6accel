@@ -99,6 +99,56 @@ int C6ACCEL_TI_imglibFunctionCall(void *pFnArray, int fxnID,
 				        C6ACCEL_TI_IMG_sobel_3x3_16_paramPtr->Row);
 		}
 			break;
+		case (SOBEL_5X5_16S_FXN_ID): {
+			/* Unmarshal Parameters */
+			IMG_sobel_5x5_16_Params *C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr;
+			C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr = pFnArray;
+			/*Parameter check*/
+			if (((C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->indata_InArrID1)
+			        > INBUF15)
+			        | ((C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->outdata_OutArrID1)
+			                > OUTBUF15)
+			        | ((C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->Col) % 2 != 0)
+			        | ((C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->Col) < 5)
+			        | ((C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->Row) < 5)
+			        | (((C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->Col)
+			                * ((C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->Row) - 4))
+			                - 4 < 2)) {
+				return (IUNIVERSAL_EPARAMFAIL);
+			} else
+				/* Call underlying kernel */
+				IMG_sobel_5x5_16s(
+				        (const short *) inBufs->descs[C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->indata_InArrID1].buf,
+				        (short *) outBufs->descs[C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->outdata_OutArrID1].buf,
+				        C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->Col,
+				        C6ACCEL_TI_IMG_sobel_5x5_16_paramPtr->Row);
+		}
+			break;
+		case (SOBEL_7X7_16S_FXN_ID): {
+			/* Unmarshal Parameters */
+			IMG_sobel_7x7_16_Params *C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr;
+			C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr = pFnArray;
+			/*Parameter check*/
+			if (((C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->indata_InArrID1)
+			        > INBUF15)
+			        | ((C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->outdata_OutArrID1)
+			                > OUTBUF15)
+			        | ((C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->Col) % 2 != 0)
+			        | ((C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->Col) < 7)
+			        | ((C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->Row) < 7)
+			        | (((C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->Col)
+			                * ((C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->Row) - 6))
+			                - 6 < 2)) {
+				return (IUNIVERSAL_EPARAMFAIL);
+			} else
+				/* Call underlying kernel */
+				IMG_sobel_7x7_16s(
+				        (const short *) inBufs->descs[C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->indata_InArrID1].buf,
+				        (short *) outBufs->descs[C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->outdata_OutArrID1].buf,
+				        C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->Col,
+				        C6ACCEL_TI_IMG_sobel_7x7_16_paramPtr->Row);
+		}
+			break;
 		case (HISTOGRAM_8_FXN_ID): {
 			/* Unmarshal Parameters */
 			IMG_histogram_8_Params *C6ACCEL_TI_IMG_histogram_8_paramPtr;
@@ -1277,8 +1327,8 @@ int C6ACCEL_TI_imglibFunctionCall(void *pFnArray, int fxnID,
 			        > INBUF15)
 			        | ((C6ACCEL_TI_IMG_thr_le2thr_8_ParamPtr->outdata_OutArrID1)
 			                > OUTBUF15)
-						        | ((C6ACCEL_TI_IMG_thr_le2thr_8_ParamPtr->Col
-			        			                * C6ACCEL_TI_IMG_thr_le2thr_8_ParamPtr->Row) < 16)
+			        | ((C6ACCEL_TI_IMG_thr_le2thr_8_ParamPtr->Col
+			                * C6ACCEL_TI_IMG_thr_le2thr_8_ParamPtr->Row) < 16)
 			        | ((C6ACCEL_TI_IMG_thr_le2thr_8_ParamPtr->Col
 			                * C6ACCEL_TI_IMG_thr_le2thr_8_ParamPtr->Row) % 16
 			                != 0)) {
@@ -1294,14 +1344,15 @@ int C6ACCEL_TI_imglibFunctionCall(void *pFnArray, int fxnID,
 
 		}
 			break;
-		//error: a declaration cannot have a label
-//		case (DILATE_BIN_FXN_ID):
-//			/*by anol*/
-//			/* Unmarshal Parameters */
-//			IMG_dilate_bin_Param * IMG_dilate_bin_ParamPtr;
+			//error: a declaration cannot have a label
+		case (DILATE_BIN_FXN_ID):
+			/*by anol*/
+			/* Unmarshal Parameters */
+		IMG_pix_sat_Params * C6ACCEL_TI_IMG_dilate_bin_ParamPtr;
 //			C6ACCEL_TI_IMG_dilate_bin_ParamPtr = pFnArray;
 //			if (((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID1) > INBUF15)
-//			        | ((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->OutArrID1) > OUTBUF15)
+//			        | ((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->OutArrID1)
+//			                > OUTBUF15)
 //			        | ((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID2) > INBUF15)
 //			        | ((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->Col % 8) != 0)) {
 //				return (IUNIVERSAL_EPARAMFAIL);
@@ -1313,26 +1364,26 @@ int C6ACCEL_TI_imglibFunctionCall(void *pFnArray, int fxnID,
 //				        (char*) inBufs->descs[C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID2].buf,
 //				        C6ACCEL_TI_IMG_dilate_bin_ParamPtr->Col);
 //			}
-//			break;
-//		case (ERODE_BIN_FXN_ID):
-//			/*by anol*/
-//			/* Unmarshal Parameters */
-//			IMG_erode_bin_Params *C6ACCEL_TI_IMG_erode_bin_ParamPtr;
-//			C6ACCEL_TI_IMG_erode_bin_ParamPtr = pFnArray;
-//			if ((C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID1 > INBUF15)
-//			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->OutArrID1 > OUTBUF15)
-//			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID2 > INBUF15)
-//			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->Col % 8 != 0)) {
-//				return (IUNIVERSAL_EPARAMFAIL);
-//			} else {
-//				/* Call underlying kernel */
-//				IMG_erode_bin(
-//				        (unsigned char *) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID1].buf,
-//				        (unsigned char *) outBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->OutArrID1].buf,
-//				        (char*) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID2].buf,
-//				        C6ACCEL_TI_IMG_erode_bin_ParamPtr->Col);
-//			}
-//			break;
+						break;
+			//		case (ERODE_BIN_FXN_ID):
+			//			/*by anol*/
+			//			/* Unmarshal Parameters */
+			//			IMG_erode_bin_Params *C6ACCEL_TI_IMG_erode_bin_ParamPtr;
+			//			C6ACCEL_TI_IMG_erode_bin_ParamPtr = pFnArray;
+			//			if ((C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID1 > INBUF15)
+			//			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->OutArrID1 > OUTBUF15)
+			//			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID2 > INBUF15)
+			//			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->Col % 8 != 0)) {
+			//				return (IUNIVERSAL_EPARAMFAIL);
+			//			} else {
+			//				/* Call underlying kernel */
+			//				IMG_erode_bin(
+			//				        (unsigned char *) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID1].buf,
+			//				        (unsigned char *) outBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->OutArrID1].buf,
+			//				        (char*) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID2].buf,
+			//				        C6ACCEL_TI_IMG_erode_bin_ParamPtr->Col);
+			//			}
+			//			break;
 
 		default:
 			/*Error caused due to passing of an invalid ID*/
