@@ -49,11 +49,11 @@
             version="1,0,4.2,1"
             usedby="ti.sdo.ce.universal"/>
     <target name="gnu.targets.arm.GCArmv5T"
-            version="1,0,4.4,1"
+            version="1,0,4.5,1"
             usedby="pyc6accel_config"/>
 </targets>
 <imports>
-    <package name="xdc.services.global" version="1, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.services.global" version="1, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="xdc.services.global.Clock"
                 used="true"
                 uses="">
@@ -65,21 +65,21 @@
                 uses="">
         </module>
     </package>
-    <package name="xdc" version="1, 1, 1" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc" version="1, 1, 1" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
     </package>
-    <package name="xdc.corevers" version="16, 0, 2, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.corevers" version="16, 0, 2, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
     </package>
-    <package name="xdc.shelf" version="1, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.shelf" version="1, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
     </package>
-    <package name="xdc.services.spec" version="1, 0, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.services.spec" version="1, 0, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
     </package>
-    <package name="xdc.services.intern.xsr" version="1, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.services.intern.xsr" version="1, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
     </package>
-    <package name="xdc.services.intern.gen" version="1, 0, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.services.intern.gen" version="1, 0, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
     </package>
-    <package name="xdc.services.intern.cmd" version="1, 0, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.services.intern.cmd" version="1, 0, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
     </package>
-    <package name="xdc.rov" version="1, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.rov" version="1, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="xdc.rov.Model"
                 used="false"
                 uses="">
@@ -105,7 +105,7 @@
                 uses="">
         </module>
     </package>
-    <package name="xdc.runtime" version="2, 1, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.runtime" version="2, 1, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="xdc.runtime.Assert"
                 used="false"
                 uses="">
@@ -211,7 +211,7 @@
                 uses="">
         </module>
     </package>
-    <package name="gnu.targets.arm.rtsv5T" version="1, 0, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="gnu.targets.arm.rtsv5T" version="1, 0, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
     </package>
     <package name="ti.c6accel" version="1, 0, 0" repository="/home/anol/workspace/pyc6accel/c6accel/soc/packages/">
         <module name="ti.c6accel.C6ACCEL"
@@ -309,9 +309,13 @@
                 uses="">
         </module>
     </package>
-    <package name="ti.xdais.dm" version="1, 0, 5" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdais_6_26_01_03/packages/">
+    <package name="ti.xdais.dm" version="1, 0, 7" repository="/opt/ti/ccsv5/xdais_7_20_00_07/packages/">
     </package>
-    <package name="ti.xdais" version="1, 2.0, 1" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdais_6_26_01_03/packages/">
+    <package name="ti.xdais" version="1, 2.0, 1" repository="/opt/ti/ccsv5/xdais_7_20_00_07/packages/">
+        <module name="ti.xdais.Trace"
+                used="false"
+                uses="">
+        </module>
     </package>
     <package name="ti.sdo.ce.node" version="1, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/">
         <module name="ti.sdo.ce.node.NODE"
@@ -378,7 +382,7 @@
                 uses="">
         </module>
     </package>
-    <package name="xdc.bld" version="1, 0, 2" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.bld" version="1, 0, 2" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="xdc.bld.BuildEnvironment"
                 used="false"
                 uses="">
@@ -428,7 +432,7 @@
                 uses="">
         </module>
     </package>
-    <package name="gnu.targets" version="1, 0, 1" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="gnu.targets" version="1, 0, 1" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="gnu.targets.Sparc"
                 used="false"
                 uses="">
@@ -450,7 +454,7 @@
                 uses="">
         </module>
     </package>
-    <package name="gnu.targets.arm" version="1, 0, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="gnu.targets.arm" version="1, 0, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="gnu.targets.arm.GCArmv5T"
                 used="true"
                 uses="">
@@ -619,9 +623,9 @@
   <field name="opts"/>
 </struct>
             </feature>
-            <feature name="lnkOpts" type="xdc.bld.ITarget2.Options" value="%7Bprefix%3A%20%2C%20suffix%3A%20-lstdc++%20-L%24%28rootDir%29/%24%28GCCTARG%29/lib%7D"><struct id="gnu.targets.arm.GCArmv5T/lnkOpts">
+            <feature name="lnkOpts" type="xdc.bld.ITarget2.Options" value="%7Bprefix%3A%20%2C%20suffix%3A%20-Wl%2C-Map%3D%24%28XDCCFGDIR%29/%24@.map%20-lstdc++%20-L%24%28rootDir%29/%24%28GCCTARG%29/lib%7D"><struct id="gnu.targets.arm.GCArmv5T/lnkOpts">
   <field name="prefix"/>
-  <field name="suffix">-lstdc++ -L$(rootDir)/$(GCCTARG)/lib</field>
+  <field name="suffix">-Wl,-Map=$(XDCCFGDIR)/$@.map -lstdc++ -L$(rootDir)/$(GCCTARG)/lib</field>
 </struct>
             </feature>
             <feature name="cc" type="xdc.bld.ITarget2.Command" value="%7Bcmd%3A%20%24%28rootDir%29/%24%28LONGNAME%29%20-c%20-MD%20-MF%20%24@.dep%2C%20opts%3A%20-march%3Darmv5t%7D"><struct id="gnu.targets.arm.GCArmv5T/cc">
@@ -651,6 +655,7 @@
             </feature>
             <feature name="includeOpts" type="string" value=""/>
             <feature name="GCCVERS" type="object" value="null"/>
+            <feature name="BINVERS" type="object" value="null"/>
             <feature name="GCCTARG" type="object" value="null"/>
             <feature name="LONGNAME" type="undefined" value="undefined"/>
             <feature name="CYGWIN" type="boolean" value="false"/>
@@ -666,7 +671,7 @@
                 uses="">
         </module>
     </package>
-    <package name="ti.catalog.arm.cortexa8" version="1, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="ti.catalog.arm.cortexa8" version="1, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="ti.catalog.arm.cortexa8.OMAP3403"
                 used="false"
                 uses="">
@@ -707,6 +712,10 @@
                 used="true"
                 uses="">
         </module>
+        <module name="ti.catalog.arm.cortexa8.TMS320TI816X"
+                used="false"
+                uses="">
+        </module>
         <module name="ti.catalog.arm.cortexa8.TMS320DM8168"
                 used="false"
                 uses="">
@@ -715,20 +724,24 @@
                 used="false"
                 uses="">
         </module>
+        <module name="ti.catalog.arm.cortexa8.TMS320TI814X"
+                used="false"
+                uses="">
+        </module>
         <module name="ti.catalog.arm.cortexa8.TMS320DM8148"
                 used="false"
                 uses="">
         </module>
     </package>
-    <package name="ti.catalog.peripherals.hdvicp2" version="" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="ti.catalog.peripherals.hdvicp2" version="" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="ti.catalog.peripherals.hdvicp2.HDVICP2"
                 used="false"
                 uses="">
         </module>
     </package>
-    <package name="ti.catalog" version="1, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="ti.catalog" version="1, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
     </package>
-    <package name="xdc.platform" version="1, 0, 1, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.platform" version="1, 0, 1, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="xdc.platform.ExeContext"
                 used="true"
                 uses="">
@@ -738,7 +751,7 @@
                 uses="">
         </module>
     </package>
-    <package name="xdc.cfg" version="1, 0, 2, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="xdc.cfg" version="1, 0, 2, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="xdc.cfg.Program"
                 used="true"
                 uses="">
@@ -756,6 +769,8 @@
             <feature name="main" type="undefined" value="undefined"/>
             <feature name="sectMap" type="object" value="%5B%0A%0A%5D">
             </feature>
+            <feature name="sectionsExclude" type="object" value="null"/>
+            <feature name="sectionsTemplate" type="object" value="null"/>
             <feature name="system" type="undefined" value="undefined"/>
             <feature name="name" type="string" value="pyc6accel.xv5T"/>
             <feature name="buildPackage" type="string" value="pyc6accel_config"/>
@@ -763,7 +778,7 @@
             <feature name="codeModel" type="object" value="null"/>
             <feature name="dataModel" type="object" value="null"/>
             <feature name="build" type="object" value="%5Bobject%20Object%5D"/>
-            <feature name="cpu" type="xdc.platform.IExeContext.Instance" value="%7Bid%3A%201%2C%20catalogName%3A%20ti.catalog.arm.cortexa8%2C%20deviceName%3A%20OMAP3530%2C%20revision%3A%20%2C%20clockRate%3A%200x14a%2C%20board%3A%20%7Bid%3A%200%2C%20boardName%3A%20evm3530%2C%20boardFamily%3A%20evm3530%2C%20boardRevision%3A%20null%7D%2C%20attrs%3A%20xdc.services.intern.xsr.Value%24Obj@1aacd5f%3A%3A%28xdc.platform.ICpuDataSheet.Instance%29ti.catalog.arm.cortexa8.OMAP3530.Instance%230%2C%20memoryMap%3A%20%5B%0A%5B%27SRAM%27%2C%20%7Bcomment%3A%20On-Chip%20SRAM%2C%20name%3A%20SRAM%2C%20space%3A%20code/data%2C%20page%3A%20undefined%2C%20base%3A%200x40200000%2C%20len%3A%200x10000%2C%20access%3A%20RWX%7D%5D%2C%0A%5B%27DDR2%27%2C%20%7Bcomment%3A%20undefined%2C%20name%3A%20DDR2%2C%20space%3A%20undefined%2C%20page%3A%20undefined%2C%20base%3A%200x80000000%2C%20len%3A%200x8000000%2C%20access%3A%20undefined%7D%5D%0A%5D%7D"/>
+            <feature name="cpu" type="xdc.platform.IExeContext.Instance" value="%7Bid%3A%201%2C%20catalogName%3A%20ti.catalog.arm.cortexa8%2C%20deviceName%3A%20OMAP3530%2C%20revision%3A%20%2C%20clockRate%3A%200x14a%2C%20board%3A%20%7Bid%3A%200%2C%20boardName%3A%20evm3530%2C%20boardFamily%3A%20evm3530%2C%20boardRevision%3A%20null%7D%2C%20attrs%3A%20xdc.services.intern.xsr.Value%24Obj@132021a%3A%3A%28xdc.platform.ICpuDataSheet.Instance%29ti.catalog.arm.cortexa8.OMAP3530.Instance%230%2C%20memoryMap%3A%20%5B%0A%5B%27SRAM%27%2C%20%7Bcomment%3A%20On-Chip%20SRAM%2C%20name%3A%20SRAM%2C%20space%3A%20code/data%2C%20page%3A%20undefined%2C%20base%3A%200x40200000%2C%20len%3A%200x10000%2C%20access%3A%20RWX%7D%5D%2C%0A%5B%27DDR2%27%2C%20%7Bcomment%3A%20undefined%2C%20name%3A%20DDR2%2C%20space%3A%20undefined%2C%20page%3A%20undefined%2C%20base%3A%200x80000000%2C%20len%3A%200x8000000%2C%20access%3A%20undefined%7D%5D%0A%5D%7D"/>
             <feature name="platformName" type="string" value="ti.platforms.evm3530"/>
             <feature name="platform" type="xdc.platform.IPlatform.Instance" value="%7BexternalMemoryMap%3A%20%5B%0A%5B%27DDR2%27%2C%20%7Bcomment%3A%20undefined%2C%20name%3A%20DDR2%2C%20space%3A%20undefined%2C%20page%3A%20undefined%2C%20base%3A%200x80000000%2C%20len%3A%200x8000000%2C%20access%3A%20undefined%7D%5D%0A%5D%2C%20customMemoryMap%3A%20%5B%0A%0A%5D%2C%20renameMap%3A%20%5B%0A%0A%5D%2C%20dataMemory%3A%20DDR2%2C%20codeMemory%3A%20DDR2%2C%20stackMemory%3A%20DDR2%2C%20sectMap%3A%20%5B%0A%0A%5D%7D"/>
             <feature name="global" type="object" value="%5B%0A%0A%5D">
@@ -785,7 +800,7 @@
                 uses="">
         </module>
     </package>
-    <package name="ti.catalog.c6000" version="1, 0, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="ti.catalog.c6000" version="1, 0, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="ti.catalog.c6000.TMS320C6452"
                 used="false"
                 uses="">
@@ -1042,6 +1057,22 @@
                 used="false"
                 uses="">
         </module>
+        <module name="ti.catalog.c6000.TMS320C6670"
+                used="false"
+                uses="">
+        </module>
+        <module name="ti.catalog.c6000.TMS320C6672"
+                used="false"
+                uses="">
+        </module>
+        <module name="ti.catalog.c6000.TMS320C6674"
+                used="false"
+                uses="">
+        </module>
+        <module name="ti.catalog.c6000.TMS320C6678"
+                used="false"
+                uses="">
+        </module>
         <module name="ti.catalog.c6000.TMS320C6454"
                 used="false"
                 uses="">
@@ -1230,6 +1261,10 @@
                 used="false"
                 uses="">
         </module>
+        <module name="ti.catalog.c6000.TMS320TI816X"
+                used="false"
+                uses="">
+        </module>
         <module name="ti.catalog.c6000.TMS320CDM740"
                 used="false"
                 uses="">
@@ -1246,18 +1281,26 @@
                 used="false"
                 uses="">
         </module>
+        <module name="ti.catalog.c6000.TMS320TI814X"
+                used="false"
+                uses="">
+        </module>
         <module name="ti.catalog.c6000.TMS320DM8148"
                 used="false"
                 uses="">
         </module>
+        <module name="ti.catalog.c6000.Arctic"
+                used="false"
+                uses="">
+        </module>
     </package>
-    <package name="ti.catalog.arm.peripherals.timers" version="" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="ti.catalog.arm.peripherals.timers" version="" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="ti.catalog.arm.peripherals.timers.Timer"
                 used="false"
                 uses="">
         </module>
     </package>
-    <package name="ti.catalog.arm" version="1, 0, 1" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="ti.catalog.arm" version="1, 0, 1" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="ti.catalog.arm.LM3S9792"
                 used="false"
                 uses="">
@@ -1467,7 +1510,7 @@
                 uses="">
         </module>
     </package>
-    <package name="ti.platforms.evm3530" version="1, 0, 0" repository="/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/">
+    <package name="ti.platforms.evm3530" version="1, 0, 0" repository="/opt/ti/ccsv5/xdctools_3_20_06_81/packages/">
         <module name="ti.platforms.evm3530.Platform"
                 used="true"
                 uses="">

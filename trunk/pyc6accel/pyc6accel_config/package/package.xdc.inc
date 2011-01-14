@@ -5,7 +5,7 @@ package/.vers_g180
 package/.vers_r170
 package/.vers_b150
 package/.vers_c150
-package/.xdc-v49
+package/.xdc-v53
 package/pyc6accel_config.java
 package/pyc6accel_config.class
 package/package_pyc6accel_config.c

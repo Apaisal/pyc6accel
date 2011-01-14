@@ -19,7 +19,7 @@
     </makefiles>
     <targets>
         <target name="gnu.targets.arm.GCArmv5T"
-            version="gnu.targets.arm.GCArmv5T{1,0,4.4,1"
+            version="gnu.targets.arm.GCArmv5T{1,0,4.5,1"
             platform="ti.platforms.evm3530"
             isa="v5T"
             suffix="v5T"

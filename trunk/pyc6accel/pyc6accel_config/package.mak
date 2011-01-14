@@ -14,90 +14,90 @@ XDCCFGDIR = package/cfg/
 # in the event that some included BOM script changes.
 #
 ifneq (clean,$(MAKECMDGOALS))
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Script.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Script.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/BuildEnvironment.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/BuildEnvironment.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Library.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Library.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/bld.js:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/bld.js
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/package.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/package.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/ITarget.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/ITarget.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/services/global/Clock.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/services/global/Clock.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Library.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Library.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/xmlgen2.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/xmlgen2.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/xdc.tci:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/xdc.tci
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/ITargetFilter.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/ITargetFilter.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/UCArm9.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/UCArm9.xs
 package.mak: package.bld
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/ITarget.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/ITarget.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/package.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/package.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/package.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/package.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/arm/GCArmv6.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/arm/GCArmv6.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/ITargetFilter.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/ITargetFilter.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/_gen.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/_gen.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/global/Trace.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/global/Trace.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/include/utils.tci:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/include/utils.tci
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/xdc.tci:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/xdc.tci
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/targets/ITarget.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/targets/ITarget.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/xmlgen2.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/xmlgen2.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/targets/package.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/targets/package.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/io/package.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/io/package.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/xmlgen.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/xmlgen.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/MVArm9.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/MVArm9.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Executable.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Executable.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/PackageContents.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/PackageContents.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/UCArm9.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/UCArm9.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/IPackage.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/IPackage.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/io/File.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/io/File.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/tools/configuro/template/custom.mak.exe.xdt:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/tools/configuro/template/custom.mak.exe.xdt
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/om2.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/om2.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/tools/configuro/template/package.xs.xdt:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/tools/configuro/template/package.xs.xdt
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Repository.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Repository.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Utils.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Utils.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/tools/configuro/template/compiler.opt.xdt:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/tools/configuro/template/compiler.opt.xdt
+/opt/ti/ccsv5/xdctools_3_20_06_81/include/utils.tci:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/include/utils.tci
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/ITarget.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/ITarget.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/package.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/package.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/Linux86.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/Linux86.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Repository.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Repository.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/arm/GCArmv7A.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/arm/GCArmv7A.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/arm/GCArmv6.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/arm/GCArmv6.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/om2.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/om2.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/tools/configuro/template/package.xs.xdt:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/tools/configuro/template/package.xs.xdt
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/_gen.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/_gen.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/tools/configuro/template/custom.mak.exe.xdt:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/tools/configuro/template/custom.mak.exe.xdt
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Script.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Script.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/services/global/Trace.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/services/global/Trace.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Manifest.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Manifest.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/ITarget.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/ITarget.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/services/io/package.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/services/io/package.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/BuildEnvironment.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/BuildEnvironment.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/package.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/package.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/PackageContents.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/PackageContents.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/Mingw.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/Mingw.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/IPackage.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/IPackage.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/bld.js:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/bld.js
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/package.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/package.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/xmlgen.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/xmlgen.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Utils.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Utils.xs
 /home/anol/workspace/pyc6accel/config.bld:
 package.mak: /home/anol/workspace/pyc6accel/config.bld
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/arm/GCArmv7A.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/arm/GCArmv7A.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/template.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/template.xs
 package.mak: config.bld
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/template.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/template.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/Mingw.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/Mingw.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/Linux86.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/Linux86.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/global/Clock.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/services/global/Clock.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Manifest.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/xdc/bld/Manifest.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/tools/configuro/template/compiler.opt.xdt:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/tools/configuro/template/compiler.opt.xdt
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/targets/ITarget.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/targets/ITarget.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/services/io/File.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/services/io/File.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/targets/package.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/targets/package.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/MVArm9.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/MVArm9.xs
+/opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Executable.xs:
+package.mak: /opt/ti/ccsv5/xdctools_3_20_06_81/packages/xdc/bld/Executable.xs
 endif
 
 gnu.targets.arm.GCArmv5T.rootDir ?= /home/anol/CodeSourcery/Sourcery_G++_Lite/
-gnu.targets.arm.packageBase ?= /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/arm/
+gnu.targets.arm.packageBase ?= /opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/arm/
 .PRECIOUS: $(XDCCFGDIR)/%.ov5T
 .PHONY: all,v5T .dlls,v5T .executables,v5T test,v5T
 all,v5T: .executables,v5T
@@ -137,7 +137,7 @@ package/cfg/pyc6accel_xv5T.ov5T : | package/cfg/pyc6accel_xv5T.xdl
 pyc6accel.xv5T:
 	$(RM) $@
 	@$(MSG) lnkv5T $@ ...
-	$(gnu.targets.arm.GCArmv5T.rootDir)/bin/arm-none-linux-gnueabi-gcc    -o $@ package/cfg/pyc6accel_xv5T.ov5T  package/cfg/pyc6accel_xv5T.xdl  -lstdc++ -L$(gnu.targets.arm.GCArmv5T.rootDir)/arm-none-linux-gnueabi/lib
+	$(gnu.targets.arm.GCArmv5T.rootDir)/bin/arm-none-linux-gnueabi-gcc    -o $@ package/cfg/pyc6accel_xv5T.ov5T  package/cfg/pyc6accel_xv5T.xdl  -Wl,-Map=$(XDCCFGDIR)/$@.map -lstdc++ -L$(gnu.targets.arm.GCArmv5T.rootDir)/arm-none-linux-gnueabi/lib
 	
 pyc6accel.xv5T:LD_LIBRARY_PATH=
 
