@@ -75,8 +75,6 @@
 					<sourceEntries>
 						<entry excluding="include|lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="python"/>
 						<entry excluding="include|lib|python|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="python/include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="python/lib"/>
 						<entry excluding="dsp.h|dsp.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
