@@ -72,11 +72,11 @@ ifeq ($(PLATFORM),omapl138)
 endif
 
 #C_FLAGS += -I/home/anol/CodeSourcery/Sourcery_G++_Lite/arm-none-linux-gnueabi/libc/usr/include/python2.6 #-I/home/anol/CodeSourcery/Sourcery_G++_Lite/arm-none-linux-gnueabi/libc/usr/local/include
-LD_FLAGS += -L$(LINUXLIBS_INSTALL_DIR)/lib -lm -lpthread -lpython2.6
+LD_FLAGS += -L$(LINUXLIBS_INSTALL_DIR)/lib -lm -lpthread -L${PWD}/python/lib -lpython2.6
 C6ACCEL_LIB += $(C6ACCEL_INSTALL_DIR)/soc/c6accelw/lib/c6accelw_$(PLATFORM).a470MV
 
-OPENCV_C_FLAGS = -I./opencv/include
-OPENCV_LD_FLAGS = -L./opencv/lib -lml -lcxcore -lcv -lcvaux -lhighgui
+OPENCV_C_FLAGS = -I${PWD}/opencv/include -I${PWD}/python/include
+OPENCV_LD_FLAGS = -L${PWD}/opencv/lib -lml -lcxcore -lcv -lcvaux -lhighgui
 #OPENCV_C_FLAGS = -I/home/anol/CodeSourcery/Sourcery_G++_Lite/arm-none-linux-gnueabi/libc/usr/local/include
 #OPENCV_LD_FLAGS = -L/home/anol/CodeSourcery/Sourcery_G++_Lite/arm-none-linux-gnueabi/libc/usr/local/lib -lml -lcxcore -lcv -lcvaux -lhighgui
 #OPENCV_PYTHON_FLAGS = -I/home/anol/workspace/OpenCV-2.1.0/interfaces/python
@@ -98,7 +98,7 @@ install_$(TARGET):
 	@install -d $(EXEC_DIR_C6ACCEL)
 	@install $(TARGET).so $(EXEC_DIR_C6ACCEL)
 	@cp c6accel/soc/packages/ti/c6accel_unitservers/$(PLATFORM)/c6accel_$(PLATFORM).x64P $(EXEC_DIR_C6ACCEL)
-	@cp python/* $(EXEC_DIR_C6ACCEL)
+	@cp -R python/* $(EXEC_DIR_C6ACCEL)
 	@cp scripts/run.sh $(EXEC_DIR_C6ACCEL)
 	@cp -R test_files/* $(EXEC_DIR_C6ACCEL)/test_files/
 	@echo Installed $(TARGET) binaries to $(EXEC_DIR_C6ACCEL)..

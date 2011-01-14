@@ -15,7 +15,7 @@ DVSDK_INSTALL_DIR=$(HOME)/dvsdk/dvsdk_3_01_00_10
 EXEC_DIR = /home/anol/workdir/filesys/opt/test
 EXEC_DIR_C6ACCEL = $(EXEC_DIR)/opencv_dsp
 
-C6ACCEL_INSTALL_DIR= ./c6accel
+C6ACCEL_INSTALL_DIR= ${PWD}/c6accel
 # RTSC platform
 PLATFORM_XDC = ti.platforms.evm3530
 

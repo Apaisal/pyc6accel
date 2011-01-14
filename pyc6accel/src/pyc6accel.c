@@ -13,8 +13,8 @@
 /* system time include*/
 #include <sys/time.h>
 /* Python includes */
-#include <python2.6/Python.h>
-#include <python2.6/structmember.h>
+#include <Python.h>
+#include <structmember.h>
 #include "pyc6accel.h"
 
 /* Codec Engine and xdc includes */

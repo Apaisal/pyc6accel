@@ -9,10 +9,10 @@
 #define PYC6ACCEL_H_
 
 /*OpenCV*/
-#include <opencv/cv.h>
-#include <opencv/cxcore.h>
-#include <opencv/cvaux.h>
-#include <opencv/highgui.h>
+#include <cv.h>
+#include <cxcore.h>
+#include <cvaux.h>
+#include <highgui.h>
 
 #define VERSION	"0.1"
 #define MODULESTR "pyc6accel"
