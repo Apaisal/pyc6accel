@@ -116,11 +116,12 @@ digraph configuration {
     }
     subgraph cluster20 {
         label="";
-        ti_xdais_dm__top [shape=box,label="ti.xdais.dm\n1, 0, 5", color=white];
+        ti_xdais_dm__top [shape=box,label="ti.xdais.dm\n1, 0, 7", color=white];
     }
     subgraph cluster21 {
         label="";
         ti_xdais__top [shape=box,label="ti.xdais\n1, 2.0, 1", color=white];
+        ti_xdais__bot [shape=point,label="", style=invis];
     }
     subgraph cluster22 {
         label="";
@@ -341,6 +342,6 @@ digraph configuration {
     ti_sdo_ce__bot -> gnu_targets_arm_GCArmv5T__1_0_4__2_1 [ltail=cluster46];
     gnu_targets_arm_GCArmv5T__1_0_4__2_1 [shape=record,label="gnu.targets.arm.GCArmv5T|1,0,4.2,1",style=filled, fillcolor=lightgrey];
     ti_sdo_ce_universal__top -> gnu_targets_arm_GCArmv5T__1_0_4__2_1 [ltail=cluster47];
-    gnu_targets_arm_GCArmv5T__1_0_4__4_1 [shape=record,label="gnu.targets.arm.GCArmv5T|1,0,4.4,1",style=filled, fillcolor=lightgrey];
-    pyc6accel_config__top -> gnu_targets_arm_GCArmv5T__1_0_4__4_1 [ltail=cluster49];
+    gnu_targets_arm_GCArmv5T__1_0_4__5_1 [shape=record,label="gnu.targets.arm.GCArmv5T|1,0,4.5,1",style=filled, fillcolor=lightgrey];
+    pyc6accel_config__top -> gnu_targets_arm_GCArmv5T__1_0_4__5_1 [ltail=cluster49];
 }

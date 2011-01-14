@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-v49
+ * @(#) xdc-v53
  */
 
 #define __nested__
@@ -98,7 +98,7 @@ Bool Memory_skipVirtualAddressTranslation = FALSE;
 
 /* List of all packages and their versions and paths, for diagnostics */
 String Global_buildInfo[] = {
-    "    package gnu.targets.arm.rtsv5T (/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/arm/rtsv5T/) [1, 0, 0, 0]",
+    "    package gnu.targets.arm.rtsv5T (/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/arm/rtsv5T/) [1, 0, 0, 0]",
     "    package ti.c6accel (/home/anol/workspace/pyc6accel/c6accel/soc/packages/ti/c6accel/) [1, 0, 0]",
     "    package ti.sdo.linuxutils.sdma (/home/anol/dvsdk/dvsdk_3_01_00_10/linuxutils_2_25_05_11/packages/ti/sdo/linuxutils/sdma/) [1, 0, 0]",
     "    package ti.sdo.linuxutils.cmem (/home/anol/dvsdk/dvsdk_3_01_00_10/linuxutils_2_25_05_11/packages/ti/sdo/linuxutils/cmem/) [2, 2, 0]",
@@ -107,8 +107,8 @@ String Global_buildInfo[] = {
     "    package ti.sdo.ce.global (/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/global/) [1, 0, 0]",
     "    package dsplink.gpp (/home/anol/dvsdk/dvsdk_3_01_00_10/dsplink_linux_1_65_00_03/packages/dsplink/gpp/) [5, 0, 0]",
     "    package ti.bios.power (/home/anol/dvsdk/dvsdk_3_01_00_10/local_power_manager_linux_1_24_02_09/packages/ti/bios/power/) [1, 1, 1]",
-    "    package ti.xdais.dm (/home/anol/dvsdk/dvsdk_3_01_00_10/xdais_6_26_01_03/packages/ti/xdais/dm/) [1, 0, 5]",
-    "    package ti.xdais (/home/anol/dvsdk/dvsdk_3_01_00_10/xdais_6_26_01_03/packages/ti/xdais/) [1, 2.0, 1]",
+    "    package ti.xdais.dm (/opt/ti/ccsv5/xdais_7_20_00_07/packages/ti/xdais/dm/) [1, 0, 7]",
+    "    package ti.xdais (/opt/ti/ccsv5/xdais_7_20_00_07/packages/ti/xdais/) [1, 2.0, 1]",
     "    package ti.sdo.ce.node (/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/node/) [1, 0, 0]",
     "    package ti.sdo.utils.trace (/home/anol/dvsdk/dvsdk_3_01_00_10/framework_components_2_25_01_05/packages/ti/sdo/utils/trace/) [1, 0, 0]",
     "    package ti.sdo.ce.utils.xdm (/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/utils/xdm/) [1, 0, 2]",
@@ -116,15 +116,15 @@ String Global_buildInfo[] = {
     "    package ti.sdo.fc.utils (/home/anol/dvsdk/dvsdk_3_01_00_10/framework_components_2_25_01_05/packages/ti/sdo/fc/utils/) [1, 0, 2]",
     "    package ti.sdo.fc.dman3 (/home/anol/dvsdk/dvsdk_3_01_00_10/framework_components_2_25_01_05/packages/ti/sdo/fc/dman3/) [1, 0, 4]",
     "    package ti.sdo.fc.acpy3 (/home/anol/dvsdk/dvsdk_3_01_00_10/framework_components_2_25_01_05/packages/ti/sdo/fc/acpy3/) [1, 0, 4]",
-    "    package gnu.targets (/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/) [1, 0, 1]",
-    "    package gnu.targets.arm (/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/arm/) [1, 0, 0, 0]",
-    "    package ti.catalog.arm.cortexa8 (/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/catalog/arm/cortexa8/) [1, 0, 0]",
-    "    package ti.catalog.peripherals.hdvicp2 (/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/catalog/peripherals/hdvicp2/) []",
-    "    package ti.catalog (/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/catalog/) [1, 0, 0]",
-    "    package ti.catalog.c6000 (/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/catalog/c6000/) [1, 0, 0, 0]",
-    "    package ti.catalog.arm.peripherals.timers (/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/catalog/arm/peripherals/timers/) []",
-    "    package ti.catalog.arm (/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/catalog/arm/) [1, 0, 1]",
-    "    package ti.platforms.evm3530 (/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/ti/platforms/evm3530/) [1, 0, 0]",
+    "    package gnu.targets (/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/) [1, 0, 1]",
+    "    package gnu.targets.arm (/opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/arm/) [1, 0, 0, 0]",
+    "    package ti.catalog.arm.cortexa8 (/opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/catalog/arm/cortexa8/) [1, 0, 0]",
+    "    package ti.catalog.peripherals.hdvicp2 (/opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/catalog/peripherals/hdvicp2/) []",
+    "    package ti.catalog (/opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/catalog/) [1, 0, 0]",
+    "    package ti.catalog.c6000 (/opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/catalog/c6000/) [1, 0, 0, 0]",
+    "    package ti.catalog.arm.peripherals.timers (/opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/catalog/arm/peripherals/timers/) []",
+    "    package ti.catalog.arm (/opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/catalog/arm/) [1, 0, 1]",
+    "    package ti.platforms.evm3530 (/opt/ti/ccsv5/xdctools_3_20_06_81/packages/ti/platforms/evm3530/) [1, 0, 0]",
     "    package ti.sdo.ce.osal (/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/osal/) [2, 0, 2]",
     "    package ti.sdo.ce.ipc (/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/ipc/) [2, 0, 1]",
     "    package ti.sdo.ce.osal.linux (/home/anol/dvsdk/dvsdk_3_01_00_10/codec_engine_2_26_01_09/packages/ti/sdo/ce/osal/linux/) [2, 0, 1]",

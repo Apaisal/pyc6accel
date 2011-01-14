@@ -100,9 +100,10 @@ __o = __obj[7]
 
 __o = __obj[8]  // gnu.targets.arm.GCArmv5T
     __o['$name'] = String(java.net.URLDecoder.decode('gnu.targets.arm.GCArmv5T', 'UTF-8'))
+    __o['BINVERS'] = String(java.net.URLDecoder.decode('0.09', 'UTF-8'))
     __o['CYGWIN'] = false
     __o['GCCTARG'] = String(java.net.URLDecoder.decode('arm-none-linux-gnueabi', 'UTF-8'))
-    __o['GCCVERS'] = String(java.net.URLDecoder.decode('4.4.1', 'UTF-8'))
+    __o['GCCVERS'] = String(java.net.URLDecoder.decode('4.5.1', 'UTF-8'))
     __o['LONGNAME'] = String(java.net.URLDecoder.decode('bin%2Farm-none-linux-gnueabi-gcc', 'UTF-8'))
     __o['alignDirectiveSupported'] = false
     __o['ar'] = __obj[9.0]
@@ -134,7 +135,7 @@ __o = __obj[8]  // gnu.targets.arm.GCArmv5T
     __o['stdInclude'] = String(java.net.URLDecoder.decode('gnu%2Ftargets%2Farm%2Fstd.h', 'UTF-8'))
     __o['stdTypes'] = __obj[43.0]
     __o['suffix'] = String(java.net.URLDecoder.decode('v5T', 'UTF-8'))
-    __o['version'] = String(java.net.URLDecoder.decode('gnu.targets.arm.GCArmv5T%7B1%2C0%2C4.4%2C1', 'UTF-8'))
+    __o['version'] = String(java.net.URLDecoder.decode('gnu.targets.arm.GCArmv5T%7B1%2C0%2C4.5%2C1', 'UTF-8'))
     __o['versionMap'] = __obj[61.0]
 
 __o = __obj[9]  // gnu.targets.arm.GCArmv5T/ar
@@ -227,7 +228,7 @@ __o = __obj[25]  // gnu.targets.arm.GCArmv5T/lnk
 __o = __obj[26]  // gnu.targets.arm.GCArmv5T/lnkOpts
     __o['$name'] = String(java.net.URLDecoder.decode('gnu.targets.arm.GCArmv5T%2FlnkOpts', 'UTF-8'))
     __o['prefix'] = String(java.net.URLDecoder.decode('', 'UTF-8'))
-    __o['suffix'] = String(java.net.URLDecoder.decode('-lstdc%2B%2B+-L%24%28rootDir%29%2F%24%28GCCTARG%29%2Flib', 'UTF-8'))
+    __o['suffix'] = String(java.net.URLDecoder.decode('-Wl%2C-Map%3D%24%28XDCCFGDIR%29%2F%24%40.map+-lstdc%2B%2B+-L%24%28rootDir%29%2F%24%28GCCTARG%29%2Flib', 'UTF-8'))
 
 __o = __obj[27]  // gnu.targets.arm.GCArmv5T/model
     __o['$name'] = String(java.net.URLDecoder.decode('gnu.targets.arm.GCArmv5T%2Fmodel', 'UTF-8'))

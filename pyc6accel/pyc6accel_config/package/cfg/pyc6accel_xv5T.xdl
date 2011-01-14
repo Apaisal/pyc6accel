@@ -25,6 +25,12 @@ INPUT(
     /home/anol/dvsdk/dvsdk_3_01_00_10/framework_components_2_25_01_05/packages/ti/sdo/fc/scpy/lib/release/scpy.av5T
     /home/anol/dvsdk/dvsdk_3_01_00_10/linuxutils_2_25_05_11/packages/ti/sdo/linuxutils/cmem/lib/cmem.a470MV
     /home/anol/dvsdk/dvsdk_3_01_00_10/linuxutils_2_25_05_11/packages/ti/sdo/linuxutils/sdma/lib/sdma.a470MV
-    /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_20_04_68/packages/gnu/targets/arm/rtsv5T/lib/gnu.targets.arm.rtsv5T.av5T
+    /opt/ti/ccsv5/xdctools_3_20_06_81/packages/gnu/targets/arm/rtsv5T/lib/gnu.targets.arm.rtsv5T.av5T
 )
+
+SECTIONS {
+    xdc.meta (COPY) : {*(xdc.meta)} 
+
+}
+
 
