@@ -151,15 +151,14 @@ pyc6accel_img_cvtcolor(PyObject *self, PyObject *args)
 	if (!PyArg_ParseTuple(args, "OOi", &src, &dst, &code))
 		return NULL;
 
-	printf("%d\n", code);
 	color = ((iplimage_t *) src)->a;
 	gray = ((iplimage_t *) dst)->a;
 
 	START_BENCHMARK();
 	switch (code) {
 		case CV_RGB2GRAY:
-			C6accel_IMG_rgb_to_y(hC6, (unsigned char *) color->imageData,
-			        (unsigned char *) gray->imageData, gray->imageSize);
+			C6accel_IMG_rgb_to_y(hC6, color,
+			        gray, gray->imageSize);
 			break;
 		default:
 			failmsg("This convert code can not support @ version %s", VERSION);
@@ -227,23 +226,23 @@ pyc6accel_img_threshold(PyObject *self, PyObject *args)
 //				case CV_THRESH_BINARY:
 		case THRESH_GREATER2MAX:
 			C6accel_IMG_thr_gt2max_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData, (short) output->width,
+			        (unsigned char*) output->imageData, (short) output->widthStep,
 			        (short) output->height, (unsigned char) threshold);
 			break;
 //				case CV_THRESH_BINARY:
 		case THRESH_GREATER2THRES:
 			C6accel_IMG_thr_gt2thr_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData, (short) output->width,
+			        (unsigned char*) output->imageData, (short) output->widthStep,
 			        (short) output->height, (unsigned char) threshold);
 			break;
 		case THRESH_LESS2MIN:
 			C6accel_IMG_thr_le2min_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData, (short) output->width,
+			        (unsigned char*) output->imageData, (short) output->widthStep,
 			        (short) output->height, (unsigned char) threshold);
 			break;
 		case THRESH_LESS2THRES:
 			C6accel_IMG_thr_le2thr_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData, (short) output->width,
+			        (unsigned char*) output->imageData, (short) output->widthStep,
 			        (short) output->height, (unsigned char) threshold);
 			break;
 		default:
@@ -257,142 +256,6 @@ pyc6accel_img_threshold(PyObject *self, PyObject *args)
 	END_BENCHMARK();
 	END: return Py_None;
 }
-
-//static PyObject *
-//pyc6accel_math_absdiff(PyObject *self, PyObject *args)
-//{
-//	PyObject *src1, *src2, *dst;
-//	IplImage *base, *adder, *result;
-//
-//	if (!PyArg_ParseTuple(args, "OOO", &src1, &src2, &dst))
-//		return NULL;
-//
-//	base = ((iplimage_t *) src)->a;
-//	adder = ((iplimage_t *) dst)->a;
-//	result = ((iplimage_t *) dst)->a;
-//
-//
-//}
-//
-//static PyObject *
-//pyc6accel_img_histogram_16(PyObject *self, PyObject *args)
-//{
-//	int len, npixel, imgbits;
-//	short accumulate = 1;
-//	unsigned char *input;
-//	if (!PyArg_ParseTuple(args, "s#ii|h", &input, &len, &npixel, &imgbits,
-//	        &accumulate))
-//		return NULL;
-//
-//	memcpy(pSrcBuf_16bpp, input, len);
-//	//	memset(pRefBuf_16bpp, 0x00, len);
-//	//	memset(pOutBuf_16bpp, 0x00, len);
-//
-//	C6accel_IMG_histogram_16(hC6, (unsigned short *) pSrcBuf_16bpp, npixel,
-//	        accumulate, (short *) pRefBuf_16bpp, (short *) pOutBuf_16bpp,
-//	        imgbits);
-//	if (C6Accel_readCallType(hC6) == ASYNC)
-//		C6accel_waitAsyncCall(hC6);
-//
-//	return PyString_FromStringAndSize((char *) pOutBuf_16bpp,
-//	        (imgbits * npixel) / 8);
-//}
-//
-//static PyObject *
-//pyc6accel_img_histogram_8(PyObject *self, PyObject *args)
-//{
-//	int len;
-//	short accumulate = 1;
-//	unsigned char *input;
-//	if (!PyArg_ParseTuple(args, "t#i|h", &input, &len, &accumulate))
-//		return NULL;
-//
-//	memcpy(pSrcBuf_16bpp, input, len);
-//	memset(pRefBuf_16bpp, 0x00, sizeof(unsigned short) * 1024);
-//	memset(pOutBuf_16bpp, 0x00, sizeof(unsigned short) * 256);
-//	C6accel_IMG_histogram_8(hC6, (unsigned char *) pSrcBuf_16bpp, len,
-//	        accumulate, (unsigned short *) pRefBuf_16bpp,
-//	        (unsigned short *) pOutBuf_16bpp);
-//	if (C6Accel_readCallType(hC6) == ASYNC)
-//		C6accel_waitAsyncCall(hC6);
-//
-//	return Py_BuildValue("s#s#", (char *) pOutBuf_16bpp, 256, pRefBuf_16bpp,
-//	        1024);
-//}
-//
-//static PyObject *
-//pyc6accel_img_median_3x3_8(PyObject *self, PyObject *args)
-//{
-//	int len, cols;
-//	unsigned char *input;
-//	if (!PyArg_ParseTuple(args, "t#i", &input, &len, &cols))
-//		return NULL;
-//
-//	memcpy(pSrcBuf_16bpp, input, len);
-//	memset(pOutBuf_16bpp, 0x00, len);
-//
-//	C6accel_IMG_median_3x3_8(hC6, (unsigned char *) pSrcBuf_16bpp, cols,
-//	        (unsigned char *) pOutBuf_16bpp);
-//	if (C6Accel_readCallType(hC6) == ASYNC)
-//		C6accel_waitAsyncCall(hC6);
-//
-//	return PyString_FromStringAndSize((char *) pOutBuf_16bpp, len);
-//}
-//
-//static PyObject *
-//pyc6accel_img_thr_gt2max_8(PyObject *self, PyObject *args)
-//{
-//	int len;
-//	short rows, cols;
-//	unsigned char threshold;
-//	const unsigned char *input;
-//	int status;
-//
-//	if (!PyArg_ParseTuple(args, "t#hhI", &input, &len, &rows, &cols, &threshold))
-//		return NULL;
-//
-//	memcpy(pSrcBuf_16bpp, input, cols * rows);
-//
-//	START_BENCHMARK();
-//	status = C6accel_IMG_thr_gt2max_8(hC6, (unsigned char *) pSrcBuf_16bpp,
-//	        (unsigned char *) pOutBuf_16bpp, cols, rows, threshold);
-//	END_BENCHMARK();
-//
-//	if (C6Accel_readCallType(hC6) == ASYNC)
-//		C6accel_waitAsyncCall(hC6);
-//	printf("status %d\n", status);
-//
-//	return PyString_FromStringAndSize((char *) pOutBuf_16bpp, len);
-//}
-//
-//static PyObject *
-//pyc6accel_canny(PyObject *self, PyObject *args)
-//{
-//	int len, rows, cols, aperture_size = 3;
-//	double l_thr, h_thr;
-//	unsigned char *input;
-//
-//	if (!PyArg_ParseTuple(args, "t#iiddi", &input, &len, &rows, &cols, &l_thr,
-//	        &h_thr, &aperture_size))
-//		return NULL;
-//
-//	memcpy(pSrcBuf_16bpp, input, len * sizeof(unsigned char));
-//	memset(pOutBuf_16bpp, 0x00, len * sizeof(unsigned char));
-//	memset(pRefBuf_16bpp, 0x00, pow(aperture_size, 2) * sizeof(unsigned char));
-//
-//	getGaussianKernel((unsigned char*) pRefBuf_16bpp, 3);
-//
-//	C6accel_IMG_conv_5x5_i8_c8s(hC6, (unsigned char *) pSrcBuf_16bpp,
-//	        (unsigned char *) pOutBuf_16bpp, rows, cols,
-//	        (char *) pRefBuf_16bpp, 3);
-//	//	C6accel_IMG_canny(hC6, (unsigned char *) pSrcBuf_16bpp,
-//	//	        (unsigned char *) pOutBuf_16bpp, (unsigned char*) pRefBuf_16bpp,
-//	//	        rows, cols, l_thr, h_thr, aperture_size);
-//	if (C6Accel_readCallType(hC6) == ASYNC)
-//		C6accel_waitAsyncCall(hC6);
-//	return PyString_FromStringAndSize((char *) pOutBuf_16bpp, len
-//	        * sizeof(unsigned char));
-//}
 
 int getGaussianKernel(unsigned char * out_dat, int ksize) {
 	int i, j;

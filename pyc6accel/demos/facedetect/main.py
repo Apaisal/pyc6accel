@@ -10,12 +10,11 @@ from optparse import OptionParser
 from detect import detect
 
 
-
 def main():
 	usage = "usage: %prog [options] [ip_camera|local_camera_index]"
 	parser = OptionParser(usage)
 
-	parser.add_option("-c", "--cascade", dest = "cascade", type = "string", help = "Haar cascade file, default %default", default = "./haarcascade_frontalface_default.xml")
+	parser.add_option("-c", "--cascade", dest = "cascade", type = "string", help = "Haar cascade file, default %default", default = "./haarcascade_frontalface_alt2.xml")
 	parser.add_option("-o", "--output", dest = "output", type = "string", help = "output file, default %default")
 	(options, args) = parser.parse_args()
 
@@ -37,9 +36,10 @@ def main():
 		camera = IPCamera()
 		camera.scan_ip_network(args[0])
 		camera.createCapture()
-
+	cv.SetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH, 640)
+	cv.SetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_HEIGHT, 480)
 	if output == None:
-		cv.NamedWindow('test', 1)
+		cv.NamedWindow('test', 2)
 	else:
 		writer = cv.CreateVideoWriter(output, cv.CV_FOURCC('M', 'J', 'P', 'G'), 10, (320, 240))
 

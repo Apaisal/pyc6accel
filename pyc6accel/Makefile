@@ -77,9 +77,6 @@ C6ACCEL_LIB += $(C6ACCEL_INSTALL_DIR)/soc/c6accelw/lib/c6accelw_$(PLATFORM).a470
 
 OPENCV_C_FLAGS = -I${PWD}/opencv/include -I${PWD}/python/include
 OPENCV_LD_FLAGS = -L${PWD}/opencv/lib -lml -lcxcore -lcv -lcvaux -lhighgui
-#OPENCV_C_FLAGS = -I/home/anol/CodeSourcery/Sourcery_G++_Lite/arm-none-linux-gnueabi/libc/usr/local/include
-#OPENCV_LD_FLAGS = -L/home/anol/CodeSourcery/Sourcery_G++_Lite/arm-none-linux-gnueabi/libc/usr/local/lib -lml -lcxcore -lcv -lcvaux -lhighgui
-#OPENCV_PYTHON_FLAGS = -I/home/anol/workspace/OpenCV-2.1.0/interfaces/python
 
 COMPILE.c = $(VERBOSE) $(CSTOOL_PREFIX)gcc  $(CPP_FLAGS) $(C_FLAGS) $(OPENCV_C_FLAGS) $(OPENCV_PYTHON_FLAGS) -c
 LINK.c = $(VERBOSE) $(CSTOOL_PREFIX)gcc $(LD_FLAGS) $(OPENCV_LD_FLAGS) 

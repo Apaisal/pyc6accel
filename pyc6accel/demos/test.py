@@ -215,7 +215,7 @@ def load(img):
     gray = cv.CreateImage(cv.GetSize(img), 8, 1)
 #    ret = pyc6accel.load(gray)
 #    pyc6accel.init()
-    ret = pyc6accel.RGB2Gray(img, gray)
+#    ret = pyc6accel.RGB2Gray(img, gray)
 #    ret = pyc6accel.rgb2y(img.tostring(), img.height, img.width)
     print 'Finish'
     cv.SaveImage('test_files/lena_pyc6accel_RGB2Gray.jpg', gray)
@@ -240,8 +240,8 @@ def main():
 #        sobel(lenaimg)
 #        adds(lenaimg)
 #        subs(lenaimg)
-#        convertcolor(lenaimg)
-        threshold(lenaimg, 100)
+        convertcolor(lenaimg)
+#        threshold(lenaimg, 100)
 #        load(lenaimg)
 
         fd.write('\n')

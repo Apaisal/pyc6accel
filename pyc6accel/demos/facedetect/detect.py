@@ -4,6 +4,7 @@ Created on Aug 14, 2010
 @author: anol
 '''
 import cv, time
+import pyc6accel
 
 class detect():
     '''
@@ -37,8 +38,8 @@ class detect():
                    cv.Round (image.height / image_scale)), 8, 1)
 
         # convert color input image to grayscale
-        cv.CvtColor(image, gray, cv.CV_BGR2GRAY)
-
+#        cv.CvtColor(image, gray, cv.CV_BGR2GRAY)
+        pyc6accel.CvtColor(image, gray, cv.CV_RGB2GRAY)
         # scale input image for faster processing
         cv.Resize(gray, small_img, cv.CV_INTER_LINEAR)
 
@@ -48,9 +49,9 @@ class detect():
             start = cv.GetTickCount()
             faces = cv.HaarDetectObjects(small_img, self.cascade, cv.CreateMemStorage(0)
             , haar_scale \
-#            , min_neighbors \
-#            , haar_flags \
-#            , min_size \
+            , min_neighbors \
+            , haar_flags \
+            , min_size \
             )
             interval = cv.GetTickCount() - start
             print "detection time = %gms" % (interval / (cv.GetTickFrequency()*1000.))
