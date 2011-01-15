@@ -350,8 +350,8 @@ unsigned char *restrict cr, /* Unpacked red chroma frame       */
 unsigned char *restrict cb /* Unpacked green chroma frame     */
 );
 
-int C6accel_IMG_rgb_to_y(C6accel_Handle hC6accel, const unsigned char * src,
-        unsigned char * restrict dst, unsigned int count);
+int C6accel_IMG_rgb_to_y(C6accel_Handle hC6accel, const IplImage * src,
+		IplImage * restrict dst, unsigned int count);
 
 // image threshold greater than to maximum 8 bits
 int C6accel_IMG_thr_gt2max_8(C6accel_Handle hC6accel,

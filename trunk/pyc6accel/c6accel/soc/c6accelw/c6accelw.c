@@ -23,6 +23,12 @@
 #include <string.h>
 #include <stdarg.h>
 
+/*OpenCV*/
+#include <cv.h>
+#include <cxcore.h>
+#include <cvaux.h>
+#include <highgui.h>
+
 /* Wrapper Header file */
 #include "c6accelw.h"
 
@@ -16133,8 +16139,8 @@ Int C6accel_IMG_ycbcr420pl_to_ycbcr422sp(C6accel_Handle hC6accel,
 
 }
 
-Int C6accel_IMG_rgb_to_y(C6accel_Handle hC6accel, const unsigned char * src,
-        unsigned char * restrict dst, unsigned int count)
+Int C6accel_IMG_rgb_to_y(C6accel_Handle hC6accel, const IplImage * src,
+		IplImage * restrict dst, unsigned int count)
 {
 	XDM1_BufDesc inBufDesc;
 	XDM1_BufDesc outBufDesc;
@@ -16169,8 +16175,8 @@ Int C6accel_IMG_rgb_to_y(C6accel_Handle hC6accel, const unsigned char * src,
 
 
 	/* Fill in input/output buffer descriptor parameters */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(src,0, 3 * count * sizeof(unsigned char));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(dst,0, count * sizeof(unsigned char));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(src->imageData,0, src->height * src->widthStep * sizeof(unsigned char));
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(dst->imageData,0, dst->height * dst->widthStep * sizeof(unsigned char));
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;

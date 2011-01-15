@@ -18,7 +18,10 @@ VERBOSE = @
 # Which compiler flags should be used?
 BUILD_TYPE=release
 
-CPP_FLAGS += -I../packages -I$(XDC_INSTALL_DIR)/packages -I$(CE_INSTALL_DIR)/packages -I$(XDAIS_INSTALL_DIR)/packages -Dxdc_target_name__=arm/GCArmv5T -Dxdc_target_types__=gnu/targets/std.h
+OPENCV_C_FLAGS = -I${PWD}/opencv/include -I${PWD}/python/include
+OPENCV_LD_FLAGS = -L${PWD}/opencv/lib -lml -lcxcore -lcv -lcvaux -lhighgui 
+C_FLAGS += ${OPENCV_C_FLAGS}
+CPP_FLAGS += ${OPENCV_C_FLAGS} -I../packages -I$(XDC_INSTALL_DIR)/packages -I$(CE_INSTALL_DIR)/packages -I$(XDAIS_INSTALL_DIR)/packages -Dxdc_target_name__=arm/GCArmv5T -Dxdc_target_types__=gnu/targets/std.h
 
 ifeq ($(BUILD_TYPE), release)
 ifeq ($(ARM_ISA),armv7-a)
@@ -33,7 +36,7 @@ else
     C_FLAGS	+= -Wall -g
 endif
 
-LD_FLAGS += -L$(LINUXLIBS_INSTALL_DIR)/lib
+LD_FLAGS += -L$(LINUXLIBS_INSTALL_DIR)/lib ${OPENCV_LD_FLAGS}
 AR_FLAGS += 
 
 COMPILE.c = $(VERBOSE) $(CSTOOL_PREFIX)gcc $(CPP_FLAGS) $(C_FLAGS) -c -fPIC
