@@ -1281,7 +1281,7 @@ int C6ACCEL_TI_imglibFunctionCall(void *pFnArray, int fxnID,
 				return (IUNIVERSAL_EPARAMFAIL);
 			} else
 				/* Call underlying kernel */
-				IMG_thr_gt2th_8(
+				IMG_thr_gt2thr_8(
 				        (unsigned char *) inBufs->descs[C6ACCEL_TI_IMG_thr_gt2thr_8_ParamPtr->indata_InArrID1].buf,
 				        (unsigned char *) outBufs->descs[C6ACCEL_TI_IMG_thr_gt2thr_8_ParamPtr->outdata_OutArrID1].buf,
 				        C6ACCEL_TI_IMG_thr_gt2thr_8_ParamPtr->Col,
@@ -1290,7 +1290,6 @@ int C6ACCEL_TI_imglibFunctionCall(void *pFnArray, int fxnID,
 
 		}
 			break;
-
 		case (THR_LE2MIN_8_FXN_ID): {
 			/*by anol*/
 			/* Unmarshal Parameters */
@@ -1308,7 +1307,7 @@ int C6ACCEL_TI_imglibFunctionCall(void *pFnArray, int fxnID,
 				return (IUNIVERSAL_EPARAMFAIL);
 			} else
 				/* Call underlying kernel */
-				IMG_thr_le2min_c(
+				IMG_thr_le2min_8(
 				        (unsigned char *) inBufs->descs[C6ACCEL_TI_IMG_thr_le2min_8_ParamPtr->indata_InArrID1].buf,
 				        (unsigned char *) outBufs->descs[C6ACCEL_TI_IMG_thr_le2min_8_ParamPtr->outdata_OutArrID1].buf,
 				        C6ACCEL_TI_IMG_thr_le2min_8_ParamPtr->Col,
@@ -1345,45 +1344,44 @@ int C6ACCEL_TI_imglibFunctionCall(void *pFnArray, int fxnID,
 		}
 			break;
 			//error: a declaration cannot have a label
-		case (DILATE_BIN_FXN_ID):
+		case (DILATE_BIN_FXN_ID): {
 			/*by anol*/
 			/* Unmarshal Parameters */
-		IMG_pix_sat_Params * C6ACCEL_TI_IMG_dilate_bin_ParamPtr;
-//			C6ACCEL_TI_IMG_dilate_bin_ParamPtr = pFnArray;
-//			if (((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID1) > INBUF15)
-//			        | ((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->OutArrID1)
-//			                > OUTBUF15)
-//			        | ((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID2) > INBUF15)
-//			        | ((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->Col % 8) != 0)) {
-//				return (IUNIVERSAL_EPARAMFAIL);
-//			} else {
-//				/* Call underlying kernel */
-//				IMG_dilate_bin(
-//				        (unsigned char *) inBufs->descs[C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID1].buf,
-//				        (unsigned char *) outBufs->descs[C6ACCEL_TI_IMG_dilate_bin_ParamPtr->OutArrID1].buf,
-//				        (char*) inBufs->descs[C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID2].buf,
-//				        C6ACCEL_TI_IMG_dilate_bin_ParamPtr->Col);
-//			}
-						break;
-			//		case (ERODE_BIN_FXN_ID):
-			//			/*by anol*/
-			//			/* Unmarshal Parameters */
-			//			IMG_erode_bin_Params *C6ACCEL_TI_IMG_erode_bin_ParamPtr;
-			//			C6ACCEL_TI_IMG_erode_bin_ParamPtr = pFnArray;
-			//			if ((C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID1 > INBUF15)
-			//			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->OutArrID1 > OUTBUF15)
-			//			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID2 > INBUF15)
-			//			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->Col % 8 != 0)) {
-			//				return (IUNIVERSAL_EPARAMFAIL);
-			//			} else {
-			//				/* Call underlying kernel */
-			//				IMG_erode_bin(
-			//				        (unsigned char *) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID1].buf,
-			//				        (unsigned char *) outBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->OutArrID1].buf,
-			//				        (char*) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID2].buf,
-			//				        C6ACCEL_TI_IMG_erode_bin_ParamPtr->Col);
-			//			}
-			//			break;
+			IMG_dilate_bin_Params * C6ACCEL_TI_IMG_dilate_bin_ParamPtr;
+			C6ACCEL_TI_IMG_dilate_bin_ParamPtr = pFnArray;
+			if (((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID1) > INBUF15)
+			        | ((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->OutArrID1)
+			                > OUTBUF15)
+			        | ((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID2) > INBUF15)
+			        | ((C6ACCEL_TI_IMG_dilate_bin_ParamPtr->Col % 8) != 0)) {
+				return (IUNIVERSAL_EPARAMFAIL);
+			} else
+				IMG_dilate_bin(
+				        (unsigned char *) inBufs->descs[C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID1].buf,
+				        (unsigned char *) outBufs->descs[C6ACCEL_TI_IMG_dilate_bin_ParamPtr->OutArrID1].buf,
+				        (char*) inBufs->descs[C6ACCEL_TI_IMG_dilate_bin_ParamPtr->InArrID2].buf,
+				        C6ACCEL_TI_IMG_dilate_bin_ParamPtr->Col);
+		}
+			break;
+		case (ERODE_BIN_FXN_ID): {
+			/*by anol*/
+			/* Unmarshal Parameters */
+			IMG_erode_bin_Params *C6ACCEL_TI_IMG_erode_bin_ParamPtr;
+			C6ACCEL_TI_IMG_erode_bin_ParamPtr = pFnArray;
+			if ((C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID1 > INBUF15)
+			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->OutArrID1 > OUTBUF15)
+			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID2 > INBUF15)
+			        | (C6ACCEL_TI_IMG_erode_bin_ParamPtr->Col % 8 != 0)) {
+				return (IUNIVERSAL_EPARAMFAIL);
+			} else
+				/* Call underlying kernel */
+				IMG_erode_bin(
+				        (unsigned char *) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID1].buf,
+				        (unsigned char *) outBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->OutArrID1].buf,
+				        (char*) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID2].buf,
+				        C6ACCEL_TI_IMG_erode_bin_ParamPtr->Col);
+		}
+			break;
 
 		default:
 			/*Error caused due to passing of an invalid ID*/

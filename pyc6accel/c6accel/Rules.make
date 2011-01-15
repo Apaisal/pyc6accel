@@ -14,6 +14,7 @@ DVSDK_INSTALL_DIR=$(HOME)/dvsdk/dvsdk_3_01_00_10
 -include $(DVSDK_INSTALL_DIR)/Rules.make
 EXEC_DIR_C6ACCEL = $(EXEC_DIR)/c6accel_app
 PLATFORM = omap3530
+C6ACCEL_INSTALL_DIR=./
 
 ifeq ($(PLATFORM),omapl138)
 # RTSC platform
@@ -99,31 +100,31 @@ else
 DVSDK_INSTALL_DIR=$(HOME)/dvsdk/dvsdk_3_01_00_10
 
 # Where the Codec Engine package is installed.
-CE_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/codec-engine_2_25_02_11
+CE_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/codec_engine_2_26_01_09
 
 # Where the XDAIS package is installed.
-XDAIS_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/xdais_6_25_02_11
+XDAIS_INSTALL_DIR=/opt/ti/ccsv5/xdais_7_20_00_07
 
 # Where the DSP Link package is installed.
-LINK_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/dsplink_1_65_00_02
+LINK_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/dsplink_linux_1_65_00_03
 
 # Where the CMEM (contiguous memory allocator) package is installed.
-CMEM_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/linuxutils_2_25_02_08
+CMEM_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/linuxutils_2_25_05_11
 
 # Where the EDMA3 Low Level Driver is installed.
 EDMA3_LLD_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/edma3_lld_01_11_00_03
 
 # Where the TI C6x codegen tool is installed.
-CODEGEN_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/cgt6x_6_1_14
+CODEGEN_INSTALL_DIR=/opt/TI/TI_CGT_C6000_7.0.4
 
 # Where the RTSC tools package is installed.
-XDC_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/xdctools_3_16_03_36
+XDC_INSTALL_DIR=/opt/ti/ccsv5/xdctools_3_20_06_81
 
 # Where Framework Components product is installed.
 FC_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/framework-components_2_25_01_05
 
 # Where DSP/BIOS is installed.
-BIOS_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/dspbios_5_41_03_17
+BIOS_INSTALL_DIR=/opt/ti/ccsv5/bios_5_41_09_34
 
 # Where biosutils package is installed.
 BIOSUTILS_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/biosutils_1_02_02
@@ -142,7 +143,6 @@ DSP_ISA = 64P
 
 endif
 
-C6ACCEL_INSTALL_DIR=  ./c6accel
 #C6ACCEL_INSTALL_DIR=  $(DVSDK_INSTALL_DIR)/c6accel_1_01_00_02
 
 # The prefix to be added before the GNU compiler tools (optionally including

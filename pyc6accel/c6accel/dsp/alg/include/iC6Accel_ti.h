@@ -1355,12 +1355,12 @@ typedef struct IMG_yc_demux_le8_c_Params {
 
 /* Function call : void IMG_dilate_bin(const unsigned char * restrict in_data, unsigned char * restrict
  out_data, const char * restrict mask, int cols) */
-typedef struct IMG_dilate_bin_Param {
+typedef struct IMG_dilate_bin_Params {
 	unsigned int InArrID1;
 	unsigned int OutArrID1;
 	unsigned int InArrID2;
 	int Col;
-} IMG_dilate_bin_Param;
+} IMG_dilate_bin_Params;
 
 /* Function call : void IMG_erode_bin(const unsigned char * restrict in_data, unsigned char * restrict
  out_data, const char * restrict mask, int cols)*/
