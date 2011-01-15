@@ -40,21 +40,21 @@
 							<builder enableCleanBuild="true" enabledIncrementalBuild="true" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;org.eclipse.cdt.core.CWDLocator" id="org.eclipse.cdt.build.core.settings.default.builder.927819091" incrementalBuildTarget="all install" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool errorParsers="org.eclipse.cdt.core.VCErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="org.eclipse.cdt.build.core.settings.holder.libs.2127965244" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool errorParsers="org.eclipse.cdt.core.VCErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="org.eclipse.cdt.build.core.settings.holder.773278023" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.1858536080" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths" valueType="undefIncludePath">
+								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.1858536080" name="Undefined Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths" valueType="undefIncludePath">
 									<listOptionValue builtIn="false" value="/home/anol/CodeSourcery/Sourcery_G++_Lite/lib/gcc/arm-none-linux-gnueabi/4.4.1/include"/>
 									<listOptionValue builtIn="false" value="/home/anol/CodeSourcery/Sourcery_G++_Lite/lib/gcc/arm-none-linux-gnueabi/4.4.1/include-fixed"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.536808654" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool errorParsers="org.eclipse.cdt.core.VCErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="org.eclipse.cdt.build.core.settings.holder.894714515" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.548507240" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths" valueType="undefIncludePath">
+								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.548507240" name="Undefined Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths" valueType="undefIncludePath">
 									<listOptionValue builtIn="false" value="/home/anol/CodeSourcery/Sourcery_G++_Lite/lib/gcc/arm-none-linux-gnueabi/4.4.1/include"/>
 									<listOptionValue builtIn="false" value="/home/anol/CodeSourcery/Sourcery_G++_Lite/lib/gcc/arm-none-linux-gnueabi/4.4.1/include-fixed"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1063945990" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool errorParsers="org.eclipse.cdt.core.VCErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="org.eclipse.cdt.build.core.settings.holder.117047184" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.1127312619" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths" valueType="undefIncludePath">
+								<option id="org.eclipse.cdt.build.core.settings.holder.undef.incpaths.1127312619" name="Undefined Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.undef.incpaths" valueType="undefIncludePath">
 									<listOptionValue builtIn="false" value="/home/anol/CodeSourcery/Sourcery_G++_Lite/lib/gcc/arm-none-linux-gnueabi/4.4.1/include"/>
 									<listOptionValue builtIn="false" value="/home/anol/CodeSourcery/Sourcery_G++_Lite/lib/gcc/arm-none-linux-gnueabi/4.4.1/include-fixed"/>
 								</option>
@@ -62,6 +62,17 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="0.880252925.1162013905" name="/" resourcePath="demos/facedetect">
+						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.550125246" name="No ToolChain" superClass="org.eclipse.cdt.build.core.prefbase.toolchain" unusedChildren="">
+							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.374600658" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs.2127965244"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.2077819341" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder.773278023"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.2062554689" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder.894714515"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.794764728" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder.117047184"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="demos/facedetect" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>

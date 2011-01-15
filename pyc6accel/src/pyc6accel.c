@@ -102,8 +102,6 @@ pyc6accel_img_adds(PyObject *self, PyObject *args)
 	img = ((iplimage_t *) src)->a;
 	adds = ((iplimage_t *) dst)->a;
 
-	printf("Start AddS\n");
-
 	START_BENCHMARK();
 	C6accel_IMG_addS_8(hC6, (char *) img->imageData, (char *) adds->imageData,
 	        (char) value, img->imageSize);
@@ -175,7 +173,6 @@ pyc6accel_img_cvtcolor(PyObject *self, PyObject *args)
 static PyObject *
 pyc6accel_img_sobel(PyObject *self, PyObject *args)
 {
-
 	PyObject *src, *dst;
 	IplImage *org, *sobel;
 	int kernel;
