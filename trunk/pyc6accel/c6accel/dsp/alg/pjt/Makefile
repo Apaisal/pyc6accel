@@ -27,7 +27,7 @@ LD_FLAGS = -z -l lnk.cmd -r -h -g _C6ACCEL_TI_IALG -g _UNIVERSAL_TI_PARAMS -g _C
 
 ifeq ($(DSP_ISA),64P)
 EXT		= 64P
-LD_LIBS = -l"../../libs/dsplib64plus.lib" -l="../../libs/C64P_LIBPLUS.lib" -l="../../libs/fastrts64x.lib" -l"../../libs/imglib2.lib" -l"../../libs/IQmath_c64x+.lib" -l"../../libs/IQmath_RAM_c64x+.lib"
+LD_LIBS = -l"../../libs/dsplib64plus.lib" -l="../../libs/C64P_LIBPLUS.lib" -l="../../libs/fastrts64x.lib" -l"../../libs/imglib2.l64P" -l"../../libs/IQmath_c64x+.lib" -l"../../libs/IQmath_RAM_c64x+.lib"
 ifeq ($(BUILD_TYPE), release)
 LTARGET		= ../lib/C6accel_c64P/Release/C6Accel.l64P
 ATARGET		= ../lib/C6accel_c64P/Release/C6Accel.a64P

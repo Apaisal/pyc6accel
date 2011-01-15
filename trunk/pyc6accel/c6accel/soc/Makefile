@@ -23,7 +23,7 @@ XDCTARGETS = ti.targets.C$(DSP_ISA)
 XDCBUILDCFG=../config.bld
 
 # Uncomment for verbose output
-#XDCOPTIONS=v
+XDCOPTIONS=v
 
 export MVTOOL_DIR
 export XDCOPTIONS
@@ -114,7 +114,7 @@ clean_packages:
 c6accel_app:
 	@echo
 	@echo Making all in subdirectory $@...
-	$(MAKE) -C app         PLATFORM_XDC=$(PLATFORM_XDC) 
+	$(MAKE) -C app PLATFORM_XDC=$(PLATFORM_XDC) 
 
 	
 clean_app:	
