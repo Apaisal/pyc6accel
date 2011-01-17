@@ -50,7 +50,7 @@ extern UNIVERSAL_Handle hUni;
  #define CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(pBuffer,outputBufferId,size)   \
         outBufDesc.descs[outputBufferId].buf      = (XDAS_Int8 *) pBuffer;             \
         outBufDesc.descs[outputBufferId].bufSize  = size;                                  \
-        Memory_cacheInv((Ptr)pBuffer, size);
+        Memory_cacheWbInv((Ptr)pBuffer, size);
 
 
 

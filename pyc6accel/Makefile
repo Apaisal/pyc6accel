@@ -17,10 +17,10 @@ TARGET = pyc6accel
 include Rules.make
 
 # Comment this out if you want to see full compiler and linker output.
-VERBOSE = @
+#VERBOSE = @
 
 # Which compiler flags should be used?
-BUILD_TYPE=debug
+BUILD_TYPE=release
 
 # Package path for the XDC tools
 XDCPATH = $(USER_XDC_PATH);../packages;$(CE_INSTALL_DIR)/packages;$(FC_INSTALL_DIR)/packages;$(LINK_INSTALL_DIR)/packages;$(LINK_INSTALL_DIR);$(XDAIS_INSTALL_DIR)/packages;$(CMEM_INSTALL_DIR)/packages;$(C6ACCEL_INSTALL_DIR)/soc/packages;$(LPM_INSTALL_DIR)/packages;$(SERVER_INSTALL_DIR)/packages

@@ -1317,6 +1317,20 @@ typedef struct IMG_addS_16s_Params {
 	int count;
 } IMG_addS_16s_Params;
 
+/* Function call : void IMG_add_16s
+(
+short * restrict imgR1,
+short * restrict imgR2,
+short * restrict imgW,
+int count
+); */
+typedef struct IMG_add_16s_Params {
+	unsigned int imgR1_InArrID1;
+	unsigned int imgR2_InArrID2;
+	unsigned int imgW_OutArrID1;
+	int count;
+} IMG_add_16s_Params;
+
 /* Function call : void IMG_subS_8(char * restrict imgR,char * restrict imgW, char constData,int count )*/
 typedef struct IMG_subS_8_Params {
 	unsigned int imgR_InArrID1;

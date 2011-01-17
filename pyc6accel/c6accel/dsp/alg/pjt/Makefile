@@ -19,7 +19,7 @@ VERBOSE = @
 # Which compiler flags should be used?
 BUILD_TYPE=release
 
-C_FLAGS += -mo -i"$(XDC_INSTALL_DIR)/packages" -i"$(FC_INSTALL_DIR)/packages" -i"$(XDAIS_INSTALL_DIR)/packages" -i"$(CODEGEN_INSTALL_DIR)/include" -i"../include" -i"../../libs/include" -d"_DEBUG" -d"xdc_target__=<ti/targets/std.h>" --mem_model:data=far
+C_FLAGS += -mo -i"$(XDC_INSTALL_DIR)/packages" -i"$(FC_INSTALL_DIR)/packages" -i"$(XDAIS_INSTALL_DIR)/packages" -i"$(CODEGEN_INSTALL_DIR)/include" -i"$(DMAI_INSTALL_DIR)/packages" -i"$(CE_INSTALL_DIR)/packages" -i"../include" -i"../../libs/include" -d"_DEBUG" -d"xdc_target__=<ti/targets/std.h>" --mem_model:data=far
 
 LD_FLAGS = -z -l lnk.cmd -r -h -g _C6ACCEL_TI_IALG -g _UNIVERSAL_TI_PARAMS -g _C6ACCEL_TI_IC6ACCEL  
 

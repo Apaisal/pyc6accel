@@ -2,17 +2,22 @@ import cv
 import pyc6accel
 
 lenaimg = cv.LoadImage('test_files/lena.jpg', cv.CV_LOAD_IMAGE_GRAYSCALE)
-cv.Scale(lenaimg, lenaimg, 1);
+lenaimg1_16s = cv.CreateImage(cv.GetSize(lenaimg), cv.IPL_DEPTH_16S, lenaimg.nChannels)
+lenaimg2_16s = cv.CreateImage(cv.GetSize(lenaimg), cv.IPL_DEPTH_16S, lenaimg.nChannels)
+cv.Convert(lenaimg, lenaimg1_16s)
+cv.Convert(lenaimg, lenaimg2_16s)
+#exit(0)
+#cv.Scale(lenaimg, lenaimg, 1);
 
-def test(img):
-    print 'Add Scalar Method'
-    adds_img = cv.CreateImage(cv.GetSize(img), img.depth, img.nChannels)
+def test():
+    print 'Add Image Method'
+    add_img = cv.CreateImage(cv.GetSize(lenaimg1_16s), lenaimg1_16s.depth, lenaimg1_16s.nChannels)
     t = cv.GetTickCount()
-    pyc6accel.AddS(img, 40, adds_img)
+    pyc6accel.Add(lenaimg1_16s, lenaimg2_16s, add_img)
     t = cv.GetTickCount() - t
     msec = t / (cv.GetTickFrequency() * 1000.)
     print "pyc6accel adds detection time = %g ms" % (t / (cv.GetTickFrequency() * 1000.))
-    cv.SaveImage('test_files/result_adds_pyc6accel.jpg', adds_img)
+    cv.SaveImage('test_files/result_add_pyc6accel.jpg', add_img)
     
 #    fd.write(str(msec) + '\t')
 #
@@ -28,5 +33,5 @@ def test(img):
     
 if __name__ == '__main__' :
     ''''''
-    for i in range(10):
-        test(lenaimg)
+    for i in range(1):
+        test()

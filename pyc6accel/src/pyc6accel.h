@@ -54,6 +54,13 @@ typedef struct {
 	size_t offset;
 } cvmatnd_t;
 
+typedef struct {
+	PyObject_HEAD
+	IplConvKernel *a;
+	PyObject *data;
+	size_t offset;
+} iplconvkernel_t;
+
 int getGaussianKernel(unsigned char * out_dat, int ksize);
 
 #endif /* PYC6ACCEL_H_ */
