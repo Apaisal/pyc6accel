@@ -815,6 +815,26 @@ int C6ACCEL_TI_imglibFunctionCall(void *pFnArray, int fxnID,
 				        C6ACCEL_TI_IMG_addS_16s_paramPtr->count);
 		}
 			break;
+		case (ADD_16S_FXN_ID): {
+			/* Unmarshal Parameters */
+			IMG_add_16s_Params *C6ACCEL_TI_IMG_add_16s_paramPtr;
+			C6ACCEL_TI_IMG_add_16s_paramPtr = pFnArray;
+			/* Parameter check */
+			if (((C6ACCEL_TI_IMG_add_16s_paramPtr->imgR1_InArrID1) > INBUF15)
+			        | ((C6ACCEL_TI_IMG_add_16s_paramPtr->imgW_OutArrID1)
+			                > INBUF15)
+			        | ((C6ACCEL_TI_IMG_add_16s_paramPtr->imgR2_InArrID2)
+			                > INBUF15)) {
+				return (IUNIVERSAL_EPARAMFAIL);
+			} else
+				/* Call underlying kernel */
+				IMG_add_16s(
+				        (short *) inBufs->descs[C6ACCEL_TI_IMG_add_16s_paramPtr->imgR1_InArrID1].buf,
+				        (short *) inBufs->descs[C6ACCEL_TI_IMG_add_16s_paramPtr->imgR2_InArrID2].buf,
+				        (short *) outBufs->descs[C6ACCEL_TI_IMG_add_16s_paramPtr->imgW_OutArrID1].buf,
+				        C6ACCEL_TI_IMG_add_16s_paramPtr->count);
+		}
+			break;
 		case (SUBS_8_FXN_ID): {
 			/* Unmarshal Parameters */
 			IMG_subS_8_Params *C6ACCEL_TI_IMG_subS_8_paramPtr;
@@ -1378,7 +1398,7 @@ int C6ACCEL_TI_imglibFunctionCall(void *pFnArray, int fxnID,
 				IMG_erode_bin(
 				        (unsigned char *) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID1].buf,
 				        (unsigned char *) outBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->OutArrID1].buf,
-				        (char*) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID2].buf,
+				        (char *) inBufs->descs[C6ACCEL_TI_IMG_erode_bin_ParamPtr->InArrID2].buf,
 				        C6ACCEL_TI_IMG_erode_bin_ParamPtr->Col);
 		}
 			break;

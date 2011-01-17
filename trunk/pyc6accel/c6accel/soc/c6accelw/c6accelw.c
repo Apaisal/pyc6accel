@@ -4059,8 +4059,8 @@ int C6accel_IMG_corr_3x3_i16s_c16s_Frame(C6accel_Handle hC6accel,
 
  */
 int C6accel_IMG_sobel_3x3_8(C6accel_Handle hC6accel,
-        const unsigned char *restrict in, /* Input image data   */
-        unsigned char *restrict out, /* Output image data  */
+        const IplImage *restrict in, /* Input image data   */
+        IplImage *restrict out, /* Output image data  */
         short cols, short rows /* Image dimensions   */
 )
 {
@@ -4098,8 +4098,8 @@ int C6accel_IMG_sobel_3x3_8(C6accel_Handle hC6accel,
 
 	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
 	/* See wrapper_c6accel_i.h for more details of operation                 */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in,0,cols * rows*sizeof(char));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out,0,cols * rows*sizeof(char));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in->imageData,0,in->height * in->widthStep *sizeof(char));
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out->imageData,0,out->height * out->widthStep *sizeof(char));
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;
@@ -4662,8 +4662,8 @@ int count /* Number of pixels in image */
  of 8 bits per pixel. The constant is 8 bits in size.
 
  */
-int C6accel_IMG_addS_8(C6accel_Handle hC6accel, const char *restrict imgR, /* Input image data 8 bits/pixel  */
-char *restrict imgW, /* Output image data 8 bits/pixel */
+int C6accel_IMG_addS_8(C6accel_Handle hC6accel, const IplImage *restrict imgR, /* Input image data 8 bits/pixel  */
+IplImage *restrict imgW, /* Output image data 8 bits/pixel */
 char constData, /* 8 bit constant to add */
 int count /* Number of pixels in image */
 )
@@ -4702,8 +4702,8 @@ int count /* Number of pixels in image */
 
 	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
 	/* See wrapper_c6accel_i.h for more details of operation                 */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR,0,count * sizeof(char));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgW,0,count * sizeof(char));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR->imageData,0,imgR->height*imgR->widthStep * sizeof(char));
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgW->imageData,0,imgW->height*imgW->widthStep * sizeof(char));
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;
@@ -4894,6 +4894,115 @@ int count /* Number of pixels in image */
 
 }
 
+int C6accel_IMG_add_16s(C6accel_Handle hC6accel, const short *restrict imgR1, /* Input image 1 data 16 bits/pixel  */
+const short *restrict imgR2, /* Input image 2 data 16 bits/pixel  */
+short *restrict imgW, /* Output image data 16 bits/pixel */
+int count /* Number of pixels in image       */
+)
+{
+	XDM1_BufDesc inBufDesc;
+	XDM1_BufDesc outBufDesc;
+	XDAS_Int32 InArg_Buf_size;
+	IC6Accel_InArgs *CInArgs;
+	UNIVERSAL_OutArgs uniOutArgs;
+	int status;
+	/* Define pointer to function parameter structure */
+	IMG_add_16s_Params *fp0;
+	XDAS_Int8 *pAlloc;
+
+	ACQUIRE_CODEC_ENGINE;
+
+	/* Allocate the InArgs structure as it varies in size
+	 (Needs to be changed everytime we make a API call)*/
+	InArg_Buf_size = sizeof(Fxn_struct) + sizeof(IMG_add_16s_Params)
+	        + sizeof(CInArgs->size) + sizeof(CInArgs->Num_fxns);
+
+
+	/* Request contiguous heap memory allocation for the extended input structure */
+	pAlloc = (XDAS_Int8 *) Memory_alloc(InArg_Buf_size, &wrapperMemParams);
+	CInArgs = (IC6Accel_InArgs *) pAlloc;
+
+
+	/* Initialize .size fields for dummy input and output arguments */
+	uniOutArgs.size = sizeof(uniOutArgs);
+
+
+	/* Set up buffers to pass buffers in and out to alg  */
+	inBufDesc.numBufs = 2;
+	outBufDesc.numBufs = 1;
+
+
+	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
+	/* See wrapper_c6accel_i.h for more details of operation                 */
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR1,0,count * sizeof(short));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR2,1,count * sizeof(short));
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgW,0,count * sizeof(short));
+
+	/* Initialize the extended InArgs structure */
+	CInArgs->Num_fxns = 1;
+	CInArgs->size = InArg_Buf_size;
+
+
+	/* Set function Id and parameter pointers for first function call */
+	CInArgs->fxn[0].FxnID = IMG_ADD_16S_FXN_ID;
+	CInArgs->fxn[0].Param_ptr_offset = sizeof(CInArgs->size)
+	        + sizeof(CInArgs->Num_fxns) + sizeof(Fxn_struct);
+
+
+	/* Initialize pointers to function parameters */
+	fp0 = (IMG_add_16s_Params *) ((XDAS_Int8*) CInArgs
+	        + CInArgs->fxn[0].Param_ptr_offset);
+
+
+	/* Fill in the fields in the parameter structure */
+	fp0->imgR1_InArrID1 = INBUF0;
+	fp0->imgR2_InArrID2 = INBUF1;
+	fp0->imgW_OutArrID1 = OUTBUF0;
+	fp0->count = count;
+
+
+	/* Call the actual algorithm */
+	if (hC6accel->callType == ASYNC) {
+
+
+		/* Update async structure */
+		if (c6accelAsyncParams.asyncCallCount != 0) {
+			status = UNIVERSAL_EFAIL;
+			printf("Async call failed as %d are still pending\n");
+		} else {
+			/* Context Saving */
+			c6accelAsyncParams.asyncCallCount++;
+			memcpy(&(c6accelAsyncParams.inBufs), &inBufDesc,
+			        sizeof(XDM1_BufDesc));
+			memcpy(&(c6accelAsyncParams.outBufs), &outBufDesc,
+			        sizeof(XDM1_BufDesc));
+			memcpy(&(c6accelAsyncParams.inArgs), CInArgs,
+			        sizeof(UNIVERSAL_InArgs));
+			memcpy(&(c6accelAsyncParams.outArgs), &uniOutArgs,
+			        sizeof(UNIVERSAL_OutArgs));
+			c6accelAsyncParams.pBuf = pAlloc;
+			c6accelAsyncParams.pBufSize = InArg_Buf_size;
+			/* Asynchronous Call to the actual algorithm */
+			status = UNIVERSAL_processAsync(hC6accel->hUni, &inBufDesc,
+			        &outBufDesc, NULL, (UNIVERSAL_InArgs *) CInArgs,
+			        &uniOutArgs);
+		}
+	} else {
+		/* Synchronous Call to the actual algorithm */
+		status = UNIVERSAL_process(hC6accel->hUni, &inBufDesc, &outBufDesc,
+		        NULL, (UNIVERSAL_InArgs *) CInArgs, &uniOutArgs);
+
+
+		/* Free the InArgs structure */
+		Memory_free(pAlloc, InArg_Buf_size, &wrapperMemParams);
+	}
+
+	RELEASE_CODEC_ENGINE;
+
+	return status;
+
+}
+
 /*
  int C6ACCEL_IMG_subS_8(C6accel_Handle hC6accel, const char * restrict imgR, char * restrict imgW, char constData,int count)
  Arguments:
@@ -4911,8 +5020,8 @@ int count /* Number of pixels in image */
  consist of 16bits per pixel. The constant is 16bits in size
 
  */
-int C6accel_IMG_subS_8(C6accel_Handle hC6accel, const char *restrict imgR, /* Input image data 8 bits/pixel  */
-char *restrict imgW, /* Output image data 8 bits/pixel */
+int C6accel_IMG_subS_8(C6accel_Handle hC6accel, const IplImage *restrict imgR, /* Input image data 8 bits/pixel  */
+IplImage *restrict imgW, /* Output image data 8 bits/pixel */
 char constData, /* 8 bit constant to sub */
 int count /* Number of pixels in image */
 )
@@ -4951,8 +5060,8 @@ int count /* Number of pixels in image */
 
 	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
 	/* See wrapper_c6accel_i.h for more details of operation                 */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR,0,count * sizeof(char));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgW,0,count * sizeof(char));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR->imageData,0,imgR->height*imgR->widthStep * sizeof(char));
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgW->imageData,0,imgW->height* imgW->widthStep* sizeof(char));
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;
@@ -6442,6 +6551,196 @@ int C6accel_IMG_thr_le2thr_8(C6accel_Handle hC6accel,
 	fp0->Col = cols;
 	fp0->Row = rows;
 	fp0->threshold = threshold;
+
+
+	/* Call the actual algorithm */
+	if (hC6accel->callType == ASYNC) {
+		/* Update async structure */
+		if (c6accelAsyncParams.asyncCallCount != 0) {
+			status = UNIVERSAL_EFAIL;
+			printf("Async call failed as %d are still pending\n");
+		} else {
+			/* Context Saving */
+			c6accelAsyncParams.asyncCallCount++;
+			memcpy(&(c6accelAsyncParams.inBufs), &inBufDesc,
+			        sizeof(XDM1_BufDesc));
+			memcpy(&(c6accelAsyncParams.outBufs), &outBufDesc,
+			        sizeof(XDM1_BufDesc));
+			memcpy(&(c6accelAsyncParams.inArgs), CInArgs,
+			        sizeof(UNIVERSAL_InArgs));
+			memcpy(&(c6accelAsyncParams.outArgs), &uniOutArgs,
+			        sizeof(UNIVERSAL_OutArgs));
+			c6accelAsyncParams.pBuf = pAlloc;
+			c6accelAsyncParams.pBufSize = InArg_Buf_size;
+			/* Asynchronous Call to the actual algorithm */
+			status = UNIVERSAL_processAsync(hC6accel->hUni, &inBufDesc,
+			        &outBufDesc, NULL, (UNIVERSAL_InArgs *) CInArgs,
+			        &uniOutArgs);
+		}
+	} else {
+		/* Synchronous Call to the actual algorithm */
+		status = UNIVERSAL_process(hC6accel->hUni, &inBufDesc, &outBufDesc,
+		        NULL, (UNIVERSAL_InArgs *) CInArgs, &uniOutArgs);
+		/* Free the InArgs structure */
+		Memory_free(pAlloc, InArg_Buf_size, &wrapperMemParams);
+	}RELEASE_CODEC_ENGINE;
+	return status;
+}
+
+int C6accel_IMG_erode_bin(C6accel_Handle hC6accel,
+        const IplImage *restrict in_data, IplImage *restrict out_data,
+        const IplConvKernel *restrict mask, int cols)
+{
+	XDM1_BufDesc inBufDesc;
+	XDM1_BufDesc outBufDesc;
+	XDAS_Int32 InArg_Buf_size;
+	IC6Accel_InArgs *CInArgs;
+	UNIVERSAL_OutArgs uniOutArgs;
+	int status;
+	/* Define pointer to function parameter structure */
+	IMG_erode_bin_Params *fp0;
+	XDAS_Int8 *pAlloc;
+
+	ACQUIRE_CODEC_ENGINE;
+
+	/* Allocate the InArgs structure as it varies in size
+	 (Needs to be changed everytime we make a API call)*/
+	InArg_Buf_size = sizeof(Fxn_struct) + sizeof(IMG_erode_bin_Params)
+	        + sizeof(CInArgs->size) + sizeof(CInArgs->Num_fxns);
+	/* Request contiguous heap memory allocation for the extended input structure */
+	pAlloc = (XDAS_Int8 *) Memory_alloc(InArg_Buf_size, &wrapperMemParams);
+	CInArgs = (IC6Accel_InArgs *) pAlloc;
+
+
+	/* Initialize .size fields for dummy input and output arguments */
+	uniOutArgs.size = sizeof(uniOutArgs);
+
+
+	/* Set up buffers to pass buffers in and out to alg  */
+	inBufDesc.numBufs = 2;
+	outBufDesc.numBufs = 1;
+
+
+	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
+	/* See wrapper_c6accel_i.h for more details of operation                 */
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data->imageData,0,in_data->imageSize);
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(mask->values,1,mask->nRows * mask->nCols);
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data->imageData,0,out_data->imageSize );
+
+	/* Initialize the extended InArgs structure */
+	CInArgs->Num_fxns = 1;
+	CInArgs->size = InArg_Buf_size;
+
+
+	/* Set function Id and parameter pointers for first function call */
+	CInArgs->fxn[0].FxnID = IMG_ERODE_BIN_FXN_ID;
+	CInArgs->fxn[0].Param_ptr_offset = sizeof(CInArgs->size)
+	        + sizeof(CInArgs->Num_fxns) + sizeof(Fxn_struct);
+
+
+	/* Initialize pointers to function parameters */
+	fp0 = (IMG_erode_bin_Params *) ((XDAS_Int8*) CInArgs
+	        + CInArgs->fxn[0].Param_ptr_offset);
+	/* Fill in the fields in the parameter structure */
+	fp0->InArrID1 = INBUF0;
+	fp0->InArrID2 = INBUF1;
+	fp0->OutArrID1 = OUTBUF0;
+	fp0->Col = in_data->widthStep;
+
+
+	/* Call the actual algorithm */
+	if (hC6accel->callType == ASYNC) {
+		/* Update async structure */
+		if (c6accelAsyncParams.asyncCallCount != 0) {
+			status = UNIVERSAL_EFAIL;
+			printf("Async call failed as %d are still pending\n");
+		} else {
+			/* Context Saving */
+			c6accelAsyncParams.asyncCallCount++;
+			memcpy(&(c6accelAsyncParams.inBufs), &inBufDesc,
+			        sizeof(XDM1_BufDesc));
+			memcpy(&(c6accelAsyncParams.outBufs), &outBufDesc,
+			        sizeof(XDM1_BufDesc));
+			memcpy(&(c6accelAsyncParams.inArgs), CInArgs,
+			        sizeof(UNIVERSAL_InArgs));
+			memcpy(&(c6accelAsyncParams.outArgs), &uniOutArgs,
+			        sizeof(UNIVERSAL_OutArgs));
+			c6accelAsyncParams.pBuf = pAlloc;
+			c6accelAsyncParams.pBufSize = InArg_Buf_size;
+			/* Asynchronous Call to the actual algorithm */
+			status = UNIVERSAL_processAsync(hC6accel->hUni, &inBufDesc,
+			        &outBufDesc, NULL, (UNIVERSAL_InArgs *) CInArgs,
+			        &uniOutArgs);
+		}
+	} else {
+		/* Synchronous Call to the actual algorithm */
+		status = UNIVERSAL_process(hC6accel->hUni, &inBufDesc, &outBufDesc,
+		        NULL, (UNIVERSAL_InArgs *) CInArgs, &uniOutArgs);
+		/* Free the InArgs structure */
+		Memory_free(pAlloc, InArg_Buf_size, &wrapperMemParams);
+	}RELEASE_CODEC_ENGINE;
+	return status;
+}
+
+int C6accel_IMG_dilate_bin(C6accel_Handle hC6accel,
+        const IplImage *restrict in_data, IplImage *restrict out_data,
+        const IplConvKernel *restrict mask, int cols)
+{
+	XDM1_BufDesc inBufDesc;
+	XDM1_BufDesc outBufDesc;
+	XDAS_Int32 InArg_Buf_size;
+	IC6Accel_InArgs *CInArgs;
+	UNIVERSAL_OutArgs uniOutArgs;
+	int status;
+	/* Define pointer to function parameter structure */
+	IMG_dilate_bin_Params *fp0;
+	XDAS_Int8 *pAlloc;
+
+	ACQUIRE_CODEC_ENGINE;
+
+	/* Allocate the InArgs structure as it varies in size
+	 (Needs to be changed everytime we make a API call)*/
+	InArg_Buf_size = sizeof(Fxn_struct) + sizeof(IMG_dilate_bin_Params)
+	        + sizeof(CInArgs->size) + sizeof(CInArgs->Num_fxns);
+	/* Request contiguous heap memory allocation for the extended input structure */
+	pAlloc = (XDAS_Int8 *) Memory_alloc(InArg_Buf_size, &wrapperMemParams);
+	CInArgs = (IC6Accel_InArgs *) pAlloc;
+
+
+	/* Initialize .size fields for dummy input and output arguments */
+	uniOutArgs.size = sizeof(uniOutArgs);
+
+
+	/* Set up buffers to pass buffers in and out to alg  */
+	inBufDesc.numBufs = 2;
+	outBufDesc.numBufs = 1;
+
+
+	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
+	/* See wrapper_c6accel_i.h for more details of operation                 */
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data->imageData,0,in_data->widthStep * in_data->height *sizeof(unsigned char));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(mask->values,1,mask->nRows*mask->nCols*sizeof(char));
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data->imageData,0,out_data->widthStep * out_data->height * sizeof(unsigned char));
+
+	/* Initialize the extended InArgs structure */
+	CInArgs->Num_fxns = 1;
+	CInArgs->size = InArg_Buf_size;
+
+
+	/* Set function Id and parameter pointers for first function call */
+	CInArgs->fxn[0].FxnID = IMG_DILATE_BIN_FXN_ID;
+	CInArgs->fxn[0].Param_ptr_offset = sizeof(CInArgs->size)
+	        + sizeof(CInArgs->Num_fxns) + sizeof(Fxn_struct);
+
+
+	/* Initialize pointers to function parameters */
+	fp0 = (IMG_dilate_bin_Params *) ((XDAS_Int8*) CInArgs
+	        + CInArgs->fxn[0].Param_ptr_offset);
+	/* Fill in the fields in the parameter structure */
+	fp0->InArrID1 = INBUF0;
+	fp0->InArrID2 = INBUF1;
+	fp0->OutArrID1 = OUTBUF0;
+	fp0->Col = cols;
 
 
 	/* Call the actual algorithm */
@@ -16140,7 +16439,7 @@ Int C6accel_IMG_ycbcr420pl_to_ycbcr422sp(C6accel_Handle hC6accel,
 }
 
 Int C6accel_IMG_rgb_to_y(C6accel_Handle hC6accel, const IplImage * src,
-		IplImage * restrict dst, unsigned int count)
+        IplImage * restrict dst, unsigned int count)
 {
 	XDM1_BufDesc inBufDesc;
 	XDM1_BufDesc outBufDesc;

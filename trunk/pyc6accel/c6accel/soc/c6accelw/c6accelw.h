@@ -229,10 +229,8 @@ int C6accel_IMG_corr_3x3_i16s_c16s_Frame(C6accel_Handle hC6accel,
         int round);
 
 int C6accel_IMG_sobel_3x3_8(C6accel_Handle hC6accel,
-        const unsigned char *restrict in, /* Input image data   */
-        unsigned char *restrict out, /* Output image data  */
-        short cols, short rows /* Image dimensions   */
-);
+        const IplImage *restrict in, IplImage *restrict out, short cols,
+        short rows);
 
 int C6accel_IMG_sobel_3x3_16(C6accel_Handle hC6accel,
         const unsigned short *restrict in, /* Input image data   */
@@ -253,8 +251,8 @@ short constData, /* 16 bit constant to multiply by   */
 int count /* Number of pixels in image        */
 );
 
-int C6accel_IMG_addS_8(C6accel_Handle hC6accel, const char *restrict imgR, /* Input image data 8 bits/pixel  */
-char *restrict imgW, /* Output image data 8 bits/pixel */
+int C6accel_IMG_addS_8(C6accel_Handle hC6accel, const IplImage *restrict imgR, /* Input image data 8 bits/pixel  */
+IplImage *restrict imgW, /* Output image data 8 bits/pixel */
 char constData, /* 8 bit constant to add          */
 int count /* Number of pixels in image      */
 );
@@ -265,8 +263,14 @@ short constData, /* 16 bit constant to multiply by  */
 int count /* Number of pixels in image       */
 );
 
-int C6accel_IMG_subS_8(C6accel_Handle hC6accel, const char *restrict imgR, /* Input image data 8 bits/pixel  */
-char *restrict imgW, /* Output image data 8 bits/pixel */
+int C6accel_IMG_add_16s(C6accel_Handle hC6accel, const short *restrict imgR1, /* Input image 1 data 16 bits/pixel  */
+const short *restrict imgR2, /* Input image 2 data 16 bits/pixel  */
+short *restrict imgW, /* Output image data 16 bits/pixel */
+int count /* Number of pixels in image       */
+);
+
+int C6accel_IMG_subS_8(C6accel_Handle hC6accel, const IplImage *restrict imgR, /* Input image data 8 bits/pixel  */
+IplImage *restrict imgW, /* Output image data 8 bits/pixel */
 char constData, /* 8 bit constant to sub          */
 int count /* Number of pixels in image      */
 );
@@ -350,8 +354,8 @@ unsigned char *restrict cr, /* Unpacked red chroma frame       */
 unsigned char *restrict cb /* Unpacked green chroma frame     */
 );
 
-int C6accel_IMG_rgb_to_y(C6accel_Handle hC6accel, const IplImage * src,
-		IplImage * restrict dst, unsigned int count);
+int C6accel_IMG_rgb_to_y(C6accel_Handle hC6accel, const IplImage *restrict src,
+        IplImage * restrict dst, unsigned int count);
 
 // image threshold greater than to maximum 8 bits
 int C6accel_IMG_thr_gt2max_8(C6accel_Handle hC6accel,
@@ -676,6 +680,14 @@ int C6accel_IMG_ycbcr420pl_to_ycbcr422sp(C6accel_Handle hC6accel,
         unsigned char * restrict cr_src, unsigned int num_lines,
         unsigned int width, unsigned int dst_pitch, unsigned int src_y_pitch,
         unsigned int src_cbcr_pitch);
+
+int C6accel_IMG_erode_bin(C6accel_Handle hC6accel,
+        const IplImage *restrict in_data,
+        IplImage *restrict out_data, const IplConvKernel *restrict mask, int cols);
+
+int C6accel_IMG_dilate_bin(C6accel_Handle hC6accel,
+        const IplImage *restrict in_data,
+        IplImage *restrict out_data, const IplConvKernel *restrict mask, int cols);
 
 #ifdef __cplusplus
 }

@@ -13,7 +13,7 @@ TARGET = $(notdir $(CURDIR))
 include $(ROOTDIR)/Rules.make
 
 # Comment this out if you want to see full compiler and linker output.
-VERBOSE = @
+#VERBOSE = @
 
 # Which compiler flags should be used?
 BUILD_TYPE=release

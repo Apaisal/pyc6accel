@@ -1,18 +1,20 @@
 import cv
 import pyc6accel
 
-lenaimg = cv.LoadImage('test_files/lena.jpg', cv.CV_LOAD_IMAGE_GRAYSCALE)
-cv.Scale(lenaimg, lenaimg, 1);
+lenaimg = cv.LoadImage('test_files/lena.jpg', cv.CV_LOAD_IMAGE_COLOR)
+#exit(0)
+#cv.Scale(lenaimg, lenaimg, 1);
 
 def test(img):
-    print 'Add Scalar Method'
-    adds_img = cv.CreateImage(cv.GetSize(img), img.depth, img.nChannels)
+    print 'Erode Filter Method'
+    out_img = cv.CreateImage(cv.GetSize(img), img.depth, img.nChannels)
+    element = cv.CreateStructuringElementEx(3, 3, 1, 1, cv.CV_SHAPE_CROSS)
     t = cv.GetTickCount()
-    pyc6accel.AddS(img, 40, adds_img)
+    pyc6accel.Erode(lenaimg, out_img, element, lenaimg.width)
     t = cv.GetTickCount() - t
     msec = t / (cv.GetTickFrequency() * 1000.)
-    print "pyc6accel adds detection time = %g ms" % (t / (cv.GetTickFrequency() * 1000.))
-    cv.SaveImage('test_files/result_adds_pyc6accel.jpg', adds_img)
+    print "pyc6accel erode detection time = %g ms" % (t / (cv.GetTickFrequency() * 1000.))
+    cv.SaveImage('test_files/result_erode_pyc6accel.jpg', out_img)
     
 #    fd.write(str(msec) + '\t')
 #
@@ -28,5 +30,5 @@ def test(img):
     
 if __name__ == '__main__' :
     ''''''
-    for i in range(10):
+    for i in range(1):
         test(lenaimg)

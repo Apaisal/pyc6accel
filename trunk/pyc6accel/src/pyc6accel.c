@@ -10,11 +10,15 @@
 #include <math.h>
 #include <stdlib.h>
 #include <strings.h>
+
 /* system time include*/
 #include <sys/time.h>
+
 /* Python includes */
 #include <Python.h>
 #include <structmember.h>
+
+/* PyC6Accel include*/
 #include "pyc6accel.h"
 
 /* Codec Engine and xdc includes */
@@ -103,8 +107,33 @@ pyc6accel_img_adds(PyObject *self, PyObject *args)
 	adds = ((iplimage_t *) dst)->a;
 
 	START_BENCHMARK();
-	C6accel_IMG_addS_8(hC6, (char *) img->imageData, (char *) adds->imageData,
-	        (char) value, img->imageSize);
+	C6accel_IMG_addS_8(hC6, img, adds, (char) value, img->imageSize);
+
+	if (C6Accel_readCallType(hC6) == ASYNC)
+		C6accel_waitAsyncCall(hC6);
+	END_BENCHMARK();
+
+	return Py_None;
+}
+
+static PyObject *
+pyc6accel_img_add(PyObject *self, PyObject *args)
+{
+	PyObject *src1, *src2, *dst;
+	IplImage *img1, *img2, *adds;
+	int value;
+
+	if (!PyArg_ParseTuple(args, "OOO", &src1, &src2, &dst))
+		return NULL;
+
+	img1 = ((iplimage_t *) src1)->a;
+	img2 = ((iplimage_t *) src2)->a;
+	adds = ((iplimage_t *) dst)->a;
+
+	START_BENCHMARK();
+	C6accel_IMG_add_16s(hC6, (short*) img1->imageData,
+	        (short*) img2->imageData, (short*) adds->imageData, adds->height
+	                * adds->widthStep);
 
 	if (C6Accel_readCallType(hC6) == ASYNC)
 		C6accel_waitAsyncCall(hC6);
@@ -129,8 +158,7 @@ pyc6accel_img_subs(PyObject *self, PyObject *args)
 	printf("Start AddS\n");
 
 	START_BENCHMARK();
-	C6accel_IMG_subS_8(hC6, (char *) img->imageData, (char *) subs->imageData,
-	        (char) value, img->imageSize);
+	C6accel_IMG_subS_8(hC6, img, subs, (char) value, img->imageSize);
 
 	if (C6Accel_readCallType(hC6) == ASYNC)
 		C6accel_waitAsyncCall(hC6);
@@ -155,8 +183,7 @@ pyc6accel_img_cvtcolor(PyObject *self, PyObject *args)
 	START_BENCHMARK();
 	switch (code) {
 		case CV_RGB2GRAY:
-			C6accel_IMG_rgb_to_y(hC6, color,
-			        gray, gray->imageSize);
+			C6accel_IMG_rgb_to_y(hC6, color, gray, gray->imageSize);
 			break;
 		default:
 			failmsg("This convert code can not support @ version %s", VERSION);
@@ -186,9 +213,8 @@ pyc6accel_img_sobel(PyObject *self, PyObject *args)
 	START_BENCHMARK();
 	switch (kernel) {
 		case 3:
-			C6accel_IMG_sobel_3x3_8(hC6, (unsigned char *) org->imageData,
-			        (unsigned char *) sobel->imageData,
-			        (short int) sobel->width, (short int) sobel->height);
+			C6accel_IMG_sobel_3x3_8(hC6, org, sobel,
+			        (short int) sobel->widthStep, (short int) sobel->height);
 			break;
 		case 5:
 		case 7:
@@ -220,27 +246,31 @@ pyc6accel_img_threshold(PyObject *self, PyObject *args)
 
 	START_BENCHMARK();
 	switch (thresholdType) {
-//				case CV_THRESH_BINARY:
+		//				case CV_THRESH_BINARY:
 		case THRESH_GREATER2MAX:
 			C6accel_IMG_thr_gt2max_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData, (short) output->widthStep,
-			        (short) output->height, (unsigned char) threshold);
+			        (unsigned char*) output->imageData,
+			        (short) output->widthStep, (short) output->height,
+			        (unsigned char) threshold);
 			break;
-//				case CV_THRESH_BINARY:
+			//				case CV_THRESH_BINARY:
 		case THRESH_GREATER2THRES:
 			C6accel_IMG_thr_gt2thr_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData, (short) output->widthStep,
-			        (short) output->height, (unsigned char) threshold);
+			        (unsigned char*) output->imageData,
+			        (short) output->widthStep, (short) output->height,
+			        (unsigned char) threshold);
 			break;
 		case THRESH_LESS2MIN:
 			C6accel_IMG_thr_le2min_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData, (short) output->widthStep,
-			        (short) output->height, (unsigned char) threshold);
+			        (unsigned char*) output->imageData,
+			        (short) output->widthStep, (short) output->height,
+			        (unsigned char) threshold);
 			break;
 		case THRESH_LESS2THRES:
 			C6accel_IMG_thr_le2thr_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData, (short) output->widthStep,
-			        (short) output->height, (unsigned char) threshold);
+			        (unsigned char*) output->imageData,
+			        (short) output->widthStep, (short) output->height,
+			        (unsigned char) threshold);
 			break;
 		default:
 			failmsg("This kernel can not support @ version %s", VERSION);
@@ -252,6 +282,56 @@ pyc6accel_img_threshold(PyObject *self, PyObject *args)
 		C6accel_waitAsyncCall(hC6);
 	END_BENCHMARK();
 	END: return Py_None;
+}
+
+static PyObject*
+pyc6accel_img_erode(PyObject *self, PyObject *args)
+{
+	PyObject *src, *mask, *dst;
+	IplImage *img, *out;
+	IplConvKernel * element;
+	int iterations;
+
+	if (!PyArg_ParseTuple(args, "OOOi", &src, &dst, &mask, &iterations))
+		return NULL;
+
+	img = ((iplimage_t *) src)->a;
+	out = ((iplimage_t *) dst)->a;
+	element = ((iplconvkernel_t *) mask)->a;
+
+	START_BENCHMARK();
+	C6accel_IMG_erode_bin(hC6, img, out, element, iterations);
+
+	if (C6Accel_readCallType(hC6) == ASYNC)
+		C6accel_waitAsyncCall(hC6);
+	END_BENCHMARK();
+
+	return Py_None;
+}
+
+static PyObject*
+pyc6accel_img_dilate(PyObject *self, PyObject *args)
+{
+	PyObject *src, *mask, *dst;
+	IplImage *img, *out;
+	IplConvKernel * element;
+	int iterations;
+
+	if (!PyArg_ParseTuple(args, "OOOi", &src, &dst, &mask, &iterations))
+		return NULL;
+
+	img = ((iplimage_t *) src)->a;
+	out = ((iplimage_t *) dst)->a;
+	element = ((iplconvkernel_t *) mask)->a;
+
+	START_BENCHMARK();
+	C6accel_IMG_dilate_bin(hC6, img, out, element, iterations);
+
+	if (C6Accel_readCallType(hC6) == ASYNC)
+		C6accel_waitAsyncCall(hC6);
+	END_BENCHMARK();
+
+	return Py_None;
 }
 
 int getGaussianKernel(unsigned char * out_dat, int ksize) {
@@ -305,11 +385,20 @@ static PyMethodDef pyc6accel_methods[] =
 	        //		                "canny", (PyCFunction) pyc6accel_canny, METH_VARARGS,
 	        //		                "Canny Edge Filter" },
 		        {
+		                "Add", (PyCFunction) pyc6accel_img_add, METH_VARARGS,
+		                "Add -> None" },
+		        {
 		                "AddS", (PyCFunction) pyc6accel_img_adds, METH_VARARGS,
 		                "AddS -> None" },
 		        {
 		                "SubS", (PyCFunction) pyc6accel_img_subs, METH_VARARGS,
 		                "SubS -> None" },
+		        {
+		                "Erode", (PyCFunction) pyc6accel_img_erode,
+		                METH_VARARGS, "Erode -> None" },
+		        {
+		                "Dilate", (PyCFunction) pyc6accel_img_dilate,
+		                METH_VARARGS, "Dilate -> None" },
 	        //		        {
 	        //		                "MulS", (PyCFunction) pyc6accel_img_muls, METH_VARARGS,
 	        //		                "MulS -> None" },
