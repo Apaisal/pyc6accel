@@ -1,4 +1,9 @@
-sudo cp pyc6accel.so /usr/local/lib/python2.6/dist-packages/
+#!/bin/bash
+
+sudo mv pyc6accel.so /usr/local/lib/python2.6/dist-packages/
+sudo mv c6accel_omap3530.x64P /usr/local/lib/python2.6/dist-packages/
+
+# Please comment any lines not used
 #python test_rgbtogray.py
 #python test_threshold.py
 #python test_sobel.py
