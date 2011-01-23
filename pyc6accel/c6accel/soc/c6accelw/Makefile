@@ -18,8 +18,8 @@ include $(ROOTDIR)/Rules.make
 # Which compiler flags should be used?
 BUILD_TYPE=release
 
-OPENCV_C_FLAGS = -I${PWD}/opencv/include -I${PWD}/python/include
-OPENCV_LD_FLAGS = -L${PWD}/opencv/lib -lml -lcxcore -lcv -lcvaux -lhighgui 
+OPENCV_C_FLAGS = -I/home/anol/workspace/pyc6accel/opencv/include -I/home/anol/workspace/pyc6accel/python/include
+OPENCV_LD_FLAGS = -L/home/anol/workspace/pyc6accel/opencv/lib -lml -lcxcore -lcv #-lcvaux -lhighgui 
 C_FLAGS += ${OPENCV_C_FLAGS}
 CPP_FLAGS += ${OPENCV_C_FLAGS} -I../packages -I$(XDC_INSTALL_DIR)/packages -I$(CE_INSTALL_DIR)/packages -I$(XDAIS_INSTALL_DIR)/packages -Dxdc_target_name__=arm/GCArmv5T -Dxdc_target_types__=gnu/targets/std.h
 

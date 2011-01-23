@@ -95,7 +95,7 @@ install_$(TARGET):
 	@install -d $(EXEC_DIR_C6ACCEL)
 	@install $(TARGET).so $(EXEC_DIR_C6ACCEL)
 	@cp c6accel/soc/packages/ti/c6accel_unitservers/$(PLATFORM)/c6accel_$(PLATFORM).x64P $(EXEC_DIR_C6ACCEL)
-	@cp -R demos/*.py $(EXEC_DIR_C6ACCEL)
+	@cp -R app/*.py $(EXEC_DIR_C6ACCEL)
 	@cp scripts/run.sh $(EXEC_DIR_C6ACCEL)
 	@cp -R test_files/* $(EXEC_DIR_C6ACCEL)/test_files/
 	@echo Installed $(TARGET) binaries to $(EXEC_DIR_C6ACCEL)..

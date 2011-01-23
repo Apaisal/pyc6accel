@@ -1,19 +1,20 @@
 import cv
 import pyc6accel
 
-lenaimg = cv.LoadImage('test_files/lena.jpg', cv.CV_LOAD_IMAGE_GRAYSCALE)
-lenaimg1_16s = cv.CreateImage(cv.GetSize(lenaimg), cv.IPL_DEPTH_16S, lenaimg.nChannels)
-lenaimg2_16s = cv.CreateImage(cv.GetSize(lenaimg), cv.IPL_DEPTH_16S, lenaimg.nChannels)
-cv.Convert(lenaimg, lenaimg1_16s)
-cv.Convert(lenaimg, lenaimg2_16s)
+lenaimg = cv.LoadImage('test_files/VGA.jpg', cv.CV_LOAD_IMAGE_GRAYSCALE)
+lenaimg_add = cv.LoadImage('test_files/VGA.jpg', cv.CV_LOAD_IMAGE_GRAYSCALE)
+#lenaimg1_16s = cv.CreateImage(cv.GetSize(lenaimg), cv.IPL_DEPTH_16S, lenaimg.nChannels)
+#lenaimg2_16s = cv.CreateImage(cv.GetSize(lenaimg), cv.IPL_DEPTH_16S, lenaimg.nChannels)
+#cv.Convert(lenaimg, lenaimg1_16s)
+#cv.Convert(lenaimg, lenaimg2_16s)
 #exit(0)
 #cv.Scale(lenaimg, lenaimg, 1);
 
 def test():
     print 'Add Image Method'
-    add_img = cv.CreateImage(cv.GetSize(lenaimg1_16s), lenaimg1_16s.depth, lenaimg1_16s.nChannels)
+    add_img = cv.CreateImage(cv.GetSize(lenaimg), lenaimg.depth, lenaimg.nChannels)
     t = cv.GetTickCount()
-    pyc6accel.Add(lenaimg1_16s, lenaimg2_16s, add_img)
+    pyc6accel.Add(lenaimg, lenaimg_add, add_img)
     t = cv.GetTickCount() - t
     msec = t / (cv.GetTickFrequency() * 1000.)
     print "pyc6accel adds detection time = %g ms" % (t / (cv.GetTickFrequency() * 1000.))

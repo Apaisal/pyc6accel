@@ -72,10 +72,13 @@ ifeq ($(PLATFORM),omapl138)
     C_FLAGS	+= -DPLATFORM=138
 endif
 
-LD_FLAGS += -L$(LINUXLIBS_INSTALL_DIR)/lib -lm -lpthread
+OPENCV_LD_FLAGS = -L/home/anol/workspace/pyc6accel/opencv/lib -lml -lcxcore -lcv #-lcvaux #-lhighgui 
+OPENCV_C_FLAGS = -I/home/anol/workspace/pyc6accel/opencv/include
+
+LD_FLAGS += -L$(LINUXLIBS_INSTALL_DIR)/lib -lm -lpthread $(OPENCV_LD_FLAGS) 
 C6ACCEL_LIB += ../c6accelw/lib/c6accelw_$(PLATFORM).a470MV
 
-COMPILE.c = $(VERBOSE) $(CSTOOL_PREFIX)gcc $(CPP_FLAGS) $(C_FLAGS) $(CPP_FLAGS) -c
+COMPILE.c = $(VERBOSE) $(CSTOOL_PREFIX)gcc $(CPP_FLAGS) $(C_FLAGS) $(CPP_FLAGS) $(OPENCV_C_FLAGS) -c
 LINK.c = $(VERBOSE) $(CSTOOL_PREFIX)gcc $(LD_FLAGS)
 
 SOURCES = $(wildcard *.c)
