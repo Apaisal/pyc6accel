@@ -23,12 +23,6 @@
 #include <string.h>
 #include <stdarg.h>
 
-/*OpenCV*/
-#include <cv.h>
-#include <cxcore.h>
-#include <cvaux.h>
-#include <highgui.h>
-
 /* Wrapper Header file */
 #include "c6accelw.h"
 
@@ -4412,8 +4406,8 @@ int C6accel_IMG_sobel_3x3_16(C6accel_Handle hC6accel,
 
  */
 int C6accel_IMG_mulS_8(C6accel_Handle hC6accel,
-        const unsigned char *restrict imgR, /* Input image data 8 bits/pixel  */
-        short *restrict imgW, /* Output image data 16 bits/pixel */
+        const IplImage *restrict imgR, /* Input image data 8 bits/pixel  */
+        IplImage *restrict imgW, /* Output image data 16 bits/pixel */
         char constData, /* 8 bit constant to multiply by */
         int count /* Number of pixels in image */
 )
@@ -4452,8 +4446,8 @@ int C6accel_IMG_mulS_8(C6accel_Handle hC6accel,
 
 	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
 	/* See wrapper_c6accel_i.h for more details of operation                 */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR,0,count * sizeof(char));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgW,0,count * sizeof(int));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR->imageData,0,imgR->imageSize);
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgW->imageData,0,imgW->imageSize);
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;
@@ -4894,10 +4888,11 @@ int count /* Number of pixels in image */
 
 }
 
-int C6accel_IMG_add_16s(C6accel_Handle hC6accel, const short *restrict imgR1, /* Input image 1 data 16 bits/pixel  */
-const short *restrict imgR2, /* Input image 2 data 16 bits/pixel  */
-short *restrict imgW, /* Output image data 16 bits/pixel */
-int count /* Number of pixels in image       */
+int C6accel_IMG_add_16s(C6accel_Handle hC6accel,
+        const IplImage *restrict imgR1, /* Input image 1 data 16 bits/pixel  */
+        const IplImage *restrict imgR2, /* Input image 2 data 16 bits/pixel  */
+        IplImage *restrict imgW, /* Output image data 16 bits/pixel */
+        int count /* Number of pixels in image       */
 )
 {
 	XDM1_BufDesc inBufDesc;
@@ -4934,9 +4929,9 @@ int count /* Number of pixels in image       */
 
 	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
 	/* See wrapper_c6accel_i.h for more details of operation                 */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR1,0,count * sizeof(short));
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR2,1,count * sizeof(short));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgW,0,count * sizeof(short));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR1->imageData,0,imgR1->imageSize);
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgR2->imageData,1,imgR2->imageSize);
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(imgW->imageData,0,imgW->imageSize);
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;
@@ -6174,11 +6169,10 @@ int C6accel_IMG_yuv420pl16_to_rgb565(C6accel_Handle hC6accel,
  //cols, rows, :Image dimensions
  //threshold : Threshold value
  by Anol*/
-int C6accel_IMG_thr_gt2max_8(C6accel_Handle hC6accel,
-        const unsigned char * in_data, /*  Input image data    */
-        unsigned char * restrict out_data, /*  Output image data   */
-        short cols, short rows, /*  Image dimensions    */
-        unsigned char threshold /*  Threshold value     */
+int C6accel_IMG_thr_gt2max_8(C6accel_Handle hC6accel, const IplImage * in_data, /*  Input image data    */
+IplImage * restrict out_data, /*  Output image data   */
+short cols, short rows, /*  Image dimensions    */
+unsigned char threshold /*  Threshold value     */
 )
 {
 	XDM1_BufDesc inBufDesc;
@@ -6213,8 +6207,8 @@ int C6accel_IMG_thr_gt2max_8(C6accel_Handle hC6accel,
 
 	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
 	/* See wrapper_c6accel_i.h for more details of operation                 */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data,0,rows*cols*sizeof(unsigned char));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data,0,rows*cols*sizeof(unsigned char));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data->imageData,0,in_data->imageSize);
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data->imageData,0,out_data->imageSize);
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;
@@ -6279,11 +6273,10 @@ int C6accel_IMG_thr_gt2max_8(C6accel_Handle hC6accel,
  //cols, rows, :Image dimensions
  //threshold : Threshold value
  by Anol*/
-int C6accel_IMG_thr_gt2thr_8(C6accel_Handle hC6accel,
-        const unsigned char * in_data, /*  Input image data    */
-        unsigned char * restrict out_data, /*  Output image data   */
-        short cols, short rows, /*  Image dimensions    */
-        unsigned char threshold /*  Threshold value     */
+int C6accel_IMG_thr_gt2thr_8(C6accel_Handle hC6accel, const IplImage * in_data, /*  Input image data    */
+IplImage * restrict out_data, /*  Output image data   */
+short cols, short rows, /*  Image dimensions    */
+unsigned char threshold /*  Threshold value     */
 )
 {
 	XDM1_BufDesc inBufDesc;
@@ -6318,8 +6311,8 @@ int C6accel_IMG_thr_gt2thr_8(C6accel_Handle hC6accel,
 
 	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
 	/* See wrapper_c6accel_i.h for more details of operation                 */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data,0,rows*cols*sizeof(unsigned char));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data,0,rows*cols*sizeof(unsigned char));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data->imageData,0,in_data->imageSize);
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data->imageData,0,out_data->imageSize);
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;
@@ -6384,11 +6377,10 @@ int C6accel_IMG_thr_gt2thr_8(C6accel_Handle hC6accel,
  //cols, rows, :Image dimensions
  //threshold : Threshold value
  by Anol*/
-int C6accel_IMG_thr_le2min_8(C6accel_Handle hC6accel,
-        const unsigned char * in_data, /*  Input image data    */
-        unsigned char * restrict out_data, /*  Output image data   */
-        short cols, short rows, /*  Image dimensions    */
-        unsigned char threshold /*  Threshold value     */
+int C6accel_IMG_thr_le2min_8(C6accel_Handle hC6accel, const IplImage * in_data, /*  Input image data    */
+IplImage * restrict out_data, /*  Output image data   */
+short cols, short rows, /*  Image dimensions    */
+unsigned char threshold /*  Threshold value     */
 )
 {
 	XDM1_BufDesc inBufDesc;
@@ -6423,8 +6415,8 @@ int C6accel_IMG_thr_le2min_8(C6accel_Handle hC6accel,
 
 	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
 	/* See wrapper_c6accel_i.h for more details of operation                 */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data,0,rows*cols*sizeof(unsigned char));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data,0,rows*cols*sizeof(unsigned char));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data->imageData,0,in_data->imageSize);
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data->imageData,0,out_data->imageSize);
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;
@@ -6489,11 +6481,10 @@ int C6accel_IMG_thr_le2min_8(C6accel_Handle hC6accel,
  //cols, rows, :Image dimensions
  //threshold : Threshold value
  by Anol*/
-int C6accel_IMG_thr_le2thr_8(C6accel_Handle hC6accel,
-        const unsigned char * in_data, /*  Input image data    */
-        unsigned char * restrict out_data, /*  Output image data   */
-        short cols, short rows, /*  Image dimensions    */
-        unsigned char threshold /*  Threshold value     */
+int C6accel_IMG_thr_le2thr_8(C6accel_Handle hC6accel, const IplImage * in_data, /*  Input image data    */
+IplImage * restrict out_data, /*  Output image data   */
+short cols, short rows, /*  Image dimensions    */
+unsigned char threshold /*  Threshold value     */
 )
 {
 	XDM1_BufDesc inBufDesc;
@@ -6528,8 +6519,8 @@ int C6accel_IMG_thr_le2thr_8(C6accel_Handle hC6accel,
 
 	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
 	/* See wrapper_c6accel_i.h for more details of operation                 */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data,0,rows*cols*sizeof(unsigned char));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data,0,rows*cols*sizeof(unsigned char));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data->imageData,0,in_data->imageSize);
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data->imageData,0,out_data->imageSize);
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;
@@ -6645,7 +6636,7 @@ int C6accel_IMG_erode_bin(C6accel_Handle hC6accel,
 	fp0->InArrID1 = INBUF0;
 	fp0->InArrID2 = INBUF1;
 	fp0->OutArrID1 = OUTBUF0;
-	fp0->Col = in_data->widthStep;
+	fp0->Col = cols;
 
 
 	/* Call the actual algorithm */
@@ -6718,9 +6709,9 @@ int C6accel_IMG_dilate_bin(C6accel_Handle hC6accel,
 
 	/* Fill in input/output buffer descriptor parameters and manage ARM cache*/
 	/* See wrapper_c6accel_i.h for more details of operation                 */
-	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data->imageData,0,in_data->widthStep * in_data->height *sizeof(unsigned char));
+	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(in_data->imageData,0,in_data->imageSize);
 	CACHE_WB_INV_INPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(mask->values,1,mask->nRows*mask->nCols*sizeof(char));
-	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data->imageData,0,out_data->widthStep * out_data->height * sizeof(unsigned char));
+	CACHE_INV_OUTPUT_BUFFERS_AND_SETUP_FOR_C6ACCEL(out_data->imageData,0,out_data->imageSize);
 
 	/* Initialize the extended InArgs structure */
 	CInArgs->Num_fxns = 1;

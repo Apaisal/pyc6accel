@@ -131,9 +131,7 @@ pyc6accel_img_add(PyObject *self, PyObject *args)
 	adds = ((iplimage_t *) dst)->a;
 
 	START_BENCHMARK();
-	C6accel_IMG_add_16s(hC6, (short*) img1->imageData,
-	        (short*) img2->imageData, (short*) adds->imageData, adds->height
-	                * adds->widthStep);
+	C6accel_IMG_add_16s(hC6, img1, img2, adds, adds->imageSize);
 
 	if (C6Accel_readCallType(hC6) == ASYNC)
 		C6accel_waitAsyncCall(hC6);
@@ -159,6 +157,31 @@ pyc6accel_img_subs(PyObject *self, PyObject *args)
 
 	START_BENCHMARK();
 	C6accel_IMG_subS_8(hC6, img, subs, (char) value, img->imageSize);
+
+	if (C6Accel_readCallType(hC6) == ASYNC)
+		C6accel_waitAsyncCall(hC6);
+	END_BENCHMARK();
+
+	return Py_None;
+}
+
+static PyObject*
+pyc6accel_img_muls(PyObject *self, PyObject *args)
+{
+	PyObject *src, *dst;
+	IplImage *img, *muls;
+	int value;
+
+	if (!PyArg_ParseTuple(args, "OiO", &src, &value, &dst))
+		return NULL;
+
+	img = ((iplimage_t *) src)->a;
+	muls = ((iplimage_t *) dst)->a;
+
+	printf("Start AddS\n");
+
+	START_BENCHMARK();
+	C6accel_IMG_mulS_8(hC6, img, muls, (char) value, img->imageSize);
 
 	if (C6Accel_readCallType(hC6) == ASYNC)
 		C6accel_waitAsyncCall(hC6);
@@ -248,27 +271,23 @@ pyc6accel_img_threshold(PyObject *self, PyObject *args)
 	switch (thresholdType) {
 		//				case CV_THRESH_BINARY:
 		case THRESH_GREATER2MAX:
-			C6accel_IMG_thr_gt2max_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData,
+			C6accel_IMG_thr_gt2max_8(hC6, input, output,
 			        (short) output->widthStep, (short) output->height,
 			        (unsigned char) threshold);
 			break;
 			//				case CV_THRESH_BINARY:
 		case THRESH_GREATER2THRES:
-			C6accel_IMG_thr_gt2thr_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData,
+			C6accel_IMG_thr_gt2thr_8(hC6, input, output,
 			        (short) output->widthStep, (short) output->height,
 			        (unsigned char) threshold);
 			break;
 		case THRESH_LESS2MIN:
-			C6accel_IMG_thr_le2min_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData,
+			C6accel_IMG_thr_le2min_8(hC6, input, output,
 			        (short) output->widthStep, (short) output->height,
 			        (unsigned char) threshold);
 			break;
 		case THRESH_LESS2THRES:
-			C6accel_IMG_thr_le2thr_8(hC6, (unsigned char*) input->imageData,
-			        (unsigned char*) output->imageData,
+			C6accel_IMG_thr_le2thr_8(hC6, input, output,
 			        (short) output->widthStep, (short) output->height,
 			        (unsigned char) threshold);
 			break;
@@ -290,18 +309,21 @@ pyc6accel_img_erode(PyObject *self, PyObject *args)
 	PyObject *src, *mask, *dst;
 	IplImage *img, *out;
 	IplConvKernel * element;
-	int iterations;
+	int iterations, i;
 
 	if (!PyArg_ParseTuple(args, "OOOi", &src, &dst, &mask, &iterations))
 		return NULL;
 
 	img = ((iplimage_t *) src)->a;
 	out = ((iplimage_t *) dst)->a;
-	element = ((iplconvkernel_t *) mask)->a;
+	element = (mask == Py_None) ? cvCreateStructuringElementEx(3, 3, 0, 0, 0,
+	        CV_SHAPE_RECT) : ((iplconvkernel_t *) mask)->a;
 
 	START_BENCHMARK();
-	C6accel_IMG_erode_bin(hC6, img, out, element, iterations);
-
+	C6accel_IMG_erode_bin(hC6, img, out, element, out->imageSize);
+	for (i = 1; i < iterations; ++i) {
+		C6accel_IMG_erode_bin(hC6, out, out, element, out->imageSize);
+	}
 	if (C6Accel_readCallType(hC6) == ASYNC)
 		C6accel_waitAsyncCall(hC6);
 	END_BENCHMARK();
@@ -315,17 +337,21 @@ pyc6accel_img_dilate(PyObject *self, PyObject *args)
 	PyObject *src, *mask, *dst;
 	IplImage *img, *out;
 	IplConvKernel * element;
-	int iterations;
+	int iterations, i;
 
 	if (!PyArg_ParseTuple(args, "OOOi", &src, &dst, &mask, &iterations))
 		return NULL;
 
 	img = ((iplimage_t *) src)->a;
 	out = ((iplimage_t *) dst)->a;
-	element = ((iplconvkernel_t *) mask)->a;
+	element = (mask == Py_None) ? cvCreateStructuringElementEx(3, 3, 0, 0, 0,
+	        CV_SHAPE_RECT) : ((iplconvkernel_t *) mask)->a;
 
 	START_BENCHMARK();
-	C6accel_IMG_dilate_bin(hC6, img, out, element, iterations);
+	C6accel_IMG_dilate_bin(hC6, img, out, element, out->imageSize);
+	for (i = 1; i < iterations; ++i) {
+		C6accel_IMG_dilate_bin(hC6, out, out, element, out->imageSize);
+	}
 
 	if (C6Accel_readCallType(hC6) == ASYNC)
 		C6accel_waitAsyncCall(hC6);
@@ -399,9 +425,9 @@ static PyMethodDef pyc6accel_methods[] =
 		        {
 		                "Dilate", (PyCFunction) pyc6accel_img_dilate,
 		                METH_VARARGS, "Dilate -> None" },
-	        //		        {
-	        //		                "MulS", (PyCFunction) pyc6accel_img_muls, METH_VARARGS,
-	        //		                "MulS -> None" },
+		        {
+		                "MulS", (PyCFunction) pyc6accel_img_muls, METH_VARARGS,
+		                "MulS -> None" },
 	        //		        {
 	        //		                "DivS", (PyCFunction) pyc6accel_img_divs, METH_VARARGS,
 	        //		                "DivS -> None" },

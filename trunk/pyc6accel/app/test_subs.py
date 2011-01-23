@@ -1,7 +1,7 @@
 import cv
 import pyc6accel
 
-lenaimg = cv.LoadImage('test_files/lena.jpg', cv.CV_LOAD_IMAGE_GRAYSCALE)
+lenaimg = cv.LoadImage('test_files/VGA.jpg', cv.CV_LOAD_IMAGE_GRAYSCALE)
 cv.Scale(lenaimg, lenaimg, 1);
 
 def test(img):
@@ -27,5 +27,5 @@ def test(img):
     
 if __name__ == '__main__' :
     ''''''
-    for i in range(10):
+    for i in range(1):
         test(lenaimg)

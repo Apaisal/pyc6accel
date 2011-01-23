@@ -1,16 +1,16 @@
 import cv
 import pyc6accel
 
-lenaimg = cv.LoadImage('test_files/lena.jpg', cv.CV_LOAD_IMAGE_COLOR)
+lenaimg = cv.LoadImage('test_files/VGA.jpg', cv.CV_LOAD_IMAGE_GRAYSCALE)
 #exit(0)
 #cv.Scale(lenaimg, lenaimg, 1);
 
 def test(img):
     print 'Erode Filter Method'
     out_img = cv.CreateImage(cv.GetSize(img), img.depth, img.nChannels)
-    element = cv.CreateStructuringElementEx(3, 3, 1, 1, cv.CV_SHAPE_CROSS)
+    element = cv.CreateStructuringElementEx(3, 3, 0, 0, cv.CV_SHAPE_RECT)
     t = cv.GetTickCount()
-    pyc6accel.Erode(lenaimg, out_img, element, lenaimg.width)
+    pyc6accel.Erode(lenaimg, out_img, None, 2)
     t = cv.GetTickCount() - t
     msec = t / (cv.GetTickFrequency() * 1000.)
     print "pyc6accel erode detection time = %g ms" % (t / (cv.GetTickFrequency() * 1000.))
