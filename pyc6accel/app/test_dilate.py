@@ -1,21 +1,20 @@
 import cv
 import pyc6accel
-from opencv.cv import IplConvKernel
 
-lenaimg = cv.LoadImage('test_files/VGA.jpg', cv.CV_LOAD_IMAGE_GRAYSCALE)
+lenaimg = cv.LoadImage('test_files/VGA.png', cv.CV_LOAD_IMAGE_GRAYSCALE)
 #exit(0)
 #cv.Scale(lenaimg, lenaimg, 1);
 
 def test(img):
     print 'Dilate Filter Method'
     out_img = cv.CreateImage(cv.GetSize(img), img.depth, img.nChannels)
-    element = cv.CreateStructuringElementEx(7, 7, 0, 0, cv.CV_SHAPE_RECT)
+    element = cv.CreateStructuringElementEx(7, 7, 0, 0, cv.CV_SHAPE_CROSS)
     t = cv.GetTickCount()
-    pyc6accel.Dilate(lenaimg, out_img, None, 2)
+    pyc6accel.Dilate(lenaimg, out_img, element, 1)
     t = cv.GetTickCount() - t
     msec = t / (cv.GetTickFrequency() * 1000.)
     print "pyc6accel adds detection time = %g ms" % (t / (cv.GetTickFrequency() * 1000.))
-    cv.SaveImage('test_files/result_dilate_pyc6accel.jpg', out_img)
+    cv.SaveImage('test_files/result_dilate_pyc6accel.png', out_img)
     
 #    fd.write(str(msec) + '\t')
 #
@@ -26,7 +25,7 @@ def test(img):
 #    t = cv.GetTickCount() - t
 #    msec = t / (cv.GetTickFrequency() * 1000.)
 #    print "opencv adds detection time = %g ms" % (t / (cv.GetTickFrequency() * 1000.))
-#    cv.SaveImage('test_files/result_adds_opencv.jpg', adds_img)
+#    cv.SaveImage('test_files/result_adds_opencv.png', adds_img)
 #    fd.write(str(msec) + '\t')
     
 if __name__ == '__main__' :

@@ -26,7 +26,6 @@
 #include <ti/sdo/ce/Engine.h>
 #include <ti/sdo/ce/CERuntime.h>
 #include <ti/sdo/ce/osal/Memory.h>
-
 /* This object is used in MACRO in benchmark.h */
 static Time_Object sTime;
 static UInt32 dtime;
@@ -42,7 +41,7 @@ static UInt32 dtime;
 		printf("%f\n",(unsigned int)dtime / 1000.);
 
 static C6accel_Handle hC6 = NULL;
-static Memory_AllocParams memParams;
+//static Memory_AllocParams memParams;
 
 static String algName = ALGNAME;
 static String engineName = ENGINENAME;
@@ -98,16 +97,19 @@ pyc6accel_img_adds(PyObject *self, PyObject *args)
 {
 	PyObject *src, *dst;
 	IplImage *img, *adds;
-	int value;
+	float value;
 
-	if (!PyArg_ParseTuple(args, "OiO", &src, &value, &dst))
+	if (!PyArg_ParseTuple(args, "OfO", &src, &value, &dst))
 		return NULL;
 
 	img = ((iplimage_t *) src)->a;
 	adds = ((iplimage_t *) dst)->a;
 
 	START_BENCHMARK();
-	C6accel_IMG_addS_8(hC6, img, adds, (char) value, img->imageSize);
+	if (img->depth == IPL_DEPTH_8U)
+		C6accel_IMG_addS_8(hC6, img, adds, (char) value, img->imageSize);
+	if (img->depth == IPL_DEPTH_16S)
+		C6accel_IMG_addS_16s(hC6, img, adds, (short) value, img->imageSize);
 
 	if (C6Accel_readCallType(hC6) == ASYNC)
 		C6accel_waitAsyncCall(hC6);
@@ -121,7 +123,6 @@ pyc6accel_img_add(PyObject *self, PyObject *args)
 {
 	PyObject *src1, *src2, *dst;
 	IplImage *img1, *img2, *adds;
-	int value;
 
 	if (!PyArg_ParseTuple(args, "OOO", &src1, &src2, &dst))
 		return NULL;
@@ -145,9 +146,9 @@ pyc6accel_img_subs(PyObject *self, PyObject *args)
 {
 	PyObject *src, *dst;
 	IplImage *img, *subs;
-	int value;
+	float value;
 
-	if (!PyArg_ParseTuple(args, "OiO", &src, &value, &dst))
+	if (!PyArg_ParseTuple(args, "OfO", &src, &value, &dst))
 		return NULL;
 
 	img = ((iplimage_t *) src)->a;
@@ -156,7 +157,10 @@ pyc6accel_img_subs(PyObject *self, PyObject *args)
 	printf("Start AddS\n");
 
 	START_BENCHMARK();
-	C6accel_IMG_subS_8(hC6, img, subs, (char) value, img->imageSize);
+	if (img->depth == IPL_DEPTH_8U)
+		C6accel_IMG_subS_8(hC6, img, subs, (char) value, img->imageSize);
+	if (img->depth == IPL_DEPTH_16S)
+		C6accel_IMG_subS_16s(hC6, img, subs, (short) value, img->imageSize);
 
 	if (C6Accel_readCallType(hC6) == ASYNC)
 		C6accel_waitAsyncCall(hC6);
@@ -170,18 +174,19 @@ pyc6accel_img_muls(PyObject *self, PyObject *args)
 {
 	PyObject *src, *dst;
 	IplImage *img, *muls;
-	int value;
+	float value;
 
-	if (!PyArg_ParseTuple(args, "OiO", &src, &value, &dst))
+	if (!PyArg_ParseTuple(args, "OfO", &src, &value, &dst))
 		return NULL;
 
 	img = ((iplimage_t *) src)->a;
 	muls = ((iplimage_t *) dst)->a;
 
-	printf("Start AddS\n");
-
 	START_BENCHMARK();
-	C6accel_IMG_mulS_8(hC6, img, muls, (char) value, img->imageSize);
+	if (img->depth == IPL_DEPTH_8U)
+		C6accel_IMG_mulS_8(hC6, img, muls, (char) value, img->imageSize);
+	if (img->depth == IPL_DEPTH_16S)
+		C6accel_IMG_mulS_16s(hC6, img, muls, (short) value, img->imageSize);
 
 	if (C6Accel_readCallType(hC6) == ASYNC)
 		C6accel_waitAsyncCall(hC6);
@@ -254,6 +259,30 @@ pyc6accel_img_sobel(PyObject *self, PyObject *args)
 }
 
 static PyObject *
+pyc6accel_img_addweighted(PyObject *self, PyObject *args)
+{
+	PyObject * src1, *src2, *dst;
+	IplImage *img1, *img2, *addW;
+	float a, b, c;
+
+	if (!PyArg_ParseTuple(args, "OfOffO", &src1, &a, &src2, &b, &c, &dst))
+		return NULL;
+
+	img1 = ((iplimage_t *) src1)->a;
+	img2 = ((iplimage_t *) src2)->a;
+	addW = ((iplimage_t *) dst)->a;
+
+	START_BENCHMARK();
+	C6accel_IMG_addweight(hC6, src1, src2, addW, a, b, c);
+
+	if (C6Accel_readCallType(hC6) == ASYNC)
+		C6accel_waitAsyncCall(hC6);
+	END_BENCHMARK();
+
+	return Py_None;
+}
+
+static PyObject *
 pyc6accel_img_threshold(PyObject *self, PyObject *args)
 {
 	PyObject *src, *dst;
@@ -268,38 +297,44 @@ pyc6accel_img_threshold(PyObject *self, PyObject *args)
 	output = ((iplimage_t *) dst)->a;
 
 	START_BENCHMARK();
-	switch (thresholdType) {
-		//				case CV_THRESH_BINARY:
-		case THRESH_GREATER2MAX:
-			C6accel_IMG_thr_gt2max_8(hC6, input, output,
-			        (short) output->widthStep, (short) output->height,
-			        (unsigned char) threshold);
-			break;
-			//				case CV_THRESH_BINARY:
-		case THRESH_GREATER2THRES:
-			C6accel_IMG_thr_gt2thr_8(hC6, input, output,
-			        (short) output->widthStep, (short) output->height,
-			        (unsigned char) threshold);
-			break;
-		case THRESH_LESS2MIN:
-			C6accel_IMG_thr_le2min_8(hC6, input, output,
-			        (short) output->widthStep, (short) output->height,
-			        (unsigned char) threshold);
-			break;
-		case THRESH_LESS2THRES:
-			C6accel_IMG_thr_le2thr_8(hC6, input, output,
-			        (short) output->widthStep, (short) output->height,
-			        (unsigned char) threshold);
-			break;
-		default:
-			failmsg("This kernel can not support @ version %s", VERSION);
-			goto END;
-			//			break;
-	}
+	if (input->depth == IPL_DEPTH_8U)
+		switch (thresholdType) {
+			case CV_THRESH_BINARY:
+				cC6accel_IMG_thr_binary(hC6, input, output,
+				        (short) output->widthStep, (short) output->height,
+				        (unsigned char) threshold);
+				break;
+			case THRESH_GREATER2MAX:
+				C6accel_IMG_thr_gt2max_8(hC6, input, output,
+				        (short) output->widthStep, (short) output->height,
+				        (unsigned char) threshold);
+				break;
+				//				case CV_THRESH_BINARY:
+			case THRESH_GREATER2THRES:
+				C6accel_IMG_thr_gt2thr_8(hC6, input, output,
+				        (short) output->widthStep, (short) output->height,
+				        (unsigned char) threshold);
+				break;
+			case THRESH_LESS2MIN:
+				C6accel_IMG_thr_le2min_8(hC6, input, output,
+				        (short) output->widthStep, (short) output->height,
+				        (unsigned char) threshold);
+				break;
+			case THRESH_LESS2THRES:
+				C6accel_IMG_thr_le2thr_8(hC6, input, output,
+				        (short) output->widthStep, (short) output->height,
+				        (unsigned char) threshold);
+				break;
+			default:
+				failmsg("This kernel can not support @ version %s", VERSION);
+				goto END;
+				//			break;
+		}
 
 	if (C6Accel_readCallType(hC6) == ASYNC)
 		C6accel_waitAsyncCall(hC6);
 	END_BENCHMARK();
+
 	END: return Py_None;
 }
 
@@ -357,6 +392,21 @@ pyc6accel_img_dilate(PyObject *self, PyObject *args)
 		C6accel_waitAsyncCall(hC6);
 	END_BENCHMARK();
 
+	return Py_None;
+}
+
+static PyObject*
+pyc6accel_img_releaseimg(PyObject *self, PyObject *args)
+{
+	PyObject *src;
+	IplImage *img;
+
+	if (!PyArg_ParseTuple(args, "O", &src))
+		return NULL;
+
+	img = ((iplimage_t *) src)->a;
+
+	cvReleaseImage(&img);
 	return Py_None;
 }
 
@@ -440,6 +490,13 @@ static PyMethodDef pyc6accel_methods[] =
 		        {
 		                "Sobel", (PyCFunction) pyc6accel_img_sobel,
 		                METH_VARARGS, "Sobel -> None" },
+		        {
+		                "ReleaseImage", (PyCFunction) pyc6accel_img_releaseimg,
+		                METH_VARARGS, "ReleaseImage -> None" },
+		        {
+		                "AddWeighted", (PyCFunction) pyc6accel_img_addweighted,
+		                METH_VARARGS, "AddWeighted -> None" },
+
 	        //		        {
 	        //		                "AbsDiff", (PyCFunction) pyc6accel_math_absdiff,
 	        //		                METH_VARARGS, "AbsDiff -> None" },
@@ -488,6 +545,7 @@ PyMODINIT_FUNC initpyc6accel(void) {
 	PUBLISH(THRESH_GREATER2THRES);
 	PUBLISH(THRESH_LESS2MIN);
 	PUBLISH(THRESH_LESS2THRES);
+	PUBLISH(CV_THRESH_BINARY);
 	PUBLISH(CV_RGB2GRAY);
 
 	py6accel_error = PyErr_NewException((char*) MODULESTR".error", NULL, NULL);
@@ -495,10 +553,11 @@ PyMODINIT_FUNC initpyc6accel(void) {
 
 
 	/* Codec Engine Initialize & Setting*/
+	//	CERuntime_exit();
 	CERuntime_init();
-	memParams = Memory_DEFAULTPARAMS;
-	memParams.flags = Memory_CACHED;
-	memParams.type = Memory_CONTIGHEAP;
+	//	memParams = Memory_DEFAULTPARAMS;
+	//	memParams.flags = Memory_CACHED;
+	//	memParams.type = Memory_CONTIGHEAP;
 	hC6 = (C6accel_Handle) C6accel_create(engineName, NULL, algName, NULL);
 	if (hC6 == NULL) {
 		PyErr_SetString(PyExc_RuntimeError, "Can not created c6accel object!");
@@ -509,4 +568,6 @@ PyMODINIT_FUNC initpyc6accel(void) {
 
 	/* Synchronous */
 	C6Accel_setSync(hC6);
+	/* Asynchronous */
+	//	C6Accel_setAsync(hC6);
 }

@@ -22,10 +22,10 @@
 
 
 /* Types of thresholding */
-#define THRESH_GREATER2MAX      0  /* value = value > threshold ? max_value : value       */
-#define THRESH_GREATER2THRES  1  /* value = value > threshold ? threshold : value       */
-#define THRESH_LESS2MIN       2  /* value = value > threshold ? threshold : min_value   */
-#define THRESH_LESS2THRES      3  /* value = value > threshold ? value : threshold           */
+#define THRESH_GREATER2MAX      10  /* value = value > threshold ? max_value : value       */
+#define THRESH_GREATER2THRES  11  /* value = value > threshold ? threshold : value       */
+#define THRESH_LESS2MIN       12  /* value = value > threshold ? threshold : min_value   */
+#define THRESH_LESS2THRES      13  /* value = value > threshold ? value : threshold           */
 
 // Define a structure to allow benchmarking using gettimeofday()
 typedef struct Time_Object {

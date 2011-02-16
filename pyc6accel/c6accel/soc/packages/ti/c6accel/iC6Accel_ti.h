@@ -1559,22 +1559,6 @@ typedef struct IMG_thr_le2thr_8_Params {
 	int threshold;
 } IMG_thr_le2thr_8_Params;
 
-/*      void IMG_dilate_bin                                                 */
-/*      (                                                                   */
-/*          const unsigned char *restrict in_data,   // Incoming image  //  */
-/*          unsigned char       *restrict out_data,  // Filtered output //  */
-/*          const char          *restrict mask,      // Filter mask     //  */
-/*          int cols  // Number of columns to process, in bytes.        //  */
-/*      );                                                                  */
-
-/*      void IMG_erode_bin                                                  */
-/*      (                                                                   */
-/*          const unsigned char *restrict in_data,   // Incoming image  //  */
-/*          unsigned char       *restrict out_data,  // Filtered output //  */
-/*          const char          *restrict mask,      // Filter mask     //  */
-/*          int cols  // Number of columns to process, in bytes.        //  */
-/*      );                                                                  */
-
 /*
  void yc_demux_be8_c
  (
