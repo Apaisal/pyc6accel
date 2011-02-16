@@ -361,6 +361,16 @@ unsigned char *restrict cb /* Unpacked green chroma frame     */
 int C6accel_IMG_rgb_to_y(C6accel_Handle hC6accel, const IplImage *restrict src,
         IplImage * restrict dst, unsigned int count);
 
+int C6accel_IMG_addweight(C6accel_Handle hC6, const IplImage * restrict src1,
+        const IplImage * restrict src2, IplImage * restrict addw, float a,
+        float b, float c);
+
+int cC6accel_IMG_thr_binary(C6accel_Handle hC6accel, const IplImage * in_data, /*  Input image data    */
+IplImage * restrict out_data, /*  Output image data   */
+short cols, short rows, /*  Image dimensions    */
+unsigned char threshold /*  Threshold value     */
+);
+
 // image threshold greater than to maximum 8 bits
 int C6accel_IMG_thr_gt2max_8(C6accel_Handle hC6accel, const IplImage * in_data, /*  Input image data    */
 IplImage * restrict out_data, /*  Output image data   */

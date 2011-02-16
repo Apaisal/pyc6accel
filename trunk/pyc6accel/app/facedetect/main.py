@@ -5,7 +5,7 @@ Created on Jul 23, 2010
 '''
 import time
 import cv, sys
-from camera import IPCamera
+import IPCamera
 from optparse import OptionParser
 from detect import detect
 
@@ -29,15 +29,16 @@ def main():
 	if input_name.isdigit():
 		capture = cv.CreateCameraCapture(int(input_name))
 		camera = None
-	elif input_name.index('.flv') > 0:
+	elif input_name.find('.flv') > 0:
 		capture = cv.CaptureFromFile(input_name)
 	else:
 		capture = None
-		camera = IPCamera()
-		camera.scan_ip_network(args[0])
-		camera.createCapture()
-	cv.SetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH, 640)
-	cv.SetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_HEIGHT, 480)
+		camera = IPCamera.IPCamera()
+#		camera.scan_ip_network(args[0])
+#		camera.createCapture()
+		camera.Start()
+#	cv.SetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH, 640)
+#	cv.SetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_HEIGHT, 480)
 	if output == None:
 		cv.NamedWindow('test', 2)
 	else:
@@ -54,7 +55,8 @@ def main():
 			cv.Resize(img, small_img)
 			img = small_img
 		else:
-			img = camera.getImage()
+#			img = camera.getImage()
+			img = camera.NextFrame()
 
 #		det.detect_object(img)
 		det.detect_and_draw(img)
@@ -75,3 +77,4 @@ def main():
 
 if __name__ == '__main__':
 	main()
+	exit(0)

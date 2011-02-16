@@ -3,6 +3,7 @@
 	<name>pyc6accel</name>
 	<comment></comment>
 	<projects>
+		<project>OpenCV-2.1.0</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

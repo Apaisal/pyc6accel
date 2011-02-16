@@ -4,7 +4,7 @@ Created on Aug 14, 2010
 @author: anol
 '''
 import cv, time
-import pyc6accel
+import pyc6accel as dsp
 
 class detect():
     '''
@@ -29,7 +29,7 @@ class detect():
         # min_size=<minimum possible face size
 
         min_size = (16, 16)
-        image_scale = 1
+        image_scale = 1.2
         haar_scale = 1.5
         min_neighbors = 2
         haar_flags = cv.CV_HAAR_DO_ROUGH_SEARCH | cv.CV_HAAR_FEATURE_MAX
@@ -39,8 +39,8 @@ class detect():
 
         # convert color input image to grayscale
 #        cv.CvtColor(image, gray, cv.CV_BGR2GRAY)
-        pyc6accel.CvtColor(image, gray, cv.CV_RGB2GRAY)
-        # scale input image for faster processing
+        dsp.CvtColor(image, gray, dsp.CV_RGB2GRAY)
+#         scale input image for faster processing
         cv.Resize(gray, small_img, cv.CV_INTER_LINEAR)
 
         cv.EqualizeHist(small_img, small_img)
