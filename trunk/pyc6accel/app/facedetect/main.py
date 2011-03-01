@@ -33,10 +33,13 @@ def main():
 		capture = cv.CaptureFromFile(input_name)
 	else:
 		capture = None
-		camera = IPCamera.IPCamera()
+		camera = IPCamera.IPCamera('http://158.108.47.118','half',1,(0,0),(1600,1184))
+		camera.openPort()
+        camera.start()
 #		camera.scan_ip_network(args[0])
 #		camera.createCapture()
-		camera.Start()
+#		camera.start()
+
 #	cv.SetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH, 640)
 #	cv.SetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_HEIGHT, 480)
 	if output == None:
@@ -55,8 +58,11 @@ def main():
 			cv.Resize(img, small_img)
 			img = small_img
 		else:
-#			img = camera.getImage()
-			img = camera.NextFrame()
+			while (camera.getImage() == None):
+				cv.WaitKey(100)
+			img = camera.getImage()
+
+#			img = camera.NextFrameImage()
 
 #		det.detect_object(img)
 		det.detect_and_draw(img)
@@ -74,6 +80,7 @@ def main():
 				break
 
 		time.sleep(0.1)
+	camera.Stop()
 
 if __name__ == '__main__':
 	main()

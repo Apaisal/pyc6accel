@@ -26,21 +26,38 @@
 #include <ti/sdo/ce/Engine.h>
 #include <ti/sdo/ce/CERuntime.h>
 #include <ti/sdo/ce/osal/Memory.h>
+#include <ti/sdo/ce/video/viddec.h>
+#include <ti/sdo/ce/image/imgdec.h>
+
 /* This object is used in MACRO in benchmark.h */
-static Time_Object sTime;
+//static Time_Object sTime;
 static UInt32 dtime;
 
 /*Define a C6Accel Handle to call the abstracted wrapper APIs*/
 #include "../c6accelw/c6accelw.h"
 
+/* DMAI */
+#include <ti/sdo/dmai/Dmai.h>
+#include <ti/sdo/dmai/BufTab.h>
+#include <ti/sdo/dmai/BufferGfx.h>
+#include <ti/sdo/dmai/Time.h>
+#include <ti/sdo/dmai/ce/Vdec.h>
+#include <ti/sdo/dmai/ce/Idec.h>
+#include <ti/sdo/dmai/Framecopy.h>
+#include <ti/sdo/dmai/ColorSpace.h>
+#include <ti/sdo/dmai/Resize.h>
+
 #define START_BENCHMARK()                                     \
-		Time_reset(&sTime);						\
-		Time_delta(&sTime,&dtime);
+		Time_reset(hTime);						\
+		Time_delta(hTime,&dtime);
 #define END_BENCHMARK()                             \
-		Time_delta(&sTime,&dtime);                                \
+		Time_delta(hTime,&dtime);                                \
 		printf("%f\n",(unsigned int)dtime / 1000.);
 
 static C6accel_Handle hC6 = NULL;
+static Engine_Handle hEngine = NULL;
+static UNIVERSAL_Handle hUni = NULL;
+static Time_Handle hTime = NULL;
 //static Memory_AllocParams memParams;
 
 static String algName = ALGNAME;
@@ -58,38 +75,6 @@ static int failmsg(const char *fmt, ...) {
 
 	PyErr_SetString(PyExc_TypeError, str);
 	return 0;
-}
-
-static void Time_reset(Time_Object *sTime) {
-	struct timeval tv;
-
-	if (gettimeofday(&tv, NULL) == -1) {
-		return;
-	}
-
-	sTime->original = tv;
-	sTime->previous = tv;
-
-	return;
-}
-
-static void Time_delta(Time_Object* sTime, UInt32 *deltaPtr) {
-	struct timeval tv;
-	time_t s;
-	suseconds_t us;
-
-	if (gettimeofday(&tv, NULL) == -1) {
-		return;
-	}
-
-	s = tv.tv_sec - sTime->previous.tv_sec;
-	us = tv.tv_usec - sTime->previous.tv_usec;
-
-	*deltaPtr = s * 1000000l + us;
-
-	sTime->previous = tv;
-
-	return;
 }
 
 static PyObject *
@@ -410,6 +395,201 @@ pyc6accel_img_releaseimg(PyObject *self, PyObject *args)
 	return Py_None;
 }
 
+//static PyObject*
+//pyc6accel_dmai_vdec(PyObject *self, PyObject *args)
+//{
+//	PyObject *src;
+//	PyObject *dst;
+//
+//	if (!PyArg_ParseTuple(args, "OO", &src, &dst))
+//		return NULL;
+//	// initial paramter
+//	VIDDEC_Params params = Vdec_Params_DEFAULT;
+//	VIDDEC_DynamicParams dynParams = Vdec_DynamicParams_DEFAULT;
+//	BufferGfx_Attrs gfxAttrs = BufferGfx_Attrs_DEFAULT;
+//	Engine_Handle hEngine = NULL;
+//	BufTab_Handle hBufTab = NULL;
+//	Time_Handle hTime = NULL;
+//	Int ret = Dmai_EOK;
+//	Int numFrame = 0;
+//	Buffer_Handle hInBuf = NULL;
+//	Buffer_Handle hDstBuf = NULL;
+//	Buffer_Handle hOutBuf;
+//
+//
+//	// Parse stream object to buffer
+//
+//	// create engine vdec
+//	hEngine = Engine_open(DEFAULT_ENGINE_NAME, NULL, NULL);
+//	if (hEngine == NULL) {
+//		printf("Failed to open codec engine %s\n", DEFAULT_ENGINE_NAME);
+//		//		goto cleanup;
+//	}
+//
+//	// Setting parameter
+//	/* Create the XDM 0.9 based video decoder */
+//	params.forceChromaFormat = XDM_YUV_422ILE;
+//	params.maxWidth = VideoStd_720P_WIDTH;
+//	params.maxHeight = VideoStd_720P_HEIGHT;
+//
+//
+//	//	hVd = (Vdec_Handle) Vdec_create(hEngine, 'h264dec', &params, &dynParams);
+//	//	if (hVd == NULL) {
+//	//		printf("Failed to create video decoder: %s\n", args->codecName);
+//	//		goto cleanup;
+//	//	}
+//	/* Align buffers to cache line boundary */
+//	//	gfxAttrs.bAttrs.memParams.align = lAttrs.mParams.align = BUFSIZEALIGN;
+//	//
+//	//	gfxAttrs.colorSpace = ColorSpace_UYVY;
+//	//	gfxAttrs.dim.width = params.maxWidth;
+//	//	gfxAttrs.dim.height = params.maxHeight;
+//	//	gfxAttrs.dim.lineLength = BufferGfx_calcLineLength(params.maxWidth,
+//	//	        gfxAttrs.colorSpace);
+//	//
+//	//	hBufTab = BufTab_create(NUM_BUFS,
+//	//	        Dmai_roundUp(Vdec_getOutBufSize(hVd), BUFSIZEALIGN),
+//	//	        BufferGfx_getBufferAttrs(&gfxAttrs));
+//
+//
+//	/* Set output buffer table */
+//	Vdec_setBufTab(hVd, hBufTab);
+//	//	/* Ask the codec how much input data it needs */
+//	//	lAttrs.readSize = Vdec_getInBufSize(hVd);
+//	//
+//	//
+//	//	/* Make the total ring buffer larger */
+//	//	lAttrs.readBufSize = Dmai_roundUp(lAttrs.readSize * 2, BUFSIZEALIGN);
+//	//
+//	//
+//	//	/* Increase the stdio buffer size for loader for better RTDX performance */
+//	//	lAttrs.vBufSize = VBUFSIZE;
+//
+//
+//	// Decode
+//	ret = Vdec_process(hVd, hInBuf, hDstBuf);
+//
+//	if (ret < 0) {
+//		printf("Failed to decode video buffer\n");
+//		goto cleanup;
+//	}
+//
+//	//clean up
+//	cleanup:
+//	/* Clean up the application */
+//	//	if (hLoader) {
+//	//		Loader_delete(hLoader);
+//	//	}
+//
+//	if (hVd) {
+//		Vdec_delete(hVd);
+//	}
+//
+//	if (hBufTab) {
+//		BufTab_delete(hBufTab);
+//	}
+//
+//	if (hEngine) {
+//		Engine_close(hEngine);
+//	}
+//
+//	if (hTime) {
+//		Time_delete(hTime);
+//	}
+//
+//
+//	//	if (outFile) {
+//	//		fclose(outFile);
+//	//	}
+//
+//	return Py_None;
+//}
+
+static PyObject*
+pyc6accel_h264_dec(PyObject *self, PyObject *args)
+{
+	XDAS_Int8 *src;
+	XDAS_Int8 *dst;
+
+	VIDDEC_Handle hVid = NULL;
+	VIDDEC_Params params = Vdec_Params_DEFAULT;
+	XDM_BufDesc inBufsDesc;
+	XDM_BufDesc outBufsDesc;
+	VIDDEC_InArgs decinArgs;
+	VIDDEC_OutArgs decoutArgs;
+	XDAS_Int32 status;
+
+	if (!PyArg_ParseTuple(args, "ss", &src, &dst))
+		return NULL;
+
+	// create engine
+	hVid = VIDDEC_create(hEngine, "h264dec", &params);
+	if (hVid == NULL) {
+		printf("Can not created viddec\n");
+		goto cleanup;
+	}
+
+	inBufsDesc.numBufs = outBufsDesc.numBufs = 1;
+	inBufsDesc.bufSizes = (XDAS_Int32 *) sizeof(src);
+	outBufsDesc.bufSizes = (XDAS_Int32 *) sizeof(dst);
+
+	inBufsDesc.bufs = &src;
+	outBufsDesc.bufs = &dst;
+	decinArgs.size = sizeof(decinArgs);
+	decinArgs.numBytes = sizeof(src);
+
+	status = VIDDEC_process(hVid, &inBufsDesc, &outBufsDesc, &decinArgs, &decoutArgs);
+	if (status != VIDDEC_EOK) {
+		printf("decode status = %ld\n", status);
+	}
+	cleanup: if (hVid)
+		VIDDEC_delete(hVid);
+
+	return Py_None;
+}
+
+static PyObject*
+pyc6accel_jpeg_dec(PyObject *self, PyObject *args)
+{
+	XDAS_Int8 *src;
+	XDAS_Int8 *dst;
+	IMGDEC_Handle hImg = NULL;
+	IMGDEC_Params params = Idec_Params_DEFAULT;
+	XDM_BufDesc inBufsDesc;
+	XDM_BufDesc outBufsDesc;
+	IMGDEC_InArgs decinArgs;
+	IMGDEC_OutArgs decoutArgs;
+	XDAS_Int32 status;
+
+	if (!PyArg_ParseTuple(args, "ss", &src, &dst))
+		return NULL;
+
+	hImg = IMGDEC_create(hEngine, "jpegdec", &params);
+	if (hImg == NULL) {
+		printf("Can not created imgdec\n");
+		goto cleanup;
+	}
+
+	inBufsDesc.numBufs = outBufsDesc.numBufs = 1;
+	inBufsDesc.bufSizes = (XDAS_Int32 *) sizeof(src);
+	outBufsDesc.bufSizes = (XDAS_Int32 *) sizeof(dst);
+
+	inBufsDesc.bufs = &src;
+	outBufsDesc.bufs = &dst;
+	decinArgs.size = sizeof(decinArgs);
+	decinArgs.numBytes = sizeof(src);
+
+	status = IMGDEC_process(hImg, &inBufsDesc, &outBufsDesc, &decinArgs,
+	        &decoutArgs);
+	if (status != IMGDEC_EOK) {
+		printf("decode status = %ld\n", status);
+	}
+	cleanup: if (hImg)
+		IMGDEC_delete(hImg);
+
+	return Py_None;
+}
+
 int getGaussianKernel(unsigned char * out_dat, int ksize) {
 	int i, j;
 	float *rows;
@@ -496,6 +676,12 @@ static PyMethodDef pyc6accel_methods[] =
 		        {
 		                "AddWeighted", (PyCFunction) pyc6accel_img_addweighted,
 		                METH_VARARGS, "AddWeighted -> None" },
+		        {
+		                "JpegDecode", (PyCFunction) pyc6accel_jpeg_dec,
+		                METH_VARARGS, "JpegDecode -> None" },
+		        {
+		                "H264Decode", (PyCFunction) pyc6accel_h264_dec,
+		                METH_VARARGS, "H264Decode -> None" },
 
 	        //		        {
 	        //		                "AbsDiff", (PyCFunction) pyc6accel_math_absdiff,
@@ -530,6 +716,7 @@ static PyMethodDef pyc6accel_methods[] =
 PyMODINIT_FUNC initpyc6accel(void) {
 	PyObject *m, *d;
 	char *version = VERSION;
+	Time_Attrs tAttrs = Time_Attrs_DEFAULT;
 
 	m = Py_InitModule3(MODULESTR"", pyc6accel_methods,"");
 	if (m == NULL)
@@ -555,14 +742,21 @@ PyMODINIT_FUNC initpyc6accel(void) {
 	/* Codec Engine Initialize & Setting*/
 	//	CERuntime_exit();
 	CERuntime_init();
+
+	Dmai_init();
+
+
 	//	memParams = Memory_DEFAULTPARAMS;
-	//	memParams.flags = Memory_CACHED;
+	//	memParams.flags = Memory_CACHED;engineName
 	//	memParams.type = Memory_CONTIGHEAP;
-	hC6 = (C6accel_Handle) C6accel_create(engineName, NULL, algName, NULL);
+	hC6 = (C6accel_Handle) C6accel_create(engineName, hEngine, algName, hUni);
 	if (hC6 == NULL) {
 		PyErr_SetString(PyExc_RuntimeError, "Can not created c6accel object!");
 	}
 
+	hTime = Time_create(&tAttrs);
+
+	Py_INCREF(hTime);
 	Py_INCREF(hC6);
 	//	Py_INCREF(memParams);
 

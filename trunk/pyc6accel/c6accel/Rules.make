@@ -106,7 +106,7 @@ CE_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/codec_engine_2_26_01_09
 XDAIS_INSTALL_DIR=/opt/ti/ccsv5/xdais_7_20_00_07
 
 # Where the DSP Link package is installed.
-LINK_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/dsplink_linux_1_65_00_03
+LINK_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/dsplink_linux_1_65_00_02
 
 # Where the CMEM (contiguous memory allocator) package is installed.
 CMEM_INSTALL_DIR=$(DVSDK_INSTALL_DIR)/linuxutils_2_25_05_11

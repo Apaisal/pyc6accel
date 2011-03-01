@@ -14,23 +14,23 @@
 
 include Rules.make
 
-COMPONENTS:=$(LPM_INSTALL_DIR) $(LINK_INSTALL_DIR) $(XDAIS_INSTALL_DIR) $(CMEM_INSTALL_DIR) $(FC_INSTALL_DIR) $(CE_INSTALL_DIR) $(XDC_INSTALL_DIR) $(BIOSUTILS_INSTALL_DIR) $(BIOS_INSTALL_DIR)
+COMPONENTS:=$(LPM_INSTALL_DIR) $(LINK_INSTALL_DIR) $(XDAIS_INSTALL_DIR) $(CMEM_INSTALL_DIR) $(FC_INSTALL_DIR) $(CE_INSTALL_DIR) $(XDC_INSTALL_DIR) $(BIOSUTILS_INSTALL_DIR) $(BIOS_INSTALL_DIR) $(DMAI_INSTALL_DIR)
 
 REPOSITORIES:=$(addsuffix /packages, $(COMPONENTS))
 
 CHECKLIST:=$(REPOSITORIES) $(CODEGEN_INSTALL_DIR)/bin/cl6x $(MVTOOL_PREFIX)gcc 
 
-.PHONY:	all clean  c6accel app app_clean packages servers c6accelw c6accel_clean install
+.PHONY:	all clean dmai c6accel app app_clean packages servers c6accelw c6accel_clean install
 
 #==============================================================================
 # The default build target.
 #==============================================================================
-all:	c6accel
+all:	c6accel dmai
 
 #==============================================================================
 # Clean up the targets built by 'make all'.
 #==============================================================================
-clean:	c6accel_clean 
+clean:	c6accel_clean dmai_clean
 #==============================================================================
 # Build everything rebuildable.
 #==============================================================================

@@ -21,6 +21,9 @@ extern "C" {
 #include <ti/sdo/ce/Engine.h>
 #include <ti/sdo/ce/universal/universal.h>
 
+///*	Video Decode */
+//#include <ti/sdo/ce/video/viddec.h>
+
 /*OpenCV*/
 #include <cv.h>
 #include <cxcore.h>
@@ -698,6 +701,8 @@ int C6accel_IMG_erode_bin(C6accel_Handle hC6accel,
 int C6accel_IMG_dilate_bin(C6accel_Handle hC6accel,
         const IplImage *restrict in_data, IplImage *restrict out_data,
         const IplConvKernel *restrict mask, int cols);
+
+int C6accel_IMG_dec();
 
 #ifdef __cplusplus
 }
