@@ -19,7 +19,10 @@
 #define ENGINENAME "omap3530"
 #define ALGNAME "c6accel"
 #define APPNAME MODULESTR
+#define DEFAULT_ENGINE_NAME	"decode"
 
+#define MAX_CODEC_NAME_SIZE     30
+#define MAX_ENGINE_NAME_SIZE    30
 
 /* Types of thresholding */
 #define THRESH_GREATER2MAX      10  /* value = value > threshold ? max_value : value       */
@@ -27,11 +30,13 @@
 #define THRESH_LESS2MIN       12  /* value = value > threshold ? threshold : min_value   */
 #define THRESH_LESS2THRES      13  /* value = value > threshold ? value : threshold           */
 
+#define BUFFSIZE 1024
+
 // Define a structure to allow benchmarking using gettimeofday()
-typedef struct Time_Object {
-    struct timeval original;
-    struct timeval previous;
-} Time_Object;
+//typedef struct Time_Object {
+//    struct timeval original;
+//    struct timeval previous;
+//} Time_Object;
 
 typedef struct {
 	PyObject_HEAD

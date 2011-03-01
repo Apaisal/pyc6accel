@@ -17,6 +17,9 @@
 #include <ti/sdo/ce/osal/Memory.h>
 #include <ti/sdo/ce/universal/universal.h>
 
+///* Video Decode */
+//#include <ti/sdo/ce/video/viddec.h>
+
 /* Run Time lib include files: */
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,6 +28,10 @@
 
 /* Wrapper Header file */
 #include "c6accelw.h"
+/* Wrapper API includes */
+#include "c6accelw_i.h"
+/* Include the header for C6ACCEL codec support*/
+#include "ti/c6accel/iC6Accel_ti.h"
 
 /* Structure for context saving in case of asynchronous process calls */
 static T_ASYNC_CALL_PARAMS c6accelAsyncParams;
@@ -37,13 +44,6 @@ static UNIVERSAL_Params uniParams;
 static Memory_AllocParams wrapperMemParams =
 	{
 	        Memory_CONTIGHEAP, Memory_CACHED, Memory_DEFAULTALIGNMENT, 0 };
-
-/* Wrapper API includes */
-#include "c6accelw_i.h"
-#include "c6accelw.h"
-
-/* Include the header for C6ACCEL codec support*/
-#include "ti/c6accel/iC6Accel_ti.h"
 
 /*Parameter definition */
 #define BUFALIGN 128
@@ -16788,6 +16788,11 @@ Int C6accel_IMG_addweight(C6accel_Handle hC6accel,
 	return status;
 }
 
+Int C6accel_IMG_dec(const char *restrict inBuf,IplImage * restrict img){
+//	IMGDEC_Handle imgdec = NULL;
+//	IMGDEC_Params imgdecParams = ID;
+	return 0;
+}
 /*
  *
  * Function to implement the async wait for completion of a call made with UNIVERSAL_process_async()

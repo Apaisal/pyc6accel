@@ -17,13 +17,13 @@ TARGET = pyc6accel
 include Rules.make
 
 # Comment this out if you want to see full compiler and linker output.
-#VERBOSE = @
+VERBOSE = @
 
 # Which compiler flags should be used?
 BUILD_TYPE=debug
 
 # Package path for the XDC tools
-XDCPATH = $(USER_XDC_PATH);../packages;$(CE_INSTALL_DIR)/packages;$(FC_INSTALL_DIR)/packages;$(LINK_INSTALL_DIR)/packages;$(LINK_INSTALL_DIR);$(XDAIS_INSTALL_DIR)/packages;$(CMEM_INSTALL_DIR)/packages;$(C6ACCEL_INSTALL_DIR)/soc/packages;$(LPM_INSTALL_DIR)/packages;$(SERVER_INSTALL_DIR)/packages
+XDCPATH = $(USER_XDC_PATH);../packages;$(CE_INSTALL_DIR)/packages;$(FC_INSTALL_DIR)/packages;$(LINK_INSTALL_DIR)/packages;$(LINK_INSTALL_DIR);$(XDAIS_INSTALL_DIR)/packages;$(CMEM_INSTALL_DIR)/packages;$(C6ACCEL_INSTALL_DIR)/soc/packages;$(LPM_INSTALL_DIR)/packages;$(SERVER_INSTALL_DIR)/packages;$(DMAI_INSTALL_DIR)/packages;
 
 # Where to output configuration files
 XDC_CFG		= $(TARGET)_config
@@ -74,6 +74,7 @@ endif
 #C_FLAGS += -I/home/anol/CodeSourcery/Sourcery_G++_Lite/arm-none-linux-gnueabi/libc/usr/include/python2.6 #-I/home/anol/CodeSourcery/Sourcery_G++_Lite/arm-none-linux-gnueabi/libc/usr/local/include
 LD_FLAGS += -L$(LINUXLIBS_INSTALL_DIR)/lib -lm -lpthread -L${PWD}/python/lib -lpython2.6
 C6ACCEL_LIB += $(C6ACCEL_INSTALL_DIR)/soc/c6accelw/lib/c6accelw_$(PLATFORM).a470MV
+DMAI_LIB += /home/anol/dvsdk/dvsdk_3_01_00_10/dmai_2_05_00_12/packages/ti/sdo/dmai/lib/dmai_linux_omap3530.a470MV
 
 OPENCV_C_FLAGS = -I${PWD}/opencv/include -I${PWD}/python/include
 OPENCV_LD_FLAGS = -L${PWD}/opencv/lib -lml -lcxcore -lcv -lcvaux -lhighgui
@@ -100,7 +101,7 @@ install_$(TARGET):
 	@cp -R test_files/* $(EXEC_DIR_C6ACCEL)/test_files/
 	@echo Installed $(TARGET) binaries to $(EXEC_DIR_C6ACCEL)..
 
-$(TARGET):	$(OBJFILES) $(C6ACCEL_LIB) $(XDC_LFILE)
+$(TARGET):	$(OBJFILES) $(C6ACCEL_LIB) $(DMAI_LIB) $(XDC_LFILE)
 	@echo
 	@echo Linking $@ from $^..
 	$(LINK.c) -shared -o $@".so" $^
