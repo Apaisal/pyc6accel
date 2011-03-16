@@ -26,8 +26,6 @@
 #include <ti/sdo/ce/Engine.h>
 #include <ti/sdo/ce/CERuntime.h>
 #include <ti/sdo/ce/osal/Memory.h>
-#include <ti/sdo/ce/video/viddec.h>
-#include <ti/sdo/ce/image/imgdec.h>
 
 /* This object is used in MACRO in benchmark.h */
 //static Time_Object sTime;
@@ -39,6 +37,7 @@ static UInt32 dtime;
 /* DMAI */
 #include <ti/sdo/dmai/Dmai.h>
 #include <ti/sdo/dmai/BufTab.h>
+#include <ti/sdo/dmai/Buffer.h>
 #include <ti/sdo/dmai/BufferGfx.h>
 #include <ti/sdo/dmai/Time.h>
 #include <ti/sdo/dmai/ce/Vdec.h>
@@ -58,6 +57,7 @@ static C6accel_Handle hC6 = NULL;
 static Engine_Handle hEngine = NULL;
 static UNIVERSAL_Handle hUni = NULL;
 static Time_Handle hTime = NULL;
+static Time_Attrs tAttrs;
 //static Memory_AllocParams memParams;
 
 static String algName = ALGNAME;
@@ -538,7 +538,8 @@ pyc6accel_h264_dec(PyObject *self, PyObject *args)
 	decinArgs.size = sizeof(decinArgs);
 	decinArgs.numBytes = sizeof(src);
 
-	status = VIDDEC_process(hVid, &inBufsDesc, &outBufsDesc, &decinArgs, &decoutArgs);
+	status = VIDDEC_process(hVid, &inBufsDesc, &outBufsDesc, &decinArgs,
+	        &decoutArgs);
 	if (status != VIDDEC_EOK) {
 		printf("decode status = %ld\n", status);
 	}
@@ -553,41 +554,65 @@ pyc6accel_jpeg_dec(PyObject *self, PyObject *args)
 {
 	XDAS_Int8 *src;
 	XDAS_Int8 *dst;
-	IMGDEC_Handle hImg = NULL;
-	IMGDEC_Params params = Idec_Params_DEFAULT;
-	XDM_BufDesc inBufsDesc;
-	XDM_BufDesc outBufsDesc;
-	IMGDEC_InArgs decinArgs;
-	IMGDEC_OutArgs decoutArgs;
 	XDAS_Int32 status;
+	Engine_Handle hEng = NULL;
+	Engine_Attrs eAttrs =
+		{
+		        "0" };
+	Engine_Error eErr;
+	Buffer_Handle hOutBuf;
+	Buffer_Handle hInBuf;
+	Buffer_Attrs bAttrs = Buffer_Attrs_DEFAULT;
+	BufferGfx_Attrs gfxAttrs = BufferGfx_Attrs_DEFAULT;
+	Idec_Handle hId = NULL;
+	IMGDEC_Params Params = Idec_Params_DEFAULT;
+	IMGDEC_DynamicParams dynParams = Idec_DynamicParams_DEFAULT;
 
-	if (!PyArg_ParseTuple(args, "ss", &src, &dst))
+	int size;
+	if (!PyArg_ParseTuple(args, "t#", &src, &size))
 		return NULL;
+	printf("size : %d\n", size);
+	Dmai_init();
+	hEngine = Engine_open(engineName, &eAttrs, &eErr);
 
-	hImg = IMGDEC_create(hEngine, "jpegdec", &params);
-	if (hImg == NULL) {
-		printf("Can not created imgdec\n");
+	if (hEngine == NULL) {
+		printf("can not open engine : %i\n", eErr);
 		goto cleanup;
+	} else {
+		printf("engine status : %i\n", eErr);
 	}
-
-	inBufsDesc.numBufs = outBufsDesc.numBufs = 1;
-	inBufsDesc.bufSizes = (XDAS_Int32 *) sizeof(src);
-	outBufsDesc.bufSizes = (XDAS_Int32 *) sizeof(dst);
-
-	inBufsDesc.bufs = &src;
-	outBufsDesc.bufs = &dst;
-	decinArgs.size = sizeof(decinArgs);
-	decinArgs.numBytes = sizeof(src);
-
-	status = IMGDEC_process(hImg, &inBufsDesc, &outBufsDesc, &decinArgs,
-	        &decoutArgs);
-	if (status != IMGDEC_EOK) {
-		printf("decode status = %ld\n", status);
+	hId = Idec_create(hEngine, "jpegdec", &Params, &dynParams);
+	if (hId) {
+		printf("can not created Idec.\n");
+		goto cleanup;
+	} else {
+		printf("created Idec\n");
 	}
-	cleanup: if (hImg)
-		IMGDEC_delete(hImg);
+	gfxAttrs.colorSpace = ColorSpace_UYVY;
+	gfxAttrs.dim.width = Params.maxWidth;
+	gfxAttrs.dim.height = Params.maxHeight;
+	gfxAttrs.dim.lineLength = BufferGfx_calcLineLength(Params.maxWidth,
+	        gfxAttrs.colorSpace);
+	hOutBuf = Buffer_create(Idec_getOutBufSize(hId), BufferGfx_getBufferAttrs(
+	        &gfxAttrs));
+	hInBuf = Buffer_create(Idec_getInBufSize(hId), &bAttrs);
+	Buffer_setUserPtr(hInBuf, src);
+	Buffer_setUserPtr(hOutBuf, dst);
+	Buffer_print(hInBuf);
+	Buffer_print(hOutBuf);
+	Buffer_setNumBytesUsed(hInBuf, sizeof(src));
+	printf("Starting... Idec.\n");
+	status = Idec_process(hId, hInBuf, hOutBuf);
 
-	return Py_None;
+	cleanup: if (hEngine)
+		Engine_close(hEngine);
+	if (hInBuf)
+		Buffer_delete(hInBuf);
+	if (hId)
+		Idec_delete(hId);
+	//	C6accel_IMG_jpegdec(hC6,(char *) src,(char*) dst);
+	return Py_BuildValue("s", dst);
+	//	return Py_None;
 }
 
 int getGaussianKernel(unsigned char * out_dat, int ksize) {
@@ -716,7 +741,7 @@ static PyMethodDef pyc6accel_methods[] =
 PyMODINIT_FUNC initpyc6accel(void) {
 	PyObject *m, *d;
 	char *version = VERSION;
-	Time_Attrs tAttrs = Time_Attrs_DEFAULT;
+	tAttrs = Time_Attrs_DEFAULT;
 
 	m = Py_InitModule3(MODULESTR"", pyc6accel_methods,"");
 	if (m == NULL)
@@ -740,28 +765,27 @@ PyMODINIT_FUNC initpyc6accel(void) {
 
 
 	/* Codec Engine Initialize & Setting*/
-	//	CERuntime_exit();
 	CERuntime_init();
-
-	Dmai_init();
 
 
 	//	memParams = Memory_DEFAULTPARAMS;
 	//	memParams.flags = Memory_CACHED;engineName
 	//	memParams.type = Memory_CONTIGHEAP;
-	hC6 = (C6accel_Handle) C6accel_create(engineName, hEngine, algName, hUni);
-	if (hC6 == NULL) {
-		PyErr_SetString(PyExc_RuntimeError, "Can not created c6accel object!");
-	}
+	//	hC6 = (C6accel_Handle) C6accel_create(engineName, hEngine, algName, hUni);
+	//	if (hC6 == NULL) {
+	//		PyErr_SetString(PyExc_RuntimeError, "Can not created c6accel object!");
+	//	}
 
 	hTime = Time_create(&tAttrs);
 
 	Py_INCREF(hTime);
-	Py_INCREF(hC6);
+	//	Py_INCREF(hC6);
+	//	Py_INCREF(hEngine);
+	//	Py_INCREF(hUni);
 	//	Py_INCREF(memParams);
 
 	/* Synchronous */
-	C6Accel_setSync(hC6);
+	//	C6Accel_setSync(hC6);
 	/* Asynchronous */
 	//	C6Accel_setAsync(hC6);
 }

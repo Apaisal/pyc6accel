@@ -10,7 +10,7 @@
 # If C6Accel package is found under DVSDK Root Directory
 # Set only the DVSDK INSTALL Directory below
 #=========================================================
-DVSDK_INSTALL_DIR=$(HOME)/dvsdk/dvsdk_3_01_00_10
+DVSDK_INSTALL_DIR=/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09
 -include $(DVSDK_INSTALL_DIR)/Rules.make
 EXEC_DIR_C6ACCEL = $(EXEC_DIR)/c6accel_app
 PLATFORM = omap3530
