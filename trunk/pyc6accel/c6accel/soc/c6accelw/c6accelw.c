@@ -16,6 +16,7 @@
 #include <ti/sdo/ce/Engine.h>
 #include <ti/sdo/ce/osal/Memory.h>
 #include <ti/sdo/ce/universal/universal.h>
+#include <ti/sdo/ce/image/imgdec.h>
 
 ///* Video Decode */
 //#include <ti/sdo/ce/video/viddec.h>
@@ -16748,6 +16749,7 @@ Int C6accel_IMG_addweight(C6accel_Handle hC6accel,
 	fp3->constData = c;
 	fp3->count = addw->imageSize;
 
+
 	/* Call the actual algorithm */
 	if (hC6accel->callType == ASYNC) {
 		/* Update async structure */
@@ -16774,6 +16776,7 @@ Int C6accel_IMG_addweight(C6accel_Handle hC6accel,
 		}
 	} else {
 
+
 		/* Synchronous Call to the actual algorithm */
 		status = UNIVERSAL_process(hC6accel->hUni, &inBufDesc, &outBufDesc,
 		        NULL, (UNIVERSAL_InArgs *) CInArgs, &uniOutArgs);
@@ -16788,10 +16791,45 @@ Int C6accel_IMG_addweight(C6accel_Handle hC6accel,
 	return status;
 }
 
-Int C6accel_IMG_dec(const char *restrict inBuf,IplImage * restrict img){
-//	IMGDEC_Handle imgdec = NULL;
-//	IMGDEC_Params imgdecParams = ID;
-	return 0;
+Int C6accel_IMG_jpegdec(C6accel_Handle hC6accel, const char *restrict inBuf,
+        char * restrict outBuf)
+{
+	int status = 0;
+//	XDAS_Int8 * src = (XDAS_Int8 *) inBuf;
+//	XDAS_Int8 * dst = (XDAS_Int8 *) outBuf;
+//	Engine_Handle hEng = NULL;
+//	Engine_Attrs eAttrs =
+//		{
+//		        0 };
+//	Engine_Error eErr;
+//	XDM1_BufDesc inBufs;
+//	XDM1_BufDesc outBufs;
+//	IMGDEC_Handle hIdec;
+//	IMGDEC_Params Params =
+//		{
+//		        sizeof(IMGDEC_Params), 1280, 720, 15 };
+//	IMGDEC_InArgs InArgs;
+//	IMGDEC_OutArgs OutArgs;
+//
+//	IMGDEC_Status IdecStatus;
+//	XDAS_Int32 status;
+//	printf("Start... imgdec.\n");
+//	hEng = Engine_open("CE", &eAttrs, &eErr);
+//	if (hEng)
+//		printf("created eng\n");
+//	else
+//		printf("can not created eng\n");
+//	printf("eng err : %d\n",eErr);
+//	hIdec = IMGDEC_create(hEng, "jpegdec", &Params);
+//	if (hIdec == NULL) {
+//		printf("Can not created imgdec.\n");
+//		return IMGDEC_EFAIL;
+//	}
+//	printf("Created imgdec.\n");
+//	//	status = IMGDEC_process(hIdec, &inBufs, &outBufs, &InArgs, &OutArgs);
+//	//	RELEASE_CODEC_ENGINE;
+//	IMGDEC_delete(hIdec);
+	return status;
 }
 /*
  *

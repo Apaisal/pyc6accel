@@ -17,81 +17,81 @@ XDCCFGDIR = package/cfg/
 # in the event that some included BOM script changes.
 #
 ifneq (clean,$(MAKECMDGOALS))
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/xmlgen.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/xmlgen.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/MSP430_large_code.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/MSP430_large_code.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/ITarget.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/ITarget.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/package.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/package.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/Executable.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/Executable.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/Script.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/Script.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/MVArm9.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/MVArm9.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/services/global/Clock.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/services/global/Clock.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/_gen.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/_gen.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/Linux86.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/Linux86.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/UCArm9.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/UCArm9.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/arm/GCArmv7A.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/arm/GCArmv7A.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/om2.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/om2.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/MSP430_large_data.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/MSP430_large_data.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/Repository.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/Repository.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/IPackage.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/IPackage.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/BuildEnvironment.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/BuildEnvironment.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/package.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/package.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/ITarget.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/ITarget.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/services/global/Trace.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/services/global/Trace.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/include/utils.tci:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/include/utils.tci
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/package.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/package.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/xdc.tci:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/xdc.tci
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/arm/GCArmv6.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/arm/GCArmv6.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/template.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/template.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/PackageContents.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/PackageContents.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/om2.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/om2.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/package.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/package.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/Mingw.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/Mingw.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/MSP430.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/MSP430.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/Repository.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/Repository.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/_gen.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/_gen.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/services/global/Clock.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/services/global/Clock.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/Library.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/Library.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/ITarget.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/ITarget.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/package.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/package.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/Linux86.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/Linux86.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/MSP430_large_code.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/MSP430_large_code.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/IPackage.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/IPackage.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/xmlgen2.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/xmlgen2.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/xmlgen.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/xmlgen.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/ITarget.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/ITarget.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/ITargetFilter.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/ITargetFilter.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/services/global/Trace.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/services/global/Trace.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/package.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/package.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/MSP430_large_data.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/MSP430_large_data.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/template.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/template.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/arm/GCArmv7A.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/arm/GCArmv7A.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/Script.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/Script.xs
 /home/anol/workspace/pyc6accel/c6accel/config.bld:
 package.mak: /home/anol/workspace/pyc6accel/c6accel/config.bld
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/package.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/package.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/ITarget.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/ITarget.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/arm/GCArmv6.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/arm/GCArmv6.xs
 package.mak: package.bld
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/Utils.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/Utils.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/xmlgen2.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/xmlgen2.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/Library.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/Library.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/PackageContents.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/PackageContents.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/ITarget.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/ITarget.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/Mingw.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/gnu/targets/Mingw.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/MSP430.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/MSP430.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/package.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/package.xs
-/home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/ITargetFilter.xs:
-package.mak: /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/xdc/bld/ITargetFilter.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/BuildEnvironment.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/BuildEnvironment.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/Executable.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/Executable.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/MVArm9.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/MVArm9.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/Utils.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/bld/Utils.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/xdc.tci:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/xdc/xdc.tci
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/UCArm9.xs:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/gnu/targets/UCArm9.xs
+/home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/include/utils.tci:
+package.mak: /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/include/utils.tci
 endif
 
-ti.targets.C64P.rootDir ?= /opt/TI/TI_CGT_C6000_7.0.4
-ti.targets.packageBase ?= /home/anol/dvsdk/dvsdk_3_01_00_10/xdctools_3_16_01_27/packages/ti/targets/
+ti.targets.C64P.rootDir ?= /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/cgt6x_6_1_14
+ti.targets.packageBase ?= /home/anol/ti-dvsdk_dm3730-evm_4_01_00_09/xdctools_3_16_03_36/packages/ti/targets/
 .PRECIOUS: $(XDCCFGDIR)/%.o64P
 .PHONY: all,64P .dlls,64P .executables,64P test,64P
 all,64P: .executables,64P

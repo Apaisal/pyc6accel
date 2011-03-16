@@ -702,7 +702,7 @@ int C6accel_IMG_dilate_bin(C6accel_Handle hC6accel,
         const IplImage *restrict in_data, IplImage *restrict out_data,
         const IplConvKernel *restrict mask, int cols);
 
-int C6accel_IMG_dec();
+int C6accel_IMG_jpegdec(C6accel_Handle hC6accel,const char *restrict inBuf,char * restrict outBuf);
 
 #ifdef __cplusplus
 }
