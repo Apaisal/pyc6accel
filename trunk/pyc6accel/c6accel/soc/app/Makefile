@@ -64,7 +64,9 @@ else
     C_FLAGS	+= -Wall -g
 endif
 
-
+ifeq ($(PLATFORM),dm3730)
+    C_FLAGS	+= -DPLATFORM=3530
+endif
 ifeq ($(PLATFORM),omap3530)
     C_FLAGS	+= -DPLATFORM=3530
 endif

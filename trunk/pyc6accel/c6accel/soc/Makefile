@@ -37,14 +37,14 @@ export XDCTARGETS
 
 .PHONY: c6accelw codec_packages server c6accel_app release_packages clean clean_packages
 
-all: codec_packages server c6accelw c6accel_app
+all: codec_packages server c6accelw #c6accel_app
 
 release: release_packages
 
 install: server_install
 	$(MAKE) -C app install
 
-clean: clean_packages clean_app clean_c6accelw
+clean: clean_packages clean_c6accelw #clean_app 
 
 # This recursively locates all packages in the packages/ directory, builds
 # and releases them
@@ -62,12 +62,35 @@ release_packages:
 
 server_install:
 	@install -d $(EXEC_DIR_C6ACCEL)
+	
+ifeq ($(PLATFORM),dm3730)
+	@echo Copying kernel modules to target file system: $(EXEC_DIR_C6ACCEL)/
+	@echo Copying cmemk.ko
+	@install -m 755 $(CMEM_INSTALL_DIR)/packages/ti/sdo/linuxutils/cmem/src/module/cmemk.ko $(EXEC_DIR_C6ACCEL)/
+	@echo Copying dsplinkk.ko
+	@install -m 755 $(LINK_INSTALL_DIR)/dsplink/gpp/export/BIN/Linux/OMAP3530/RELEASE/dsplinkk.ko $(EXEC_DIR_C6ACCEL)/
+	@echo Copying lpm_omap3530.ko
+	@install -m 755 $(LPM_INSTALL_DIR)/packages/ti/bios/power/modules/omap3530/lpm/lpm_omap3530.ko $(EXEC_DIR_C6ACCEL)/
+	@echo Copying sdmak.ko
+	@install -m 755 $(CMEM_INSTALL_DIR)/packages/ti/sdo/linuxutils/sdma/src/module/sdmak.ko $(EXEC_DIR_C6ACCEL)/
+	@echo Copying c6accel codec servers from $(C6ACCEL_INSTALL_DIR)/soc
+	@install -m 755 $(C6ACCEL_INSTALL_DIR)/soc/packages/ti/c6accel_unitservers/dm3730/dm3730.x64P $(EXEC_DIR_C6ACCEL)/
+	@echo Copying c6accel test app from $(C6ACCEL_INSTALL_DIR)
+	@install -m 755 $(C6ACCEL_INSTALL_DIR)/soc/app/app $(EXEC_DIR_C6ACCEL)/
+	@echo Copying testfile from $(C6ACCEL_INSTALL_DIR)
+	@install -m 755 $(C6ACCEL_INSTALL_DIR)/soc/app/test_files/* $(EXEC_DIR_C6ACCEL)/test_files
+	@chmod -x $(EXEC_DIR_C6ACCEL)/*.x64P $(EXEC_DIR_C6ACCEL)/*.ko 
+	@chmod +x $(EXEC_DIR_C6ACCEL)/app
+	@install -m 755 $(C6ACCEL_INSTALL_DIR)/soc/app/omap3530/loadmodules_dm3730_c6accel.sh $(EXEC_DIR_C6ACCEL)
+	@chmod +x $(EXEC_DIR_C6ACCEL)/loadmodules_dm3730_c6accel.sh
+endif
+
 ifeq ($(PLATFORM),omap3530)
 	@echo Copying kernel modules to target file system: $(EXEC_DIR_C6ACCEL)/
 	@echo Copying cmemk.ko
 	@install -m 755 $(CMEM_INSTALL_DIR)/packages/ti/sdo/linuxutils/cmem/src/module/cmemk.ko $(EXEC_DIR_C6ACCEL)/
 	@echo Copying dsplinkk.ko
-	@install -m 755 $(LINK_INSTALL_DIR)/packages/dsplink/gpp/export/BIN/Linux/OMAP3530/RELEASE/dsplinkk.ko $(EXEC_DIR_C6ACCEL)/
+	@install -m 755 $(LINK_INSTALL_DIR)/dsplink/gpp/export/BIN/Linux/OMAP3530/RELEASE/dsplinkk.ko $(EXEC_DIR_C6ACCEL)/
 	@echo Copying lpm_omap3530.ko
 	@install -m 755 $(LPM_INSTALL_DIR)/packages/ti/bios/power/modules/omap3530/lpm/lpm_omap3530.ko $(EXEC_DIR_C6ACCEL)/
 	@echo Copying sdmak.ko
@@ -111,16 +134,16 @@ clean_packages:
 .check-BIOS : $(BIOS_INSTALL_DIR)/packages/ti/rtdx/package.xdc
 
 
-c6accel_app:
-	@echo
-	@echo Making all in subdirectory $@...
-	$(MAKE) -C app PLATFORM_XDC=$(PLATFORM_XDC) 
+#c6accel_app:
+#	@echo
+#	@echo Making all in subdirectory $@...
+#	$(MAKE) -C app PLATFORM_XDC=$(PLATFORM_XDC) 
 
 	
-clean_app:	
-	@echo
-	@echo Cleaning all in subdirectory $@...
-	$(MAKE) -C app clean
+#clean_app:	
+#	@echo
+#	@echo Cleaning all in subdirectory $@...
+#	$(MAKE) -C app clean
 
 c6accelw:
 	@echo
