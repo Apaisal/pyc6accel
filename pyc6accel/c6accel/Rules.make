@@ -155,7 +155,7 @@ MVTOOL_PREFIX=$(CSTOOL_PREFIX)
 # install') in a proper file structure. This EXEC_DIR should either be visible
 # from the target, or you will have to copy this (whole) directory onto the
 # target filesystem.
-EXEC_DIR         = /$(HOME)/workdir/filesys/opt
+EXEC_DIR         = /$(HOME)/targetfs/opt
 EXEC_DIR_C6ACCEL = $(EXEC_DIR)/c6accel_app
 
 endif

@@ -88,7 +88,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="demos/facedetect" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="c6accel/soc/packages/ti/c6accel_unitservers/dm3730/server.cfg|c6accel/soc/packages/ti/c6accel_unitservers/dm3730/codec.cfg|demos/facedetect" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

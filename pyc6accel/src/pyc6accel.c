@@ -771,10 +771,10 @@ PyMODINIT_FUNC initpyc6accel(void) {
 	//	memParams = Memory_DEFAULTPARAMS;
 	//	memParams.flags = Memory_CACHED;engineName
 	//	memParams.type = Memory_CONTIGHEAP;
-	//	hC6 = (C6accel_Handle) C6accel_create(engineName, hEngine, algName, hUni);
-	//	if (hC6 == NULL) {
-	//		PyErr_SetString(PyExc_RuntimeError, "Can not created c6accel object!");
-	//	}
+	hC6 = (C6accel_Handle) C6accel_create(engineName, hEngine, algName, hUni);
+	if (hC6 == NULL) {
+		PyErr_SetString(PyExc_RuntimeError, "Can not created c6accel object!");
+	}
 
 	hTime = Time_create(&tAttrs);
 
