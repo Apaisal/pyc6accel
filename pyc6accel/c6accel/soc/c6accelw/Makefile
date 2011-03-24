@@ -16,7 +16,7 @@ include $(ROOTDIR)/Rules.make
 #VERBOSE = @
 
 # Which compiler flags should be used?
-BUILD_TYPE=debug
+BUILD_TYPE=release
 
 OPENCV_C_FLAGS = -I/home/anol/workspace/pyc6accel/opencv/include -I/home/anol/workspace/pyc6accel/python/include
 OPENCV_LD_FLAGS = -L/home/anol/workspace/pyc6accel/opencv/lib -lml -lcxcore -lcv #-lcvaux -lhighgui 

@@ -28,16 +28,26 @@ LD_FLAGS = -z -l lnk.cmd -r -h -g _C6ACCEL_TI_IALG -g _UNIVERSAL_TI_PARAMS -g _C
 ifeq ($(DSP_ISA),64P)
 EXT		= 64P
 LD_LIBS = -l"../../libs/dsplib64plus.lib" -l="../../libs/C64P_LIBPLUS.lib" -l="../../libs/fastrts64x.lib" -l"../../libs/imglib2.l64P" -l"../../libs/IQmath_c64x+.lib" -l"../../libs/IQmath_RAM_c64x+.lib"
+ifdef CXCORE 
+LD_LIBS        += $(CXCORE)
+endif
 ifeq ($(BUILD_TYPE), release)
 LTARGET		= ../lib/C6accel_c64P/Release/C6Accel.l64P
 ATARGET		= ../lib/C6accel_c64P/Release/C6Accel.a64P
 C_FLAGS	       += -mv6400+ -o3 -eoo$(EXT)
+ifdef CXCORE 
+C_FLAGS        += -DUSE_CXCORE
+endif
 OBJDIR		= c6accel_c64P_release
 PARTIAL		= $(OBJDIR)/c6accel_c64p_release.o64P
+
 else
 LTARGET		= ../lib/C6accel_c64P/Debug/C6Accel.l64P
 ATARGET		= ../lib/C6accel_c64P/Debug/C6Accel.a64P
 C_FLAGS	       += -mv6400+ -g -eoo$(EXT)
+ifdef CXCORE 
+C_FLAGS        += -DUSE_CXCORE
+endif
 OBJDIR		= c6accel_c64P_debug
 PARTIAL		= $(OBJDIR)/c6accel_c64p_debug.o64P
 endif

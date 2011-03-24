@@ -32,6 +32,8 @@
 /* Codec Interface file */
 #include "iC6Accel_ti.h"
 
+#include "cxtypes.h"
+
 /*Function definition that invoke kernels based on function IDs*/
 int C6ACCEL_TI_dsplibFunctionCall(void *pFnArray,int fxnID,XDM1_BufDesc *inBufs, XDM1_BufDesc *outBufs);
 int C6ACCEL_TI_imglibFunctionCall(void *pFnArray,int fxnID,XDM1_BufDesc *inBufs, XDM1_BufDesc *outBufs);

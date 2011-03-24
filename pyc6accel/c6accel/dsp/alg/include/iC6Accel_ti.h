@@ -15,6 +15,8 @@
 #include <ti/xdais/xdas.h>
 #include <ti/xdais/dm/iuniversal.h>
 
+#include "cxtypes.h"
+
 #ifndef ti_sdo_codecs_C6Accel_C6ACCEL_TI_
 #define ti_sdo_codecs_C6Accel_C6ACCEL_TI_
 
