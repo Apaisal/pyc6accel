@@ -87,6 +87,14 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="0.880252925.588475964" name="/" resourcePath="opencv">
+						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.273214631" name="No ToolChain" superClass="org.eclipse.cdt.build.core.prefbase.toolchain" unusedChildren="">
+							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.353140189" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs.2127965244"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.1833444371" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder.773278023"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.568891464" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder.894714515"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.425651627" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder.117047184"/>
+						</toolChain>
+					</folderInfo>
 					<sourceEntries>
 						<entry excluding="c6accel/soc/packages/ti/c6accel_unitservers/dm3730/server.cfg|c6accel/soc/packages/ti/c6accel_unitservers/dm3730/codec.cfg|demos/facedetect" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>

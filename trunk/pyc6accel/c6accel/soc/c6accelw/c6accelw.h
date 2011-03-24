@@ -25,9 +25,10 @@ extern "C" {
 //#include <ti/sdo/ce/video/viddec.h>
 
 /*OpenCV*/
-#include <cv.h>
-#include <cxcore.h>
-
+//#include <cv.h>
+//#include <cxcore.h>
+/* Include the header for C6ACCEL codec support*/
+#include "ti/c6accel/iC6Accel_ti.h"
 /* Data type to set synchronous and asynchronous calls in C6Accel */
 typedef enum _E_CALL_TYPE {
 	SYNC, ASYNC
@@ -702,7 +703,8 @@ int C6accel_IMG_dilate_bin(C6accel_Handle hC6accel,
         const IplImage *restrict in_data, IplImage *restrict out_data,
         const IplConvKernel *restrict mask, int cols);
 
-int C6accel_IMG_jpegdec(C6accel_Handle hC6accel,const char *restrict inBuf,char * restrict outBuf);
+int C6accel_IMG_jpegdec(C6accel_Handle hC6accel, const char *restrict inBuf,
+        char * restrict outBuf);
 
 #ifdef __cplusplus
 }

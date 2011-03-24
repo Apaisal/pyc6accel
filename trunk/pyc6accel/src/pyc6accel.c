@@ -593,8 +593,8 @@ pyc6accel_jpeg_dec(PyObject *self, PyObject *args)
 	gfxAttrs.dim.height = Params.maxHeight;
 	gfxAttrs.dim.lineLength = BufferGfx_calcLineLength(Params.maxWidth,
 	        gfxAttrs.colorSpace);
-	hOutBuf = Buffer_create(Idec_getOutBufSize(hId), BufferGfx_getBufferAttrs(
-	        &gfxAttrs));
+	hOutBuf = Buffer_create(Idec_getOutBufSize(hId),
+	        BufferGfx_getBufferAttrs(&gfxAttrs));
 	hInBuf = Buffer_create(Idec_getInBufSize(hId), &bAttrs);
 	Buffer_setUserPtr(hInBuf, src);
 	Buffer_setUserPtr(hOutBuf, dst);
@@ -779,7 +779,7 @@ PyMODINIT_FUNC initpyc6accel(void) {
 	hTime = Time_create(&tAttrs);
 
 	Py_INCREF(hTime);
-	//	Py_INCREF(hC6);
+	Py_INCREF(hC6);
 	//	Py_INCREF(hEngine);
 	//	Py_INCREF(hUni);
 	//	Py_INCREF(memParams);

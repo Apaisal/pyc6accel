@@ -4,7 +4,7 @@ Created on Aug 14, 2010
 @author: anol
 '''
 import cv, time
-import pyc6accel as dsp
+#import pyc6accel as dsp
 
 class detect():
     '''
@@ -28,18 +28,18 @@ class detect():
         # scale_factor=1.2, min_neighbors=2, flags=CV_HAAR_DO_CANNY_PRUNING, 
         # min_size=<minimum possible face size
 
-        min_size = (16, 16)
+        min_size = (3, 3)
         image_scale = 1.2
         haar_scale = 1.5
         min_neighbors = 2
-        haar_flags = cv.CV_HAAR_DO_ROUGH_SEARCH | cv.CV_HAAR_FEATURE_MAX
+        haar_flags = cv.CV_HAAR_SCALE_IMAGE #cv.CV_HAAR_DO_CANNY_PRUNING #cv.CV_HAAR_DO_ROUGH_SEARCH | cv.CV_HAAR_FEATURE_MAX
         gray = cv.CreateImage((image.width, image.height), 8, 1)
         small_img = cv.CreateImage((cv.Round(image.width / image_scale),
                    cv.Round (image.height / image_scale)), 8, 1)
 
         # convert color input image to grayscale
-#        cv.CvtColor(image, gray, cv.CV_BGR2GRAY)
-        dsp.CvtColor(image, gray, dsp.CV_RGB2GRAY)
+        cv.CvtColor(image, gray, cv.CV_BGR2GRAY)
+#        dsp.CvtColor(image, gray, dsp.CV_RGB2GRAY)
 #         scale input image for faster processing
         cv.Resize(gray, small_img, cv.CV_INTER_LINEAR)
 
