@@ -125,29 +125,67 @@ class SDP:
 class RTPdecH264:
     def __init__(self, pkgm, profile, parameterset):
         ''''''
-        self.packetization = pkgm
+        self.packetization_mode = int(pkgm)
         self.profile = profile
         self.parameterset = parameterset.split(',')
-        self.PayloadContext = {}
-        self.PayloadContext['packetization_mode'] = None
-        self.PayloadContext['profile_idc'] = None
-        self.PayloadContext['profile_iop'] = None
-        self.PayloadContext['level_idc'] = None
-
+        self.profile_idc = None
+        self.profile_iop = None
+        self.level_idc = None
+        self.CodecExtraData = None
+        self.CodecData = None
 
     def fmtp_config_h264(self):
-        if self.packetization != '' or self.packetization != None :
-            self.PayloadContext['packetization_mode'] = int(self.packetization)
+        codecdata = ''
 
         if (self.profile != '' or self.profile != None) and len(self.profile) == 6 :
+            self.profile_idc = int(self.profile[0:1], 16);
+            self.profile_iop = int(self.profile[2:3], 16);
+            self.level_idc = int(self.profile[4:5], 16);
+            print "RTP Profile IDC: %x Profile IOP: %x Level: %x\n" % (self.profile_idc, self.profile_iop, self.level_idc)
 
-            self.PayloadContext['profile_idc'] = int(self.profile[0:1], 16);
-            self.PayloadContext['profile_iop'] = int(self.profile[2:3], 16);
-            self.PayloadContext['level_idc'] = int(self.profile[4:5], 16);
-            print "RTP Profile IDC: %x Profile IOP: %x Level: %x\n" % (self.PayloadContext['profile_idc'], self.PayloadContext['profile_iop'], self.PayloadContext['level_idc'])
         if self.parameterset != None :
+            start_seq = '\x00' * 2 + '\x01'
             for value in self.parameterset:
-                nal = base64.decodestring(value)
+                dec = base64.b64decode(value)
+                codecdata += start_seq
+#                for h in range(0, len(dec), 2):
+                codecdata += dec
+                codecdata += '\x00' * 8
+        self.CodecExtraData = codecdata
+
+    def h264_handle_packet(self, buf):
+        ''''''
+        nal = buf[0];
+        type = ord(nal) & 0x1f;
+        result = 0;
+        start_sequence = '\x00' * 2 + '\x01'
+        data = ''
+        if type >= 1 and type <= 23:
+            type = 1 # simplify the case. (these are all the nal types used internally by the h264 codec)
+
+        if type == 28:  #FU-A (fragmented nal)
+            pack = buf[1:] #skip the fu_indicator
+            # these are the same as above, we just redo them here for clarity...
+            fu_indicator = nal;
+            fu_header = pack[0]; #// read the fu_header.
+            start_bit = ord(fu_header) >> 7;
+#//            uint8_t end_bit = (fu_header & 0x40) >> 6;
+            nal_type = ord(fu_header) & 0x1f;
+
+#            // reconstruct this packet's true nal; only the data follows..
+            reconstructed_nal = ord(fu_indicator) & 0xe0  #// the original nal forbidden bit and NRI are stored in this packet's nal;
+            reconstructed_nal |= nal_type;
+
+#            // skip the fu_header...
+            pack = pack[1:]
+            if(start_bit):
+#                // copy in the start sequence, and the reconstructed nal....
+                data += start_sequence
+                data += chr(reconstructed_nal);
+            data += pack
+
+            self.CodecData = data
+            return data
 
 class RTSP:
     '''
@@ -170,9 +208,9 @@ class RTSP:
         self.info['res'] = res
         self.info['width'] = size[0]
         self.info['height'] = size[1]
-        self.info['qp'] = 16
+        self.info['qp'] = 20
         self.info['bitrate'] = 65536
-        self.info['fps'] = 15
+        self.info['fps'] = 30
         self.info['ssn'] = random.randint(1, 65535)
         self.info['session'] = None
         self.CSeq = 1
@@ -187,6 +225,7 @@ class RTSP:
         self.ReponseStatus = ''
         self.RTSPResponse = None
         self.SDP = None
+        self.RTPH264dec = None
 
     def Connect(self, address, proto = 'tcp'):
         ''''''
@@ -240,11 +279,8 @@ class RTSP:
                 self.recv_data()
                 self.RTSPResponse = RTSPResponse(self.receiveData)
                 self.SDP = SDP(self.RTSPResponse.Payload)
-                self.h264data['packetization_mode'] = int(self.SDP.PacketizationMode)
-
-                self.h264data['profile_idc'] = self.SDP.SpropParameterSet
-                self.h264data['profile_ido'] = self.SDP.ProfileLevelID
-                self.h264data['level-idc'] = ''
+                self.RTPH264dec = RTPdecH264(self.SDP.PacketizationMode, self.SDP.ProfileLevelID, self.SDP.SpropParameterSet)
+                self.RTPH264dec.fmtp_config_h264()
                 self.CSeq += 1
         except socket.error, msg:
             if self.TCPSocket is not None:
@@ -318,14 +354,8 @@ class RTSP:
             self.receiveData = self.UDPSocket.recv(self.buffer_size)
             print 'packet size : %d' % (len(self.receiveData))
             if len(self.receiveData) > 0:
-                #extract payload
-#                print binascii.hexlify(self.receiveData[12:15])
-                #Skip RTP header
+                return self.RTPH264dec.h264_handle_packet(self.receiveData[12:])
 
-                return self.receiveData[12:]
-
-
-#            self.CSeq += 1
         except socket.error, msg:
             if self.UDPSocket is not None:
                 self.UDPSocket.close()
@@ -374,38 +404,18 @@ if __name__ == '__main__':
 #    print strtime
 #    fp = rtsp.UDPSocket.makefile('r', rtsp.buffer_size)
     fd = open('cam.264', 'wb')
+    fd.write(rtsp.RTPH264dec.CodecExtraData)
     while (True):
 
         # Receive H264 packet
 #        frame = ''
 #        while True:
-        payload = rtsp.getRTP_Payload()
+        rtsp.getRTP_Payload()
 
-        fragment_type = ord(payload[0]) & 0x1F;
-        nal_type = ord(payload[1]) & 0x1F;
-        start_bit = ord(payload[1]) & 0x80;
-        end_bit = ord(payload[1]) & 0x40;
 
-        print 'f:%d n:%d s:%d e:%d' % (fragment_type, nal_type, start_bit, end_bit)
-        if (fragment_type == 28) :
-            new_idr = ''
-            first_byte = ord(payload[0]) & 0xe0
-            first_byte |= nal_type
 
-            if (start_bit):
-                new_idr += chr(first_byte)
-                new_idr += payload[1:]
-            else:
-                new_idr += payload[2:]
-#        data = fp.read(rtsp.buffer_size)
-#        print 'packet size : %d' % (len(data))
 
-            if new_idr == '':
-                break
-
-            fd.write(new_idr)
-            if (end_bit):
-                break;
+        fd.write(rtsp.RTPH264dec.CodecData)
 #        if dsp == None :
             #import pyc6accel as dsp
 #        dec = dsp.H264Decode(fd)
@@ -423,7 +433,7 @@ if __name__ == '__main__':
             print deltatime
             rtsp.sendFeedback((ip, int(rtsp.server_port[1])))
             strtime = time.clock()
-        if count >= max or binascii.hexlify(rtsp.receiveData[1]) == 'e0':
+        if count >= max and binascii.hexlify(rtsp.receiveData[1]) == 'e0':
             count = 0
             break
         count += 1
