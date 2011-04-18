@@ -121,7 +121,8 @@ class Main:
         self.pipeline.add(screen_sink)
         self.pipeline.add(image_sink)
 
-        caps_yuv = gst.caps_from_string("video/x-raw-yuv,width=%d,height=%d" % (self.WIDTH, self.HEIGHT))
+        caps_yuv = gst.caps_from_string("video/x-raw-yuv")
+#        caps_yuv = gst.caps_from_string("video/x-raw-yuv,width=%d,height=%d" % (self.WIDTH, self.HEIGHT))
         caps_rgb = gst.caps_from_string("video/x-raw-rgb,width=%d,height=%d" % (self.WIDTH, self.HEIGHT))
 
         #/* Set up the pipeline */
@@ -162,7 +163,7 @@ class Main:
                     print len(self.buffer)
                     cv_im = cv.CreateImageHeader((self.WIDTH, self.HEIGHT), cv.IPL_DEPTH_8U, 3)
                     cv.SetData(cv_im, self.buffer)
-
+                    cv.CvtColor(cv_im, cv_im, cv.CV_BGR2RGB)
                     cv.ShowImage("Image captured", cv_im)
                     cv.WaitKey()
                 else:
